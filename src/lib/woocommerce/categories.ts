@@ -22,7 +22,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     description:
       "Sofas and sectionals where masterful upholstery meets everyday ease — the pieces that anchor a living room.",
     heroImage:
-      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1600&q=80",
+      "https://mahakalihomefurnitures.com/uploads/category/1775277522_e7ab339c-4222-41f0-a2be-1584e09eb38a.jpeg",
   },
   {
     id: 24,
@@ -33,7 +33,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     description:
       "Frame-forward sofas in teak and hardwood, built for longevity and the warm grain that only wood can give.",
     heroImage:
-      "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=1600&q=80",
+      "https://mahakalihomefurnitures.com/uploads/category/1775625955_image.jpg",
   },
   {
     id: 23,
@@ -44,7 +44,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     description:
       "Bedroom cots and bedsteads in solid wood — quiet silhouettes, honest joinery, and a finish that ages well.",
     heroImage:
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1600&q=80",
+      "https://mahakalihomefurnitures.com/uploads/category/1776681424_41ad91c8-1400-4175-b283-c5ff71558fa4.jpeg",
   },
   {
     id: 22,
@@ -55,7 +55,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     description:
       "Traditional wooden jhoolas for verandahs and living rooms — a slow, familiar rhythm for Udupi homes.",
     heroImage:
-      "https://images.unsplash.com/photo-1567016432779-094069958ea5?auto=format&fit=crop&w=1600&q=80",
+      "https://mahakalihomefurnitures.com/uploads/category/1776080159_aac22c29-86dd-48f6-9e8c-d8183556ec22.jpeg",
   },
   {
     id: 19,
@@ -66,7 +66,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     description:
       "Dining sets proportioned for everyday family meals — a 5/3 configuration with a solid wooden top.",
     heroImage:
-      "https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=1600&q=80",
+      "https://mahakalihomefurnitures.com/uploads/category/1776336410_5566e1df-5547-4d76-9176-571a76663461.jpeg",
   },
   {
     id: 20,
@@ -77,7 +77,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     description:
       "Generous wooden dining sets for six — the weekend table, festival meals, and conversations that linger.",
     heroImage:
-      "https://images.unsplash.com/photo-1617104551722-3b2d51366400?auto=format&fit=crop&w=1600&q=80",
+      "https://mahakalihomefurnitures.com/uploads/category/1776250417_f0e56a86-42c2-42c2-af5f-14ab62416bc8.jpeg",
   },
   {
     id: 21,
@@ -88,7 +88,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     description:
       "Four-seater dining with a glass top — the grain shows through, the surface stays easy to live with.",
     heroImage:
-      "https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=1600&q=80",
+      "https://mahakalihomefurnitures.com/uploads/category/1776147783_d3c91ee4-27c6-4fdf-b772-81cd2143ca1d.jpeg",
   },
   {
     id: 18,
@@ -99,7 +99,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     description:
       "Tepoys and occasional tables that complete a seating arrangement — compact, sturdy, and finely finished.",
     heroImage:
-      "https://images.unsplash.com/photo-1554295405-abb8fd54f153?auto=format&fit=crop&w=1600&q=80",
+      "https://mahakalihomefurnitures.com/uploads/category/1776750765_0985A978-2698-4362-985F-C9F6B50B9CFB.png",
   },
   {
     id: 17,
@@ -110,7 +110,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     description:
       "Cushioned lounge and accent chairs — extra seating that still feels like a destination in the room.",
     heroImage:
-      "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=1600&q=80",
+      "https://mahakalihomefurnitures.com/uploads/category/1778477217_IMG_1713.jpeg",
   },
   {
     id: 16,
@@ -121,7 +121,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     description:
       "A wider wooden furniture edit — pieces that sit outside a single collection but share the same workshop DNA.",
     heroImage:
-      "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=1600&q=80",
+      "https://mahakalihomefurnitures.com/uploads/category/1779278761_6C91D122-7ED2-4BAD-8F6B-ABDEAE1D2686.png",
   },
 ];
 

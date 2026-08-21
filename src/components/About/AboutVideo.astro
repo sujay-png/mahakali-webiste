@@ -8,14 +8,17 @@ export interface Props {
 const { data } = Astro.props;
 ---
 
-<section class="section wrap wrap--wide">
-  <div class="intro">
-    <p class="eyebrow">The workshop</p>
-    <h2>See the work, not the pitch.</h2>
-  </div>
-  <div class="video-section" data-embed={data.embedUrl} role="button" tabindex="0" aria-label="Play latest video">
-    <div class="video-bg" style={`background-image: url('${data.image}')`}></div>
-    <span class="play-btn" aria-hidden="true"></span>
+<section class="film">
+  <div class="wrap wrap--wide grid">
+    <div class="copy">
+      <p class="eyebrow">The workshop</p>
+      <h2>See the work, not the pitch.</h2>
+      <p>A short look at how pieces are finished in Udupi — grain, joinery, and the pace of the floor.</p>
+    </div>
+    <div class="video-section" data-embed={data.embedUrl} role="button" tabindex="0" aria-label="Play latest video">
+      <div class="video-bg" style={`background-image: url('${data.image}')`}></div>
+      <span class="play-btn" aria-hidden="true"></span>
+    </div>
   </div>
 </section>
 
@@ -58,43 +61,45 @@ const { data } = Astro.props;
 </script>
 
 <style>
-  .intro { margin-bottom: 2.5rem; max-width: 14ch; }
+  .film { padding-block: clamp(3.5rem, 7vw, 6rem); }
+  .grid {
+    display: grid;
+    grid-template-columns: 0.7fr 1.3fr;
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    align-items: center;
+  }
+  h2 { max-width: 10ch; margin: 0.7rem 0 0.9rem; }
+  .copy p:last-child { color: var(--color-ink-soft); font-weight: 300; max-width: 32ch; }
   .video-section {
     position: relative;
-    width: 100%;
     aspect-ratio: 16/9;
     overflow: hidden;
-    background-color: var(--color-ink);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: var(--color-ink);
     cursor: pointer;
+    display: grid;
+    place-items: center;
   }
   .video-bg {
     position: absolute;
     inset: 0;
     background-size: cover;
     background-position: center;
-    transform: scale(1.04);
-    transition: transform 1.4s var(--ease), opacity 0.5s var(--ease);
   }
-  .video-section:hover .video-bg { transform: scale(1); opacity: 0.85; }
   .play-btn {
     position: relative;
     z-index: 2;
-    width: 5.5rem;
-    height: 5.5rem;
-    border: 1px solid rgba(255,255,255,0.7);
+    width: 4.2rem;
+    height: 4.2rem;
+    border: 1px solid #fff;
     display: grid;
     place-items: center;
   }
   .play-btn::after {
     content: "";
-    width: 0;
-    height: 0;
     border-style: solid;
-    border-width: 9px 0 9px 16px;
+    border-width: 7px 0 7px 12px;
     border-color: transparent transparent transparent #fff;
     margin-left: 3px;
   }
+  @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
 </style>

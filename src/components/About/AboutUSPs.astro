@@ -1,46 +1,53 @@
 ---
 ---
 
-<section class="section section--cream">
-  <div class="wrap wrap--wide notes" data-reveal-group>
-    <article data-reveal>
+<section class="notes">
+  <div class="wrap wrap--wide list">
+    <article>
       <span>01</span>
-      <h3 class="font-display">Free delivery</h3>
-      <p>For qualifying orders across our service area.</p>
+      <div>
+        <h3 class="font-display">Free delivery</h3>
+        <p>For qualifying orders across our service area.</p>
+      </div>
     </article>
-    <article data-reveal>
+    <article>
       <span>02</span>
-      <h3 class="font-display">Made to last</h3>
-      <p>Custom and showroom pieces are finished for years of use.</p>
+      <div>
+        <h3 class="font-display">Made to last</h3>
+        <p>Custom and showroom pieces are finished for years of use.</p>
+      </div>
     </article>
-    <article data-reveal>
+    <article>
       <span>03</span>
-      <h3 class="font-display">Secure payment</h3>
-      <p>In-store and online payments through trusted gateways.</p>
+      <div>
+        <h3 class="font-display">Secure payment</h3>
+        <p>In-store and online payments through trusted gateways.</p>
+      </div>
     </article>
-    <article data-reveal>
+    <article>
       <span>04</span>
-      <h3 class="font-display">Showroom hours</h3>
-      <p>9:30AM – 7:00PM. Walk in, or call ahead for a consultation.</p>
+      <div>
+        <h3 class="font-display">Showroom hours</h3>
+        <p>9:30AM – 7:00PM. Walk in, or call ahead.</p>
+      </div>
     </article>
   </div>
 </section>
 
 <style>
-  .notes {
+  .notes { padding-block: 2.5rem 1rem; }
+  .list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2.5rem;
-    padding-block: 0.5rem 2rem;
+    gap: 1.5rem;
   }
-  article { display: grid; gap: 0.7rem; }
-  span {
-    font-size: 0.68rem;
-    letter-spacing: 0.2em;
-    color: var(--color-gold);
+  article {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: 0.7rem;
   }
-  h3 { font-size: 1.7rem; max-width: 10ch; }
-  p { color: var(--color-ink-soft); font-weight: 300; max-width: 28ch; }
-  @media (max-width: 900px) { .notes { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 560px) { .notes { grid-template-columns: 1fr; } }
+  span { color: var(--color-gold); font-size: 0.72rem; letter-spacing: 0.12em; padding-top: 0.35rem; }
+  h3 { font-size: 1.35rem; margin-bottom: 0.3rem; }
+  p { color: var(--color-ink-soft); font-weight: 300; font-size: 0.92rem; }
+  @media (max-width: 800px) { .list { grid-template-columns: 1fr 1fr; } }
 </style>

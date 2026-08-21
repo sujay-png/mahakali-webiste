@@ -6,36 +6,48 @@ const { data } = Astro.props;
 ---
 
 <section class="deal">
-  <div class="media" data-media>
-    <img src={data.productImage} alt={data.title} />
-  </div>
-  <div class="veil"></div>
-  <div class="wrap copy" data-reveal="fade">
-    <p class="eyebrow light">{data.eyebrow}</p>
-    <h2>{data.title}</h2>
-    <p>{data.copy}</p>
-    <div class="price"><b>{data.price}</b> <s>{data.oldPrice}</s></div>
-    <a class="btn btn-ghost-light" href={data.cta.href}>{data.cta.label} <Icon name="arrow-right" /></a>
+  <div class="wrap wrap--wide grid">
+    <div class="copy" data-reveal="fade">
+      <p class="eyebrow">{data.eyebrow}</p>
+      <h2>{data.title}</h2>
+      <p>{data.copy}</p>
+      <div class="price"><b>{data.price}</b> <s>{data.oldPrice}</s></div>
+      <a class="btn btn-primary" href={data.cta.href}>{data.cta.label} <Icon name="arrow-right" /></a>
+    </div>
+    <div class="visual">
+      <img src={data.productImage} alt={data.title} />
+    </div>
   </div>
 </section>
 
 <style>
-  .deal {
-    position: relative;
-    min-height: 72vh;
+  .deal { padding-block: clamp(2.5rem, 5vw, 4rem); }
+  .grid {
     display: grid;
+    grid-template-columns: 1fr 0.85fr;
+    gap: 2.5rem;
     align-items: center;
-    overflow: hidden;
-    color: #fff;
+    background: var(--color-cream);
+    padding: 2.2rem 2.4rem;
   }
-  .media, .veil { position: absolute; inset: 0; }
-  .veil { background: linear-gradient(90deg, rgba(36,28,24,0.78) 0%, rgba(36,28,24,0.25) 70%); }
-  .copy { position: relative; z-index: 1; padding-block: 7rem; max-width: 36rem; }
-  .eyebrow.light, .eyebrow.light::before { color: #e4c9a4; }
-  .eyebrow.light::before { background: #e4c9a4; }
-  h2 { color: #fff; max-width: 12ch; margin: 1rem 0 1.2rem; }
-  p { color: rgba(255,255,255,0.8); font-weight: 300; }
-  .price { display: flex; gap: 1rem; align-items: baseline; margin: 1.6rem 0 2rem; }
-  .price b { font-family: var(--font-display); font-size: 2.2rem; font-weight: 400; }
-  .price s { opacity: 0.6; }
+  h2 { max-width: 14ch; margin: 0.7rem 0 0.9rem; font-size: clamp(1.8rem, 3vw, 2.6rem); }
+  p { color: var(--color-ink-soft); font-weight: 300; max-width: 42ch; }
+  .price { display: flex; gap: 0.9rem; align-items: baseline; margin: 1.2rem 0 1.5rem; }
+  .price b { font-family: var(--font-display); font-size: 1.8rem; font-weight: 500; }
+  .price s { color: var(--color-ink-soft); }
+  .visual {
+    background: var(--color-surface);
+    min-height: 220px;
+    display: grid;
+    place-items: center;
+    padding: 1.2rem;
+  }
+  .visual img {
+    max-height: 240px;
+    width: auto;
+    object-fit: contain;
+  }
+  @media (max-width: 800px) {
+    .grid { grid-template-columns: 1fr; padding: 1.5rem; }
+  }
 </style>

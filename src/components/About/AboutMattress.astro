@@ -10,22 +10,19 @@ const { data } = Astro.props;
 
 <section class="mattress">
   <div class="wrap wrap--wide grid">
-    <figure data-media data-reveal="left">
-      <img src={data.image} alt="" loading="lazy" />
-    </figure>
-    <div data-reveal="right">
-      <p class="eyebrow">Rest</p>
+    <div>
+      <p class="eyebrow light">Rest</p>
       <h2>{data.title}</h2>
       <p class="lead">{data.lead}</p>
-      <ol>
-        {data.bullets.map((bullet, i) => (
-          <li>
-            <span>{String(i + 1).padStart(2, "0")}</span>
-            {bullet}
-          </li>
-        ))}
-      </ol>
     </div>
+    <ol>
+      {data.bullets.map((bullet, i) => (
+        <li>
+          <span>{String(i + 1).padStart(2, "0")}</span>
+          {bullet}
+        </li>
+      ))}
+    </ol>
   </div>
 </section>
 
@@ -33,25 +30,29 @@ const { data } = Astro.props;
   .mattress {
     background: var(--color-walnut);
     color: #f4efe8;
-    padding-block: clamp(5rem, 10vw, 8.5rem);
+    padding-block: clamp(3.5rem, 7vw, 5.5rem);
   }
   .grid {
     display: grid;
     grid-template-columns: 0.9fr 1.1fr;
-    gap: clamp(2rem, 5vw, 5rem);
-    align-items: center;
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: start;
   }
-  figure { margin: 0; aspect-ratio: 4/5; }
-  h2 { color: #fff; max-width: 14ch; margin: 0.8rem 0 1.2rem; }
-  .lead { color: rgba(244,239,232,0.72); font-weight: 300; max-width: 42ch; margin-bottom: 2rem; }
-  ol { display: grid; gap: 1.1rem; }
+  h2 { color: #fff; max-width: 14ch; margin: 0.7rem 0 1rem; font-size: clamp(2rem, 3.5vw, 3.2rem); }
+  .lead { color: rgba(244,239,232,0.7); font-weight: 300; max-width: 42ch; }
+  .eyebrow.light { color: #e4c9a4; }
+  .eyebrow.light::before { background: #e4c9a4; }
+  ol { display: grid; gap: 0; }
   li {
     display: grid;
     grid-template-columns: 2.4rem 1fr;
     gap: 0.8rem;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(244,239,232,0.12);
     color: rgba(244,239,232,0.88);
     font-weight: 300;
   }
-  span { color: #e4c9a4; font-size: 0.78rem; letter-spacing: 0.12em; padding-top: 0.2rem; }
+  li:last-child { border-bottom: 1px solid rgba(244,239,232,0.12); }
+  span { color: #e4c9a4; font-size: 0.75rem; letter-spacing: 0.12em; padding-top: 0.15rem; }
   @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
 </style>

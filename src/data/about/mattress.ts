@@ -8,5 +8,5 @@ export const aboutMattress = {
     "With proper care, our mattresses can last 6–10 years.",
     "Home Delivery & Installation Available (On Request)."
   ],
-  image: "/images/gallery/gallery-upholstered-1.jpg"
+  image: "https://mahakalihomefurnitures.com/assets/images/about/2.jpg"
 };

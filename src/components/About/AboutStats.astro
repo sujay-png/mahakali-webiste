@@ -9,9 +9,10 @@ const { data } = Astro.props;
 ---
 
 <section class="stats">
-  <div class="wrap wrap--wide row" data-reveal-group>
-    {data.map((stat) => (
-      <div class="stat-item" data-reveal>
+  <div class="wrap wrap--wide row">
+    {data.map((stat, i) => (
+      <div class="stat-item">
+        <small>{String(i + 1).padStart(2, "0")}</small>
         <span class="stat-value font-display">{stat.value}</span>
         <span class="stat-label">{stat.label}</span>
       </div>
@@ -21,21 +22,30 @@ const { data } = Astro.props;
 
 <style>
   .stats {
-    background: var(--color-cream);
-    padding-block: clamp(4rem, 8vw, 6.5rem);
+    border-block: 1px solid var(--color-line);
+    margin-top: 3.5rem;
   }
   .row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
   }
-  .stat-item { display: grid; gap: 0.5rem; }
-  .stat-value { font-size: clamp(2.6rem, 5vw, 4.2rem); color: var(--color-walnut); }
+  .stat-item {
+    display: grid;
+    gap: 0.25rem;
+    padding: 1.6rem 1.2rem 1.6rem 0;
+    border-right: 1px solid var(--color-line);
+  }
+  .stat-item:last-child { border-right: none; }
+  small { font-size: 0.62rem; letter-spacing: 0.16em; color: var(--color-gold); }
+  .stat-value { font-size: clamp(2rem, 3.4vw, 3rem); line-height: 1; }
   .stat-label {
     font-size: 0.68rem;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--color-ink-soft);
   }
-  @media (max-width: 800px) { .row { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 800px) {
+    .row { grid-template-columns: 1fr 1fr; }
+    .stat-item:nth-child(2) { border-right: none; }
+  }
 </style>

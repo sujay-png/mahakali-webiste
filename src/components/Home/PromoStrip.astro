@@ -5,44 +5,44 @@ export interface Props { data: typeof PromoStripType; }
 const { data } = Astro.props;
 ---
 
-<section class="band">
-  <div class="wrap wrap--wide grid" data-reveal-group>
+<section class="offers">
+  <div class="wrap wrap--wide row">
     {data.map((promo) => (
-      <a href={promo.cta.href} class="tile" data-reveal="fade">
-        <span data-media class="tile__media">
-          <img src={promo.image} alt={promo.title} loading="lazy" />
-        </span>
-        <span class="tile__copy">
-          <small>{promo.tag}</small>
-          <strong class="font-display">{promo.title}</strong>
-          <em class="link-arrow">{promo.cta.label} <Icon name="arrow-right" /></em>
-        </span>
+      <a href={promo.cta.href} class="offer">
+        <small>{promo.tag}</small>
+        <strong class="font-display">{promo.title}</strong>
+        <span class="link-arrow">{promo.cta.label} <Icon name="arrow-right" /></span>
       </a>
     ))}
   </div>
 </section>
 
 <style>
-  .band { padding-bottom: clamp(4rem, 8vw, 7rem); }
-  .grid {
-    display: grid;
-    grid-template-columns: 1.2fr 0.9fr 0.9fr;
-    gap: 1.1rem;
+  .offers {
+    padding-block: 0.5rem 2.5rem;
   }
-  .tile { display: grid; gap: 1.1rem; }
-  .tile:first-child { grid-row: span 1; }
-  .tile__media { aspect-ratio: 4 / 5; }
-  .tile:first-child .tile__media { aspect-ratio: 4 / 5; }
-  .tile__copy { display: grid; gap: 0.35rem; }
-  .tile__copy small {
-    letter-spacing: 0.18em;
+  .row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--color-line);
+  }
+  .offer {
+    display: grid;
+    gap: 0.35rem;
+    padding: 1.4rem 1.5rem 1.4rem 0;
+    border-right: 1px solid var(--color-line);
+  }
+  .offer:last-child { border-right: none; padding-right: 0; }
+  .offer:first-child { padding-left: 0; }
+  small {
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    font-size: 0.66rem;
+    font-size: 0.62rem;
     color: var(--color-gold);
   }
-  .tile__copy strong { font-size: 1.8rem; font-weight: 400; }
-  @media (max-width: 860px) {
-    .grid { grid-template-columns: 1fr; }
-    .tile__media { aspect-ratio: 16 / 10; }
+  strong { font-size: 1.35rem; font-weight: 500; line-height: 1.2; max-width: 16ch; }
+  @media (max-width: 800px) {
+    .row { grid-template-columns: 1fr; }
+    .offer { border-right: none; border-bottom: 1px solid var(--color-line); padding: 1.2rem 0; }
   }
 </style>

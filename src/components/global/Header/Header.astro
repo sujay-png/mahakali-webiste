@@ -1,6 +1,7 @@
 ---
 import Icon from "../UI/Icon.astro";
 import { mainNav } from "../../../data/site";
+import { CATALOG_CATEGORIES } from "../../../lib/woocommerce/categories";
 
 const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
 ---
@@ -11,7 +12,7 @@ const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
       <img src="/images/new-logo.png" alt="Mahakali Home Furnitures" class="brand-logo-img" />
     </a>
 
-    <nav class="nav" id="primary-nav" aria-label="Primary">
+    <nav class="desktop-nav" aria-label="Primary">
       <ul>
         {
           mainNav.map((item) => {
@@ -25,13 +26,25 @@ const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
                   {item.children && <Icon name="chevron-down" class="icon-10 caret" />}
                 </a>
                 {item.children && (
-                  <ul class="dropdown">
-                    {item.children.map((child) => (
-                      <li>
-                        <a href={child.href}>{child.label}</a>
-                      </li>
-                    ))}
-                  </ul>
+                  <div class="mega">
+                    <div class="mega__head">
+                      <p>Collections</p>
+                      <a href="/products">View all</a>
+                    </div>
+                    <ul>
+                      {CATALOG_CATEGORIES.map((cat, i) => (
+                        <li>
+                          <a href={`/products/${cat.slug}`}>
+                            <img src={cat.heroImage} alt="" />
+                            <span>
+                              <small>{String(i + 1).padStart(2, "0")}</small>
+                              <strong>{cat.navLabel}</strong>
+                            </span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 )}
               </li>
             );
@@ -44,27 +57,54 @@ const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
       <a href="/contact" class="btn-inquiry">Visit Showroom</a>
       <button
         class="icon-action nav-toggle"
+        type="button"
         aria-label="Open menu"
         aria-expanded="false"
-        aria-controls="primary-nav"
+        aria-controls="mobile-menu"
         id="nav-toggle"
       >
-        <Icon name="menu" class="icon-22" />
+        <span class="toggle-bars" aria-hidden="true"></span>
       </button>
     </div>
   </div>
 </header>
 
+<div id="mobile-menu" class="mobile-menu" hidden>
+  <div class="mobile-menu__inner">
+    <p class="menu-kicker">Menu</p>
+    <nav aria-label="Mobile">
+      <ul class="menu-links">
+        {mainNav.map((item, i) => (
+          <li style={`--d: ${0.08 + i * 0.06}s`}>
+            {item.children ? (
+              <div class="menu-group">
+                <a href={item.href} class="menu-link">{item.label}</a>
+                <ul class="menu-sub">
+                  {item.children.map((child) => (
+                    <li><a href={child.href}>{child.label}</a></li>
+                  ))}
+                </ul>
+              </div>
+            ) : (
+              <a href={item.href} class="menu-link">{item.label}</a>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <a href="/contact" class="btn btn-primary menu-cta">Visit showroom</a>
+  </div>
+</div>
+
 <style>
   .site-header {
     position: sticky;
     top: 0;
-    z-index: 80;
-    background: rgba(244, 239, 232, 0.9);
+    z-index: 120;
+    background: rgba(244, 239, 232, 0.92);
     backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
     border-bottom: 1px solid rgba(36, 28, 24, 0.06);
-    transition: background 0.5s var(--ease), border-color 0.5s var(--ease), padding 0.5s var(--ease);
+    transition: background 0.45s var(--ease), border-color 0.45s var(--ease);
   }
 
   .site-header.is-overlay {
@@ -73,36 +113,47 @@ const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
     background: transparent;
     border-bottom-color: rgba(255, 255, 255, 0.12);
   }
-  .site-header.is-overlay .nav > ul > li > a,
+  .site-header.is-overlay .desktop-nav a,
   .site-header.is-overlay .btn-inquiry,
-  .site-header.is-overlay .icon-action { color: #f7f3ee; }
+  .site-header.is-overlay .nav-toggle { color: #f7f3ee; }
   .site-header.is-overlay .btn-inquiry { border-color: rgba(255,255,255,0.35); }
   .site-header.is-overlay .brand-logo-img { filter: brightness(0) invert(1); mix-blend-mode: normal; }
+  .site-header.is-overlay .toggle-bars,
+  .site-header.is-overlay .toggle-bars::before,
+  .site-header.is-overlay .toggle-bars::after { background: #f7f3ee; }
 
   .site-header.is-scrolled,
-  .site-header.is-overlay.is-scrolled {
-    background: rgba(244, 239, 232, 0.94);
+  .site-header.is-overlay.is-scrolled,
+  .site-header.is-menu-open {
+    background: rgba(244, 239, 232, 0.96);
     border-bottom-color: rgba(36, 28, 24, 0.08);
   }
-  .site-header.is-overlay.is-scrolled .nav > ul > li > a,
+  .site-header.is-overlay.is-scrolled .desktop-nav a,
   .site-header.is-overlay.is-scrolled .btn-inquiry,
-  .site-header.is-overlay.is-scrolled .icon-action { color: var(--color-ink); }
+  .site-header.is-overlay.is-scrolled .nav-toggle,
+  .site-header.is-menu-open .nav-toggle { color: var(--color-ink); }
   .site-header.is-overlay.is-scrolled .btn-inquiry { border-color: rgba(36, 28, 24, 0.2); }
-  .site-header.is-overlay.is-scrolled .brand-logo-img { filter: none; mix-blend-mode: multiply; }
+  .site-header.is-overlay.is-scrolled .brand-logo-img,
+  .site-header.is-menu-open .brand-logo-img { filter: none; mix-blend-mode: multiply; }
+  .site-header.is-overlay.is-scrolled .toggle-bars,
+  .site-header.is-overlay.is-scrolled .toggle-bars::before,
+  .site-header.is-overlay.is-scrolled .toggle-bars::after,
+  .site-header.is-menu-open .toggle-bars,
+  .site-header.is-menu-open .toggle-bars::before,
+  .site-header.is-menu-open .toggle-bars::after { background: var(--color-ink); }
 
   .header__inner {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    padding-block: 1.15rem;
+    padding-block: 1.05rem;
     padding-inline: var(--gutter);
     max-width: var(--max-wide);
     margin: 0 auto;
   }
-  .site-header.is-scrolled .header__inner { padding-block: 0.8rem; }
-  .brand { justify-self: start; }
-  .nav { justify-self: center; }
-  .header__actions { justify-self: end; display: flex; align-items: center; gap: 0.8rem; }
+  .brand { justify-self: start; z-index: 130; }
+  .desktop-nav { justify-self: center; }
+  .header__actions { justify-self: end; display: flex; align-items: center; gap: 0.8rem; z-index: 130; }
 
   .brand-logo-img {
     height: 40px;
@@ -111,68 +162,111 @@ const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
     mix-blend-mode: multiply;
   }
 
-  .nav ul { display: flex; align-items: center; gap: 1.8rem; }
-  .nav > ul > li { position: relative; }
-  .nav > ul > li > a {
+  .desktop-nav > ul { display: flex; align-items: center; gap: 1.8rem; }
+  .desktop-nav > ul > li { position: relative; }
+  .desktop-nav > ul > li > a {
     display: inline-flex;
     align-items: center;
     gap: 0.3rem;
     font-size: 0.72rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    padding-block: 0.4rem;
+    padding-block: 0.5rem;
   }
-  .nav > ul > li > a.is-active::after,
-  .nav > ul > li > a:hover::after {
-    content: '';
+  .desktop-nav > ul > li > a.is-active::after,
+  .desktop-nav > ul > li > a:hover::after {
+    content: "";
     position: absolute;
     left: 0;
-    bottom: 0;
+    bottom: 0.15rem;
     width: 100%;
     height: 1px;
     background: currentColor;
   }
-
-  .caret { transition: transform 0.4s var(--ease); }
-  .has-children:hover .caret,
-  .has-children.is-open .caret { transform: rotate(180deg); }
+  .caret { transition: transform 0.35s var(--ease); }
+  .has-children:hover .caret { transform: rotate(180deg); }
   .has-children::after {
     content: "";
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
-    height: 16px;
+    height: 18px;
   }
 
-  .nav .dropdown {
+  .mega {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 10px);
     left: 50%;
     transform: translate(-50%, 12px);
+    width: min(680px, 88vw);
     background: var(--color-bg);
     color: var(--color-ink);
     border: 1px solid var(--color-line);
-    padding: 0.8rem 0;
-    min-width: 240px;
-    max-height: min(70vh, 480px);
-    overflow-y: auto;
+    padding: 1.2rem 1.3rem 1.1rem;
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: all 0.4s var(--ease);
-    z-index: 1050;
+    transition: opacity 0.35s var(--ease), transform 0.35s var(--ease), visibility 0.35s;
+    z-index: 140;
+    box-shadow: var(--shadow-md);
   }
-  .has-children:hover .dropdown,
-  .has-children:focus-within .dropdown,
-  .has-children.is-open .dropdown {
+  .has-children:hover .mega,
+  .has-children:focus-within .mega {
     opacity: 1;
     visibility: visible;
-    transform: translate(-50%, 6px);
+    transform: translate(-50%, 0);
     pointer-events: auto;
   }
-  .dropdown li a { display: block; padding: 0.5rem 1.2rem; font-size: 0.86rem; letter-spacing: 0; text-transform: none; color: var(--color-ink); }
-  .dropdown li a:hover { color: var(--color-primary); }
+  .mega__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.9rem;
+    padding-bottom: 0.7rem;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .mega__head p {
+    font-size: 0.66rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+  }
+  .mega__head a { font-size: 0.78rem; color: var(--color-primary); }
+  .mega ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.15rem 1rem;
+  }
+  .mega a {
+    display: grid;
+    grid-template-columns: 46px 1fr;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 0.45rem 0.2rem;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .mega img {
+    width: 46px;
+    height: 46px;
+    object-fit: cover;
+    background: var(--color-cream);
+  }
+  .mega small {
+    display: block;
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    color: var(--color-gold);
+  }
+  .mega strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+  .mega a:hover strong { color: var(--color-primary); }
 
   .btn-inquiry {
     border: 1px solid rgba(36, 28, 24, 0.2);
@@ -183,73 +277,139 @@ const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
   }
   .btn-inquiry:hover { background: var(--color-primary); border-color: var(--color-primary); color: #fff; }
 
-  .icon-action { display: grid; place-items: center; cursor: pointer; }
-  .icon-22 { width: 22px; height: 22px; }
-  .nav-toggle { display: none; }
+  .nav-toggle {
+    display: none;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    position: relative;
+    z-index: 130;
+  }
+  .toggle-bars {
+    width: 18px;
+    height: 1.5px;
+    background: var(--color-ink);
+    position: relative;
+    display: block;
+    transition: background 0.3s;
+  }
+  .toggle-bars::before,
+  .toggle-bars::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 18px;
+    height: 1.5px;
+    background: inherit;
+    transition: transform 0.35s var(--ease), top 0.35s var(--ease);
+  }
+  .toggle-bars::before { top: -6px; }
+  .toggle-bars::after { top: 6px; }
+  .site-header.is-menu-open .toggle-bars { background: transparent; }
+  .site-header.is-menu-open .toggle-bars::before { top: 0; transform: rotate(45deg); background: var(--color-ink); }
+  .site-header.is-menu-open .toggle-bars::after { top: 0; transform: rotate(-45deg); background: var(--color-ink); }
+
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 110;
+    background: #1b1512;
+    color: #f4efe8;
+    display: grid;
+    align-items: end;
+    padding: 6.5rem var(--gutter) 2.5rem;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.45s var(--ease), visibility 0.45s;
+  }
+  .mobile-menu.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  .menu-kicker {
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #e4c9a4;
+    margin-bottom: 1.4rem;
+  }
+  .menu-links { display: grid; gap: 0.2rem; }
+  .menu-link {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 10vw, 3.6rem);
+    line-height: 1.05;
+    color: #fff;
+    transform: translateY(24px);
+    opacity: 0;
+  }
+  .mobile-menu.is-open .menu-link,
+  .mobile-menu.is-open .menu-group {
+    animation: menu-rise 0.7s var(--ease) both;
+    animation-delay: var(--d, 0.1s);
+  }
+  .menu-sub {
+    display: none;
+    padding: 0.4rem 0 0.8rem 0.2rem;
+    gap: 0.35rem;
+  }
+  .menu-group.is-open .menu-sub { display: grid; }
+  .menu-sub a {
+    color: rgba(244,239,232,0.7);
+    font-size: 1rem;
+  }
+  .menu-cta { margin-top: 2.2rem; }
+
+  @keyframes menu-rise {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: none; }
+  }
 
   @media (max-width: 980px) {
     .header__inner { grid-template-columns: 1fr auto; }
-    .nav {
-      position: fixed;
-      inset: 0 0 0 auto;
-      width: min(340px, 88vw);
-      background: var(--color-bg);
-      color: var(--color-ink);
-      transform: translateX(100%);
-      transition: transform 0.5s var(--ease);
-      padding: 6rem 1.8rem 2rem;
-      overflow-y: auto;
-      justify-self: stretch;
-    }
-    .nav.is-open { transform: translateX(0); }
-    .nav ul { flex-direction: column; align-items: flex-start; gap: 1.1rem; }
-    .nav > ul > li { width: 100%; }
-    .nav > ul > li > a { color: var(--color-ink); }
-    .dropdown {
-      position: static;
-      transform: none;
-      opacity: 1;
-      visibility: visible;
-      display: none;
-      border: none;
-      background: transparent;
-      left: 0;
-    }
-    .has-children:hover .dropdown { transform: none; }
-    .has-children.is-open .dropdown { display: block; pointer-events: auto; }
+    .desktop-nav, .btn-inquiry { display: none; }
     .nav-toggle { display: grid; }
-    .btn-inquiry { display: none; }
-    .site-header.is-overlay .brand-logo-img { filter: none; mix-blend-mode: multiply; }
-    .site-header.is-overlay .icon-action { color: var(--color-ink); }
-    .site-header.is-overlay { background: rgba(244, 239, 232, 0.92); border-bottom-color: rgba(36,28,24,0.06); }
   }
 </style>
 
 <script>
   function syncHeaderState() {
-    document.querySelector(".site-header")?.classList.toggle("is-scrolled", window.scrollY > 24);
+    const header = document.querySelector(".site-header");
+    header?.classList.toggle("is-scrolled", window.scrollY > 24);
+  }
+
+  function setMenu(open: boolean) {
+    const header = document.querySelector(".site-header");
+    const menu = document.getElementById("mobile-menu");
+    const toggle = document.getElementById("nav-toggle");
+    header?.classList.toggle("is-menu-open", open);
+    menu?.classList.toggle("is-open", open);
+    if (menu) menu.hidden = !open;
+    toggle?.setAttribute("aria-expanded", String(open));
+    toggle?.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    document.body.style.overflow = open ? "hidden" : "";
   }
 
   function initHeader() {
     const toggle = document.getElementById("nav-toggle");
-    const nav = document.getElementById("primary-nav");
-
+    const menu = document.getElementById("mobile-menu");
     if (toggle instanceof HTMLElement && toggle.dataset.bound !== "true") {
       toggle.dataset.bound = "true";
-      toggle.addEventListener("click", () => {
-        const isOpen = nav?.classList.toggle("is-open");
-        toggle.setAttribute("aria-expanded", String(!!isOpen));
+      toggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const open = !menu?.classList.contains("is-open");
+        setMenu(open);
       });
     }
 
-    document.querySelectorAll(".nav .has-children > a").forEach((link) => {
+    menu?.querySelectorAll(".menu-group > .menu-link").forEach((link) => {
       if (!(link instanceof HTMLElement) || link.dataset.bound === "true") return;
       link.dataset.bound = "true";
       link.addEventListener("click", (e) => {
-        if (window.innerWidth <= 980) {
-          e.preventDefault();
-          link.parentElement?.classList.toggle("is-open");
-        }
+        e.preventDefault();
+        link.parentElement?.classList.toggle("is-open");
       });
     });
 
@@ -262,5 +422,8 @@ const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
   }
 
   initHeader();
-  document.addEventListener("astro:page-load", initHeader);
+  document.addEventListener("astro:page-load", () => {
+    setMenu(false);
+    initHeader();
+  });
 </script>

@@ -2,41 +2,46 @@
 // its slice of this object as a prop, so copy edits happen in one place
 // and never inside markup.
 
+import { CATALOG_CATEGORIES } from '../lib/woocommerce/categories';
+
+const categoryImage = (slug: string) =>
+  CATALOG_CATEGORIES.find((c) => c.slug === slug)?.heroImage ?? '';
+
 export const heroSlides = [
   {
-    eyebrow: 'Mahakali Home Furnitures',
-    title: 'Furniture that transforms',
-    titleAccent: 'the way you live',
+    eyebrow: 'Welcome to Mahakali!',
+    title: 'Transform your home with',
+    titleAccent: 'Mahakali Udupi',
     copy: 'At Mahakali Udupi, every sofa, mattress and furnishing is designed with comfort, elegance and lasting quality — so your home feels as beautiful as it looks.',
-    ctaPrimary: { label: 'Explore Collection', href: '/products' },
-    ctaSecondary: { label: 'Visit Our Showroom', href: '/contact' },
+    ctaPrimary: { label: 'Shop Now', href: '/products' },
+    ctaSecondary: { label: 'Learn More', href: '/about' },
     image: {
-      src: '/images/hero-01.png',
-      alt: 'Mahakali Furnitures'
+      src: 'https://mahakalihomefurnitures.com/assets/img/hero/01.png',
+      alt: 'Mahakali sofa'
     }
   },
   {
-    eyebrow: 'Crafted in Udupi since 1997',
+    eyebrow: 'Welcome to Mahakali!',
     title: 'Premium comfort with',
     titleAccent: 'timeless style',
     copy: 'Handcrafted sofas, wooden cots and curated curtains — modern designs meeting trusted craftsmanship for over 28 years.',
-    ctaPrimary: { label: 'Explore Collection', href: '/products' },
-    ctaSecondary: { label: 'Visit Our Showroom', href: '/contact' },
+    ctaPrimary: { label: 'Shop Now', href: '/products' },
+    ctaSecondary: { label: 'Learn More', href: '/about' },
     image: {
-      src: '/images/hero-02.png',
-      alt: 'Mahakali Furnitures'
+      src: 'https://mahakalihomefurnitures.com/assets/img/hero/02.png',
+      alt: 'Mahakali tepoy and seating'
     }
   },
   {
-    eyebrow: 'Showrooms in Udupi & Kundapura',
-    title: 'Spaces deserve furniture',
-    titleAccent: 'with character',
+    eyebrow: 'Welcome to Mahakali!',
+    title: 'Furniture that transforms',
+    titleAccent: 'the way you live',
     copy: 'From seating to dining and rest, we bring comfort, durability and beauty together for living spaces you will love coming home to.',
-    ctaPrimary: { label: 'Explore Collection', href: '/products' },
-    ctaSecondary: { label: 'Visit Our Showroom', href: '/contact' },
+    ctaPrimary: { label: 'Shop Now', href: '/products' },
+    ctaSecondary: { label: 'Learn More', href: '/about' },
     image: {
-      src: '/images/hero-03.png',
-      alt: 'Mahakali Furnitures'
+      src: 'https://mahakalihomefurnitures.com/assets/img/hero/03.png',
+      alt: 'Mahakali lounge chair'
     }
   }
 ];
@@ -46,12 +51,12 @@ export const topCategories = {
   title: 'Furniture for every room in the house.',
   viewAllHref: '/products',
   items: [
-    { name: 'Upholstered', count: 'Collection', href: '/products/upholstered', image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1400&q=80' },
-    { name: 'Wooden Sofa', count: 'Collection', href: '/products/wooden-sofa', image: 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=1200&q=80' },
-    { name: 'Wooden Cot', count: 'Collection', href: '/products/wooden-cot', image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80' },
-    { name: 'Wooden Jhoola', count: 'Collection', href: '/products/wooden-jhoola', image: 'https://images.unsplash.com/photo-1567016432779-094069958ea5?auto=format&fit=crop&w=1200&q=80' },
-    { name: 'Dining + Glass Top', count: 'Collection', href: '/products/wooden-dining-glass-4-3', image: 'https://images.unsplash.com/photo-1617104551722-3b2d51366400?auto=format&fit=crop&w=1200&q=80' },
-    { name: 'Tepoy', count: 'Collection', href: '/products/tepoy', image: 'https://images.unsplash.com/photo-1554295405-abb8fd54f153?auto=format&fit=crop&w=1200&q=80' }
+    { name: 'Upholstered', count: 'Collection', href: '/products/upholstered', image: categoryImage('upholstered') },
+    { name: 'Wooden Sofa', count: 'Collection', href: '/products/wooden-sofa', image: categoryImage('wooden-sofa') },
+    { name: 'Wooden Cot', count: 'Collection', href: '/products/wooden-cot', image: categoryImage('wooden-cot') },
+    { name: 'Wooden Jhoola', count: 'Collection', href: '/products/wooden-jhoola', image: categoryImage('wooden-jhoola') },
+    { name: 'Dining + Glass Top', count: 'Collection', href: '/products/wooden-dining-glass-4-3', image: categoryImage('wooden-dining-glass-4-3') },
+    { name: 'Tepoy', count: 'Collection', href: '/products/tepoy', image: categoryImage('tepoy') }
   ]
 };
 
@@ -61,21 +66,21 @@ export const promoStrip = [
     title: 'Elegant Tepoy Collections',
     cta: { label: 'Shop Now', href: '/products/tepoy' },
     theme: 'blush',
-    image: 'https://images.unsplash.com/photo-1554295405-abb8fd54f153?auto=format&fit=crop&w=500&q=80'
+    image: categoryImage('tepoy')
   },
   {
     tag: 'Hot Sale',
     title: 'Premium Sofa Sale Collections',
     cta: { label: 'Discover Now', href: '/products/upholstered' },
     theme: 'sand',
-    image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=500&q=80'
+    image: categoryImage('upholstered')
   },
   {
     tag: 'Best Cot',
     title: 'Premium Cot Collections',
     cta: { label: 'Discover Now', href: '/products/wooden-cot' },
     theme: 'sky',
-    image: 'https://images.unsplash.com/photo-1505692952047-1a78307da8f2?auto=format&fit=crop&w=500&q=80'
+    image: categoryImage('wooden-cot')
   }
 ];
 

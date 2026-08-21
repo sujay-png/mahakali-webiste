@@ -5,33 +5,46 @@ const { data } = Astro.props;
 ---
 
 <section class="about-hero">
-  <div class="wrap wrap--wide grid">
-    <div data-reveal="fade">
-      <p class="eyebrow">{data.eyebrow}</p>
-      <h1>Spaces deserve furniture with character.</h1>
-      <p class="copy">{data.copy}</p>
+  <div class="wrap wrap--wide intro">
+    <p class="eyebrow">{data.eyebrow}</p>
+    <h1>Spaces deserve furniture with character.</h1>
+  </div>
+  <div class="wrap wrap--wide body">
+    <figure>
+      <img src={data.image.src} alt={data.image.alt} loading="eager" />
+    </figure>
+    <div class="copy">
+      <p>{data.copy}</p>
       <div class="actions">
         <a href="/contact" class="btn btn-primary">Visit showroom</a>
         <a href="/products" class="btn btn-secondary">Collections</a>
       </div>
     </div>
-    <figure data-media data-reveal="right">
-      <img src={data.image.src} alt={data.image.alt} loading="eager" />
-    </figure>
   </div>
 </section>
 
 <style>
-  .about-hero { padding-block: clamp(6rem, 10vw, 8.5rem) 4rem; }
-  .grid {
+  .about-hero { padding-top: clamp(6.5rem, 10vw, 8rem); }
+  .intro { margin-bottom: 2.5rem; }
+  h1 { max-width: 14ch; margin-top: 0.8rem; }
+  .body {
     display: grid;
-    grid-template-columns: 0.9fr 1.1fr;
-    gap: clamp(2rem, 5vw, 5rem);
-    align-items: center;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: end;
   }
-  h1 { max-width: 11ch; margin: 1rem 0 1.4rem; }
-  .copy { color: var(--color-ink-soft); font-weight: 300; max-width: 42ch; margin-bottom: 2rem; }
-  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-  figure { aspect-ratio: 4/5; margin: 0; }
-  @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
+  figure { margin: 0; aspect-ratio: 16 / 10; overflow: hidden; background: var(--color-cream); }
+  figure img { width: 100%; height: 100%; object-fit: cover; }
+  .copy { padding-bottom: 0.4rem; }
+  .copy p {
+    color: var(--color-ink-soft);
+    font-weight: 300;
+    max-width: 42ch;
+    margin-bottom: 1.6rem;
+  }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+  @media (max-width: 800px) {
+    .body { grid-template-columns: 1fr; }
+    figure { aspect-ratio: 4 / 3; }
+  }
 </style>
