@@ -1,42 +1,59 @@
 ---
 import Icon from "../../global/UI/Icon.astro";
-import ProductSpecs from "./ProductSpecs.astro";
+import { stripHtml } from "../../../lib/woocommerce/format";
 
 export interface Props {
   title: string;
   rating: number;
   stars: number;
+  ratingCount?: number;
   currentPrice: string;
-  originalPrice: string;
-  discountText: string;
-  discountLabel: string;
-  productCode: string;
+  originalPrice?: string;
+  discountText?: string;
+  discountLabel?: string;
   sku: string;
   stockStatus: string;
+  categoryName: string;
+  categoryHref: string;
+  whatsappHref: string;
+  contactHref?: string;
+  excerptHtml?: string;
 }
 
-const { 
-  title, 
-  rating, 
-  stars, 
-  currentPrice, 
-  originalPrice, 
-  discountText, 
-  discountLabel,
-  productCode,
+const {
+  title,
+  rating,
+  stars,
+  ratingCount = 0,
+  currentPrice,
+  originalPrice,
+  discountText,
+  discountLabel = "Showroom price",
   sku,
-  stockStatus
+  stockStatus,
+  categoryName,
+  categoryHref,
+  whatsappHref,
+  contactHref = "/contact",
+  excerptHtml = "",
 } = Astro.props;
+
+const fullStars = Math.max(1, Math.min(5, Math.round(stars || rating || 5)));
+const excerpt = stripHtml(excerptHtml);
 ---
 
 <div class="product-info-wrapper">
+  <a class="collection-chip" href={categoryHref}>{categoryName}</a>
+
   <div class="info-header">
     <h1 class="product-title font-display">{title}</h1>
     <div class="rating-container">
-      {Array.from({ length: stars }).map(() => (
-        <Icon name="star" class="star-icon" />
+      {Array.from({ length: fullStars }).map(() => (
+        <Icon name="star-filled" class="star-icon" />
       ))}
-      <span class="rating-text">({rating.toFixed(1)})</span>
+      <span class="rating-text">
+        {rating.toFixed(1)}{ratingCount ? ` · ${ratingCount} reviews` : ""}
+      </span>
     </div>
   </div>
 
@@ -45,187 +62,121 @@ const {
       <span class="discount-label">{discountLabel}</span>
       <div class="price-row">
         <span class="current-price font-display">{currentPrice}</span>
-        <span class="original-price">{originalPrice}</span>
+        {originalPrice && <span class="original-price">{originalPrice}</span>}
       </div>
     </div>
-    <span class="discount-badge">{discountText}</span>
+    {discountText && <span class="discount-badge">{discountText}</span>}
   </div>
 
+  {excerpt && <p class="excerpt">{excerpt}</p>}
+
   <div class="meta-container">
-    <p class="product-codes">
-      PRODUCT CODE {productCode}<br/>
-      SKU: {sku}
-    </p>
+    <p class="product-codes">SKU {sku}</p>
     <p class="stock-status">
       <Icon name="info" class="info-icon" /> {stockStatus}
     </p>
   </div>
 
-  <!-- Specs injected here via slot or directly if we prefer. Given the layout, Specs go here before Add to Cart -->
   <slot />
 
-  <button class="add-to-cart-btn">
-    <Icon name="shopping-bag" class="cart-icon" />
-    Add to Cart
-  </button>
+  <div class="cta-row">
+    <a class="add-to-cart-btn" href={whatsappHref}>
+      <Icon name="phone" class="cart-icon" />
+      Enquire on WhatsApp
+    </a>
+    <a class="ghost-btn" href={contactHref}>Visit a showroom</a>
+  </div>
 </div>
 
 <style>
-  .product-info-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  .product-info-wrapper { display: flex; flex-direction: column; }
+
+  .collection-chip {
+    align-self: flex-start;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #7c5730;
+    margin-bottom: 0.85rem;
   }
 
   .info-header {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
     border-bottom: 1px solid rgba(226, 191, 185, 0.3);
-    padding-bottom: 1.5rem;
-    margin-bottom: 1.5rem;
+    padding-bottom: 1.3rem;
+    margin-bottom: 1.3rem;
   }
 
   .product-title {
-    font-size: 2.5rem; /* text-display-lg */
-    line-height: 1.2;
-    color: #570000; /* primary */
+    font-size: clamp(2rem, 3vw, 2.7rem);
+    color: #570000;
+    margin-bottom: 0.6rem;
   }
 
   .rating-container {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-family: var(--font-nav);
-    font-size: 0.75rem; /* text-label-sm */
-    color: #5a413d; /* on-surface-variant */
+    gap: 0.35rem;
+    color: #5a413d;
+    font-size: 0.82rem;
   }
-
-  :global(.star-icon) {
-    width: 16px;
-    height: 16px;
-    color: #F59E0B; /* amber-500 */
-    fill: currentColor;
-  }
-
-  .rating-text {
-    margin-left: 0.5rem;
-  }
+  :global(.star-icon) { width: 15px; height: 15px; color: #c48a3a; }
 
   .pricing-container {
     display: flex;
     align-items: flex-end;
     gap: 1rem;
-    border-bottom: 1px solid rgba(226, 191, 185, 0.3);
-    padding-bottom: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
   }
-
-  .price-details {
-    display: flex;
-    flex-direction: column;
-  }
-
   .discount-label {
-    font-family: var(--font-nav);
-    font-size: 0.75rem;
-    color: #5a413d;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 0.25rem;
-  }
-
-  .price-row {
-    display: flex;
-    align-items: baseline;
-    gap: 0.75rem;
-  }
-
-  .current-price {
-    font-size: 2rem; /* text-headline-lg */
-    font-weight: 700;
-    color: #1c1b1b;
-  }
-
-  .original-price {
-    font-family: var(--font-body);
-    font-size: 1rem;
     color: #5a413d;
-    text-decoration: line-through;
   }
-
+  .price-row { display: flex; align-items: baseline; gap: 0.7rem; }
+  .current-price { font-size: 2rem; font-weight: 700; }
+  .original-price { color: #8a746f; text-decoration: line-through; }
   .discount-badge {
-    font-family: var(--font-nav);
-    font-size: 0.75rem;
-    color: #ba1a1a; /* error */
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 0.5rem;
     margin-left: auto;
-  }
-
-  .meta-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-
-  .product-codes {
-    font-family: var(--font-body);
-    font-size: 1rem;
-    color: #5a413d;
-    line-height: 1.5;
-  }
-
-  .stock-status {
-    font-family: var(--font-nav);
-    font-size: 0.75rem;
-    color: #93000a; /* on-error-container */
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-  }
-
-  :global(.info-icon) {
-    width: 16px;
-    height: 16px;
-  }
-
-  .add-to-cart-btn {
-    background-color: #570000; /* primary */
-    color: #ffffff; /* on-primary */
-    font-family: var(--font-nav);
-    font-size: 0.875rem; /* text-label-lg */
+    color: #93000a;
+    font-weight: 700;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    padding: 1rem 2rem;
-    border-radius: 0.25rem;
-    display: flex;
+    font-size: 0.75rem;
+  }
+
+  .excerpt {
+    color: #5a413d;
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+
+  .meta-container { display: grid; gap: 0.45rem; margin-bottom: 1.5rem; color: #5a413d; }
+  .stock-status { display: flex; align-items: center; gap: 0.35rem; font-size: 0.85rem; }
+  :global(.info-icon) { width: 16px; height: 16px; }
+
+  .cta-row { display: grid; gap: 0.7rem; }
+  @media (min-width: 640px) {
+    .cta-row { grid-template-columns: 1.4fr 1fr; }
+  }
+
+  .add-to-cart-btn,
+  .ghost-btn {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    width: 100%;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    padding: 1rem 1.4rem;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
   }
-
-  @media (min-width: 768px) {
-    .add-to-cart-btn {
-      width: auto;
-    }
-  }
-
-  .add-to-cart-btn:hover {
-    background-color: #800000; /* primary-container */
-  }
-
-  :global(.cart-icon) {
-    width: 20px;
-    height: 20px;
-    fill: currentColor;
-  }
+  .add-to-cart-btn { background: #570000; color: #fff; }
+  .add-to-cart-btn:hover { background: #410000; }
+  .ghost-btn { border: 1px solid rgba(87, 0, 0, 0.25); color: #570000; }
+  .ghost-btn:hover { background: rgba(87, 0, 0, 0.06); }
+  :global(.cart-icon) { width: 18px; height: 18px; }
 </style>

@@ -8,29 +8,46 @@ export interface Props {
   image: string;
   link: string;
   category?: string;
+  regularPrice?: string;
+  onSale?: boolean;
 }
 
-const { name, price, stars, image, link, category = "" } = Astro.props;
+const {
+  name,
+  price,
+  stars,
+  image,
+  link,
+  category = "",
+  regularPrice,
+  onSale = false,
+} = Astro.props;
 
-// Calculate stars to render
 const fullStars = Math.floor(stars);
 const hasHalfStar = stars % 1 !== 0;
-const emptyStars = 5 - Math.ceil(stars);
-
-const numericPrice = parseFloat(price.replace(/[^0-9.-]+/g, ""));
+const emptyStars = Math.max(0, 5 - Math.ceil(stars));
+const numericPrice = Number(String(price).replace(/[^0-9.-]+/g, "")) || 0;
 ---
 
-<a href={link} class="product-card" data-name={name.toLowerCase()} data-price={numericPrice} data-category={category.toLowerCase()}>
+<a
+  href={link}
+  class="product-card"
+  data-name={name.toLowerCase()}
+  data-price={numericPrice}
+  data-category={category.toLowerCase()}
+>
   <div class="card-image-container">
     <img src={image} alt={name} class="card-image" loading="lazy" />
     <div class="hover-overlay"></div>
-    <span class="quick-view-btn">Quick View</span>
+    {onSale && <span class="sale-chip">Sale</span>}
+    <span class="quick-view-btn">View piece</span>
   </div>
-  
+
   <div class="card-info">
     <div class="card-details">
+      {category && <p class="product-cat">{category}</p>}
       <h3 class="product-name font-display">{name}</h3>
-      <div class="star-rating">
+      <div class="star-rating" aria-label={`${stars} out of 5`}>
         {Array.from({ length: fullStars }).map(() => (
           <Icon name="star-filled" class="star-icon" />
         ))}
@@ -40,7 +57,10 @@ const numericPrice = parseFloat(price.replace(/[^0-9.-]+/g, ""));
         ))}
       </div>
     </div>
-    <span class="product-price">{price}</span>
+    <div class="price-stack">
+      <span class="product-price">{price}</span>
+      {regularPrice && onSale && <s class="was">{regularPrice}</s>}
+    </div>
   </div>
 </a>
 
@@ -48,46 +68,52 @@ const numericPrice = parseFloat(price.replace(/[^0-9.-]+/g, ""));
   .product-card {
     display: flex;
     flex-direction: column;
-    cursor: pointer;
-    position: relative;
     text-decoration: none;
     color: inherit;
   }
-  .product-card:hover .card-image {
-    transform: scale(1.05);
-  }
-  .product-card:hover .hover-overlay {
-    background: rgba(0, 0, 0, 0.05);
-  }
+  .product-card:hover .card-image { transform: scale(1.06); }
+  .product-card:hover .hover-overlay { background: rgba(44, 22, 0, 0.18); }
   .product-card:hover .quick-view-btn {
     opacity: 1;
     transform: translate(-50%, 0);
   }
-  .product-card:hover .product-name {
-    color: #570000; /* primary */
-  }
+  .product-card:hover .product-name { color: #570000; }
 
   .card-image-container {
     position: relative;
     aspect-ratio: 4/3;
-    background-color: #f6f3f2; /* surface-container-low */
-    margin-bottom: 1.5rem;
+    background: #f3eee4;
+    margin-bottom: 1.15rem;
     overflow: hidden;
-    border-radius: 0.125rem;
+    border-radius: 14px;
   }
 
   .card-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.7s ease;
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .hover-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0);
-    transition: background 0.3s ease;
+    transition: background 0.35s ease;
+  }
+
+  .sale-chip {
+    position: absolute;
+    top: 0.85rem;
+    left: 0.85rem;
+    z-index: 2;
+    background: #570000;
+    color: #fff;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 0.28rem 0.6rem;
+    border-radius: 999px;
   }
 
   .quick-view-btn {
@@ -96,56 +122,61 @@ const numericPrice = parseFloat(price.replace(/[^0-9.-]+/g, ""));
     left: 50%;
     transform: translate(-50%, 1rem);
     opacity: 0;
-    background: rgba(252, 249, 248, 0.9); /* surface/90 */
-    backdrop-filter: blur(8px);
+    background: rgba(252, 249, 248, 0.92);
+    backdrop-filter: blur(10px);
     color: #1c1b1b;
-    padding: 0.5rem 1.5rem;
-    border-radius: 0.25rem;
+    padding: 0.55rem 1.35rem;
+    border-radius: 999px;
     font-family: var(--font-nav);
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     font-weight: 600;
-    text-decoration: none;
+    letter-spacing: 0.04em;
     white-space: nowrap;
-    transition: all 0.3s ease;
-  }
-  .quick-view-btn:hover {
-    background: #570000;
-    color: #ffffff;
+    transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .card-info {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    gap: 1rem;
   }
 
-  .card-details {
-    display: flex;
-    flex-direction: column;
+  .product-cat {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #7c5730;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
   }
 
   .product-name {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     color: #1c1b1b;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.45rem;
     transition: color 0.2s ease;
   }
 
   .star-rating {
     display: flex;
-    color: #7c5730; /* secondary */
+    color: #7c5730;
     gap: 2px;
   }
-  :global(.star-icon) {
-    width: 16px;
-    height: 16px;
-  }
+  :global(.star-icon) { width: 14px; height: 14px; }
 
+  .price-stack { text-align: right; }
   .product-price {
+    display: block;
     font-family: var(--font-nav);
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: #5a413d; /* on-surface-variant */
-    margin-top: 0.25rem;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #570000;
+  }
+  .was {
+    display: block;
+    margin-top: 0.15rem;
+    font-size: 0.78rem;
+    color: #8a746f;
   }
 </style>

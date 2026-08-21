@@ -1,5 +1,4 @@
-// Global, site-wide data. Any future page (About, Products, Contact...)
-// imports from here so nav/footer/contact stay in one place.
+import { CATALOG_CATEGORIES, categoryPath } from "../lib/woocommerce/categories";
 
 export const siteInfo = {
   name: 'Mahakali',
@@ -32,13 +31,10 @@ export const mainNav = [
   {
     label: 'Products',
     href: '/products',
-    children: [
-      { label: 'Upholstered', href: '/products/upholstered' },
-      { label: 'Wooden Sofa', href: '/products/wooden-sofa' },
-      { label: 'Wooden Cot', href: '/products/wooden-cot' },
-      { label: 'Wooden Jhoola', href: '/products/wooden-jhoola' },
-      { label: 'Dining Sets', href: '/products/dining-sets' }
-    ]
+    children: CATALOG_CATEGORIES.map((category) => ({
+      label: category.navLabel,
+      href: categoryPath(category.slug),
+    })),
   }
 ];
 

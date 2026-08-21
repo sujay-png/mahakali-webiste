@@ -1,10 +1,30 @@
 ---
 import Icon from "../global/UI/Icon.astro";
 import StarRating from "../global/UI/StarRating.astro";
-import type { productLists as ProductListsType } from "../../data/home";
+
+type ShelfItem = {
+  name: string;
+  rating: number;
+  price: string;
+  oldPrice?: string;
+  image: string;
+  href?: string;
+};
+
+type Column = {
+  title: string;
+  items: ShelfItem[];
+  emptyMessage?: string;
+};
+
 export interface Props {
-  data: typeof ProductListsType;
+  data: {
+    onSale: Column;
+    bestSeller: Column;
+    topRated: Column;
+  };
 }
+
 const { data } = Astro.props;
 const columns = [data.onSale, data.bestSeller, data.topRated];
 ---
@@ -21,7 +41,7 @@ const columns = [data.onSale, data.bestSeller, data.topRated];
             <ul class="product-col__list">
               {col.items.map((item) => (
                 <li>
-                  <a href="#" class="product-mini">
+                  <a href={item.href || "/products"} class="product-mini">
                     <img
                       src={item.image}
                       alt={item.name}
@@ -34,9 +54,7 @@ const columns = [data.onSale, data.bestSeller, data.topRated];
                       <StarRating rating={item.rating} />
                       <span class="product-mini__price">
                         {item.price}
-                        {"oldPrice" in item && item.oldPrice && (
-                          <s>{item.oldPrice}</s>
-                        )}
+                        {item.oldPrice && <s>{item.oldPrice}</s>}
                       </span>
                     </span>
                   </a>
@@ -46,7 +64,7 @@ const columns = [data.onSale, data.bestSeller, data.topRated];
           ) : (
             <p class="product-col__empty">
               <Icon name="tag" class="icon-16" />
-              {(col as any).emptyMessage || 'No products available.'}
+              {col.emptyMessage || "No products available."}
             </p>
           )}
         </div>
@@ -69,7 +87,6 @@ const columns = [data.onSale, data.bestSeller, data.topRated];
     font-size: 1.05rem;
     margin-bottom: 1.1rem;
   }
-
   .product-col__list {
     display: flex;
     flex-direction: column;
@@ -93,9 +110,7 @@ const columns = [data.onSale, data.bestSeller, data.topRated];
     font-weight: 600;
     transition: color 0.2s;
   }
-  .product-mini:hover strong {
-    color: var(--color-primary);
-  }
+  .product-mini:hover strong { color: var(--color-primary); }
   .product-mini__price {
     display: block;
     margin-top: 0.25rem;
@@ -108,7 +123,6 @@ const columns = [data.onSale, data.bestSeller, data.topRated];
     color: var(--color-ink-soft);
     font-weight: 400;
   }
-
   .product-col__empty {
     display: flex;
     align-items: center;
@@ -116,15 +130,8 @@ const columns = [data.onSale, data.bestSeller, data.topRated];
     color: var(--color-ink-soft);
     font-size: 0.9rem;
   }
-  :global(.icon-16) {
-    width: 15px;
-    height: 15px;
-  }
-
+  :global(.icon-16) { width: 15px; height: 15px; }
   @media (max-width: 860px) {
-    .product-lists__grid {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-    }
+    .product-lists__grid { grid-template-columns: 1fr; gap: 2.5rem; }
   }
 </style>

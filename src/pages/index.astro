@@ -1,4 +1,6 @@
 ---
+export const prerender = false;
+
 import Layout from "../layouts/Layout.astro";
 import GrainDivider from "../components/global/UI/GrainDivider.astro";
 
@@ -25,12 +27,31 @@ import {
   whyChooseUs,
   aboutSection,
   dealBanner,
-  productLists,
   gallery,
   testimonials,
   blogSection,
   instagramStrip,
 } from "../data/home";
+import { getHomeShelves } from "../lib/woocommerce/catalog";
+
+const shelves = await getHomeShelves();
+const liveProductLists = {
+  onSale: {
+    title: "On Sale",
+    items: shelves.onSale,
+    emptyMessage: "No sale pieces online right now — ask in-store.",
+  },
+  bestSeller: {
+    title: "Best Seller",
+    items: shelves.bestSeller,
+    emptyMessage: "Best sellers will appear once the catalog is connected.",
+  },
+  topRated: {
+    title: "Top Rated",
+    items: shelves.topRated,
+    emptyMessage: "Ratings sync from WooCommerce after keys are added.",
+  },
+};
 ---
 
 <Layout
@@ -53,7 +74,7 @@ import {
     <AboutSection data={aboutSection} />
 
     <DealBanner data={dealBanner} />
-    <ProductLists data={productLists} />
+    <ProductLists data={liveProductLists} />
 
     <GrainDivider variant="cream" />
     <Gallery data={gallery} />

@@ -3,13 +3,21 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
+    "dev": "astro dev --host 0.0.0.0",
+    "start": "HOST=0.0.0.0 node ./dist/server/entry.mjs",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview --host 0.0.0.0"
   },
   "dependencies": {
+    "@astrojs/node": "^8.3.4",
+    "@astrojs/react": "^4.4.2",
     "astro": "^4.15.0",
-    "motion": "^13.1.0"
+    "motion": "^13.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7"
   }
 }

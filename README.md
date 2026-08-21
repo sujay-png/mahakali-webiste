@@ -3,17 +3,33 @@
 A from-scratch redesign of the Mahakali homepage: same content and information
 architecture as the original site, new "Carved Warmth" visual language
 (burnt terracotta + brass on linen, chamfered/cut-corner cards referencing
-joinery, a wood-grain divider as the signature motif). Built with **Astro**
-and **plain CSS only** — no Tailwind, no CSS framework.
+joinery, a wood-grain divider as the signature motif). Built with **Astro**,
+**WooCommerce** for the live catalog, and **Motion** (Framer) for animation.
 
 ## Run it
 
 ```bash
+cp .env.example .env   # then fill WooCommerce keys
 npm install
-npm run dev       # http://localhost:4321
-npm run build     # outputs to /dist
-npm run preview   # preview the production build
+npm run dev            # http://localhost:4321
+npm run build          # SSR build → dist/
+npm start              # HOST=0.0.0.0 node ./dist/server/entry.mjs
 ```
+
+## WooCommerce
+
+Copy `.env.example` to `.env` and replace the placeholders:
+
+| Variable | What it is |
+| --- | --- |
+| `WOOCOMMERCE_URL` | WordPress store origin, no trailing slash |
+| `WOOCOMMERCE_CONSUMER_KEY` | REST key (`ck_…`) with **Read** access |
+| `WOOCOMMERCE_CONSUMER_SECRET` | REST secret (`cs_…`) |
+| `PUBLIC_SITE_URL` | Canonical public site URL |
+| `PUBLIC_WHATSAPP_NUMBER` | Enquiry number, digits with country code |
+
+Category IDs are mapped in `src/lib/woocommerce/categories.ts`.
+Product URLs are `/products/{category}/{slug}`.
 
 ## Folder structure
 
@@ -38,7 +54,7 @@ src/
 │   ├── StarRating.astro   ← shared rating widget
 │   └── GrainDivider.astro ← signature wood-grain section divider
 ├── scripts/
-│   ├── scroll-reveal.js  ← IntersectionObserver, powers [data-reveal]
+│   ├── motion-reveal.js  ← Motion (Framer) scroll reveals
 │   └── carousel.js       ← vanilla scroll-snap carousel (dots + arrows)
 ├── styles/
 │   └── global.css        ← design tokens, reset, type scale, buttons,

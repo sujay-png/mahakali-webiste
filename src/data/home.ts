@@ -46,12 +46,12 @@ export const topCategories = {
   title: 'Top Categories',
   viewAllHref: '/products',
   items: [
-    { name: 'Upholstered', count: '87 Items', href: '/products/upholstered', image: 'https://images.unsplash.com/photo-1550254478-ead40cc54513?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Wooden Sofa', count: '15 Items', href: '/products/wooden-sofa', image: 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Wooden Cot', count: '20 Items', href: '/products/wooden-cot', image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Wooden Jhoola', count: '2 Items', href: '/products/wooden-jhoola', image: 'https://images.unsplash.com/photo-1567016432779-094069958ea5?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Dining Set + Glass Top', count: '10 Items', href: '/products/dining-glass-top', image: 'https://images.unsplash.com/photo-1617104551722-3b2d51366400?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Wooden Dining 6/3', count: '22 Items', href: '/products/dining-6-3', image: 'https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=300&q=80' }
+    { name: 'Upholstered', count: 'Collection', href: '/products/upholstered', image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=300&q=80' },
+    { name: 'Wooden Sofa', count: 'Collection', href: '/products/wooden-sofa', image: 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=300&q=80' },
+    { name: 'Wooden Cot', count: 'Collection', href: '/products/wooden-cot', image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=300&q=80' },
+    { name: 'Wooden Jhoola', count: 'Collection', href: '/products/wooden-jhoola', image: 'https://images.unsplash.com/photo-1567016432779-094069958ea5?auto=format&fit=crop&w=300&q=80' },
+    { name: 'Dining + Glass Top', count: 'Collection', href: '/products/wooden-dining-glass-4-3', image: 'https://images.unsplash.com/photo-1617104551722-3b2d51366400?auto=format&fit=crop&w=300&q=80' },
+    { name: 'Tepoy', count: 'Collection', href: '/products/tepoy', image: 'https://images.unsplash.com/photo-1554295405-abb8fd54f153?auto=format&fit=crop&w=300&q=80' }
   ]
 };
 
@@ -66,14 +66,14 @@ export const promoStrip = [
   {
     tag: 'Hot Sale',
     title: 'Premium Sofa Sale Collections',
-    cta: { label: 'Discover Now', href: '/products/sofa' },
+    cta: { label: 'Discover Now', href: '/products/upholstered' },
     theme: 'sand',
     image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=500&q=80'
   },
   {
     tag: 'Best Cot',
     title: 'Premium Cot Collections',
-    cta: { label: 'Discover Now', href: '/products/cot' },
+    cta: { label: 'Discover Now', href: '/products/wooden-cot' },
     theme: 'sky',
     image: 'https://images.unsplash.com/photo-1505692952047-1a78307da8f2?auto=format&fit=crop&w=500&q=80'
   }
