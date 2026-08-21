@@ -7,50 +7,183 @@ const { data } = Astro.props;
 
 <section class="section about">
   <div class="wrap wrap--wide about__grid">
-    <div class="copy" data-reveal="fade">
-      <p class="eyebrow">{data.eyebrow}</p>
-      <h2>Spaces deserve furniture with character.</h2>
-      <p class="lead">{data.copy}</p>
-      <p class="years">{data.badge}</p>
-      <a class="btn btn-primary" href={data.cta.href}>{data.cta.label} <Icon name="arrow-right" /></a>
-    </div>
-    <div class="visual" data-reveal="right">
-      <figure data-media class="main">
+    <div class="visual" data-reveal-group>
+      <figure data-media class="img-1" data-reveal="fade">
         <img src={data.images[0].src} alt={data.images[0].alt} loading="lazy" />
       </figure>
-      <figure data-media class="side">
+      <figure data-media class="img-2" data-reveal="up">
         <img src={data.images[1].src} alt={data.images[1].alt} loading="lazy" />
       </figure>
+      <figure data-media class="img-3" data-reveal="down">
+        <img src={data.images[2].src} alt={data.images[2].alt} loading="lazy" />
+      </figure>
+      
+      <div class="experience-badge" data-reveal="fade">
+        <span class="font-display">28</span>
+        <small>Years Of<br/>Experience</small>
+      </div>
+    </div>
+
+    <div class="copy" data-reveal="fade">
+      <p class="eyebrow">{data.eyebrow}</p>
+      <h2>
+        {data.title} <br/>
+        <em class="accent">{data.titleAccent}</em><br/>
+        <span class="tail">{data.titleTail}</span>
+      </h2>
+      <p class="lead">{data.copy}</p>
+      
+      <ul class="bullets">
+        {data.bullets.map(b => (
+          <li><Icon name="check" class="icon-sm" /> {b}</li>
+        ))}
+      </ul>
+
+      <a class="btn btn-primary btn-outline" href={data.cta.href}>{data.cta.label}</a>
     </div>
   </div>
 </section>
 
 <style>
+  .about {
+    padding-block: clamp(4rem, 8vw, 8rem);
+    background: var(--color-surface);
+  }
   .about__grid {
     display: grid;
-    grid-template-columns: 0.85fr 1.15fr;
-    gap: clamp(2.5rem, 6vw, 6rem);
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(3rem, 6vw, 6rem);
     align-items: center;
   }
-  h2 { max-width: 11ch; margin: 1rem 0 1.5rem; }
-  .lead { color: var(--color-ink-soft); font-weight: 300; max-width: 42ch; }
-  .years {
-    margin: 2rem 0 2.2rem;
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
+  
+  .visual {
+    position: relative;
+    min-height: 600px;
+  }
+  figure { margin: 0; background: var(--color-cream); overflow: hidden; position: absolute; }
+  figure img { width: 100%; height: 100%; object-fit: cover; }
+  
+  .img-1 {
+    width: 65%;
+    aspect-ratio: 3/4;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    border-radius: 12px;
+  }
+  .img-2 {
+    width: 45%;
+    aspect-ratio: 4/5;
+    bottom: 5%;
+    right: 0;
+    z-index: 2;
+    border-radius: 12px;
+    box-shadow: -10px -10px 40px rgba(0,0,0,0.05);
+  }
+  .img-3 {
+    width: 35%;
+    aspect-ratio: 1;
+    top: 15%;
+    right: 5%;
+    z-index: 3;
+    border-radius: 50%;
+    border: 8px solid var(--color-surface);
+  }
+  
+  .experience-badge {
+    position: absolute;
+    bottom: 10%;
+    left: 10%;
+    z-index: 4;
+    background: var(--color-ink);
+    color: var(--color-cream);
+    padding: 1.5rem;
+    border-radius: 50%;
+    width: 140px;
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transform: translate(-30%, 30%);
+  }
+  .experience-badge span {
+    font-size: 2.5rem;
+    line-height: 1;
     color: var(--color-gold);
   }
-  .visual {
-    display: grid;
-    grid-template-columns: 1.4fr 0.8fr;
-    gap: 1rem;
-    align-items: end;
+  .experience-badge small {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 0.2rem;
   }
-  .main { aspect-ratio: 4/5; }
-  .side { aspect-ratio: 3/4; margin-bottom: 12%; }
+  
+  .copy { padding-right: 2rem; }
+  .eyebrow { margin-bottom: 1.2rem; }
+  h2 {
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    line-height: 1.15;
+    margin-bottom: 1.8rem;
+  }
+  .accent {
+    font-style: italic;
+    color: var(--color-gold);
+    font-weight: 400;
+  }
+  .tail {
+    font-size: clamp(1.4rem, 2vw, 1.8rem);
+    font-weight: 400;
+    color: var(--color-ink-soft);
+  }
+  .lead { 
+    color: var(--color-ink-soft); 
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+  
+  .bullets {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  .bullets li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+    color: var(--color-ink);
+  }
+  .icon-sm {
+    width: 16px;
+    height: 16px;
+    color: var(--color-primary);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  
+  .btn-outline {
+    border: 1px solid var(--color-line);
+    background: transparent;
+    color: var(--color-ink);
+    padding: 1rem 2.2rem;
+  }
+  .btn-outline:hover {
+    background: var(--color-ink);
+    color: #fff;
+    border-color: var(--color-ink);
+  }
+  
   @media (max-width: 900px) {
     .about__grid { grid-template-columns: 1fr; }
-    .side { display: none; }
+    .visual { min-height: 500px; margin-bottom: 2rem; }
+    .img-1 { width: 70%; }
+    .img-2 { width: 50%; }
+    .experience-badge { width: 120px; height: 120px; transform: translate(-10%, 20%); }
+    .bullets { grid-template-columns: 1fr; }
+    .copy { padding-right: 0; }
   }
 </style>

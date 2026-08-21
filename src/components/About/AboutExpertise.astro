@@ -8,44 +8,99 @@ export interface Props {
 const { data } = Astro.props;
 ---
 
-<section class="expertise">
-  <div class="wrap wrap--wide">
-    <div class="intro">
+<section class="expertise section">
+  <div class="wrap wrap--wide expertise-grid">
+    <div class="intro" data-reveal="fade">
       <p class="eyebrow">Why families return</p>
-      <h2>A quieter way to furnish a home.</h2>
+      <h2 class="font-display">A quieter way to <br/>furnish a home.</h2>
     </div>
-    <ol>
+    
+    <div class="expertise-list" data-reveal-group>
       {data.map((item, index) => (
-        <li>
-          <span>{String(index + 1).padStart(2, "0")}</span>
-          <h3 class="font-display">{item.title}</h3>
+        <div class="expertise-item" data-reveal="up">
+          <div class="item-header">
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <h3 class="font-display">{item.title}</h3>
+          </div>
           <p>{item.copy}</p>
-        </li>
+        </div>
       ))}
-    </ol>
+    </div>
   </div>
 </section>
 
 <style>
-  .expertise { padding-block: clamp(3.5rem, 7vw, 6rem); }
-  .intro { margin-bottom: 2.5rem; max-width: 16ch; }
-  ol {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    border-top: 1px solid var(--color-line);
+  .expertise {
+    padding-block: clamp(5rem, 10vw, 8rem);
+    background: var(--color-bg);
   }
-  li {
-    padding: 2rem 2.2rem 2rem 0;
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: clamp(3rem, 6vw, 6rem);
+    align-items: flex-start;
+  }
+  
+  .intro {
+    position: sticky;
+    top: 120px;
+  }
+  .intro h2 {
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    line-height: 1.1;
+    margin-top: 1rem;
+    color: var(--color-ink);
+  }
+  
+  .expertise-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+  .expertise-item {
+    padding-bottom: 3rem;
     border-bottom: 1px solid var(--color-line);
   }
-  li:nth-child(odd) { padding-right: 2.5rem; border-right: 1px solid var(--color-line); }
-  li:nth-child(even) { padding-left: 2.5rem; }
-  span { color: var(--color-gold); font-size: 0.72rem; letter-spacing: 0.16em; }
-  h3 { font-size: 1.7rem; max-width: 16ch; margin: 0.6rem 0 0.7rem; }
-  p { color: var(--color-ink-soft); font-weight: 300; max-width: 40ch; }
-  @media (max-width: 800px) {
-    ol { grid-template-columns: 1fr; }
-    li:nth-child(odd), li:nth-child(even) { padding: 1.5rem 0; border-right: none; }
+  .expertise-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  
+  .item-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .item-header span {
+    color: var(--color-gold);
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  .item-header h3 {
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    color: var(--color-ink);
+  }
+  
+  .expertise-item p {
+    color: var(--color-ink-soft);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    padding-left: 2.8rem;
+    max-width: 45ch;
+  }
+  
+  @media (max-width: 900px) {
+    .expertise-grid {
+      grid-template-columns: 1fr;
+      gap: 4rem;
+    }
+    .intro {
+      position: static;
+    }
+    .expertise-item p {
+      padding-left: 0;
+    }
+    .item-header { gap: 1rem; }
   }
 </style>

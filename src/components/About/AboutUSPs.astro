@@ -1,32 +1,33 @@
 ---
+import Icon from "../global/UI/Icon.astro";
 ---
 
-<section class="notes">
-  <div class="wrap wrap--wide list">
-    <article>
-      <span>01</span>
-      <div>
+<section class="notes section">
+  <div class="wrap wrap--wide list" data-reveal-group>
+    <article class="usp-card" data-reveal="up" style="transition-delay: 0s">
+      <div class="usp-icon"><Icon name="truck" /></div>
+      <div class="usp-content">
         <h3 class="font-display">Free delivery</h3>
         <p>For qualifying orders across our service area.</p>
       </div>
     </article>
-    <article>
-      <span>02</span>
-      <div>
+    <article class="usp-card" data-reveal="up" style="transition-delay: 0.1s">
+      <div class="usp-icon"><Icon name="medal" /></div>
+      <div class="usp-content">
         <h3 class="font-display">Made to last</h3>
         <p>Custom and showroom pieces are finished for years of use.</p>
       </div>
     </article>
-    <article>
-      <span>03</span>
-      <div>
+    <article class="usp-card" data-reveal="up" style="transition-delay: 0.2s">
+      <div class="usp-icon"><Icon name="shield" /></div>
+      <div class="usp-content">
         <h3 class="font-display">Secure payment</h3>
         <p>In-store and online payments through trusted gateways.</p>
       </div>
     </article>
-    <article>
-      <span>04</span>
-      <div>
+    <article class="usp-card" data-reveal="up" style="transition-delay: 0.3s">
+      <div class="usp-icon"><Icon name="headset" /></div>
+      <div class="usp-content">
         <h3 class="font-display">Showroom hours</h3>
         <p>9:30AM – 7:00PM. Walk in, or call ahead.</p>
       </div>
@@ -35,19 +36,53 @@
 </section>
 
 <style>
-  .notes { padding-block: 2.5rem 1rem; }
+  .notes { padding-block: 4rem 6rem; }
   .list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
   }
-  article {
-    display: grid;
-    grid-template-columns: 2rem 1fr;
-    gap: 0.7rem;
+  .usp-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2.5rem 2rem;
+    background: var(--color-surface);
+    border-radius: 12px;
+    border: 1px solid rgba(36,28,24,0.05);
+    transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
   }
-  span { color: var(--color-gold); font-size: 0.72rem; letter-spacing: 0.12em; padding-top: 0.35rem; }
-  h3 { font-size: 1.35rem; margin-bottom: 0.3rem; }
-  p { color: var(--color-ink-soft); font-weight: 300; font-size: 0.92rem; }
-  @media (max-width: 800px) { .list { grid-template-columns: 1fr 1fr; } }
+  .usp-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+    border-color: rgba(36,28,24,0.1);
+  }
+  .usp-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--color-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-gold);
+    transition: background 0.4s var(--ease), color 0.4s var(--ease);
+  }
+  .usp-icon :global(svg) {
+    width: 20px;
+    height: 20px;
+  }
+  .usp-card:hover .usp-icon {
+    background: var(--color-gold);
+    color: #fff;
+  }
+  h3 { font-size: 1.45rem; margin-bottom: 0.8rem; }
+  p { color: var(--color-ink-soft); font-weight: 300; font-size: 1rem; line-height: 1.5; }
+  
+  @media (max-width: 900px) { 
+    .list { grid-template-columns: 1fr 1fr; } 
+  }
+  @media (max-width: 500px) { 
+    .list { grid-template-columns: 1fr; } 
+  }
 </style>

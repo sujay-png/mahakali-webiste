@@ -41,10 +41,10 @@ const rowB = [...data.images.slice().reverse(), ...data.images.slice().reverse()
 
 <style>
   h2 { max-width: 14ch; }
-  .gallery { padding-bottom: clamp(4rem, 8vw, 6rem); }
+  .gallery { padding-bottom: clamp(2rem, 4vw, 3rem); }
   .gallery-marquee {
     display: grid;
-    gap: 1.1rem;
+    gap: 1rem;
     perspective: 1200px;
   }
   .frame {
@@ -56,9 +56,9 @@ const rowB = [...data.images.slice().reverse(), ...data.images.slice().reverse()
     transform-style: preserve-3d;
     transition: transform 0.7s var(--ease);
   }
-  .frame--1 { width: min(38vw, 420px); aspect-ratio: 4 / 5; }
-  .frame--2 { width: min(46vw, 520px); aspect-ratio: 16 / 10; }
-  .frame--3 { width: min(32vw, 340px); aspect-ratio: 1; }
+  .frame--1 { width: min(28vw, 320px); aspect-ratio: 4 / 4.5; }
+  .frame--2 { width: min(34vw, 400px); aspect-ratio: 16 / 9; }
+  .frame--3 { width: min(24vw, 280px); aspect-ratio: 4 / 3; }
   .frame img {
     width: 100%;
     height: 100%;

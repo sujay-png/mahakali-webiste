@@ -8,16 +8,18 @@ export interface Props {
 const { data } = Astro.props;
 ---
 
-<section class="film">
-  <div class="wrap wrap--wide grid">
-    <div class="copy">
+<section class="film section">
+  <div class="wrap wrap--wide grid" data-reveal-group>
+    <div class="copy" data-reveal="up">
       <p class="eyebrow">The workshop</p>
-      <h2>See the work, not the pitch.</h2>
+      <h2 class="font-display">See the work, <br/>not the pitch.</h2>
       <p>A short look at how pieces are finished in Udupi — grain, joinery, and the pace of the floor.</p>
     </div>
-    <div class="video-section" data-embed={data.embedUrl} role="button" tabindex="0" aria-label="Play latest video">
+    <div class="video-section" data-reveal="fade" data-embed={data.embedUrl} role="button" tabindex="0" aria-label="Play latest video">
       <div class="video-bg" style={`background-image: url('${data.image}')`}></div>
-      <span class="play-btn" aria-hidden="true"></span>
+      <span class="play-btn" aria-hidden="true">
+        <span class="play-triangle"></span>
+      </span>
     </div>
   </div>
 </section>
@@ -61,15 +63,15 @@ const { data } = Astro.props;
 </script>
 
 <style>
-  .film { padding-block: clamp(3.5rem, 7vw, 6rem); }
+  .film { padding-block: clamp(5rem, 10vw, 8rem); background: var(--color-surface); }
   .grid {
     display: grid;
-    grid-template-columns: 0.7fr 1.3fr;
-    gap: clamp(1.5rem, 4vw, 3.5rem);
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: clamp(2rem, 5vw, 4rem);
     align-items: center;
   }
-  h2 { max-width: 10ch; margin: 0.7rem 0 0.9rem; }
-  .copy p:last-child { color: var(--color-ink-soft); font-weight: 300; max-width: 32ch; }
+  h2 { max-width: 14ch; margin: 1rem 0 1.5rem; font-size: clamp(2.5rem, 4vw, 3.2rem); line-height: 1.1; }
+  .copy p:last-child { color: var(--color-ink-soft); font-weight: 300; font-size: 1.1rem; line-height: 1.6; max-width: 32ch; }
   .video-section {
     position: relative;
     aspect-ratio: 16/9;
@@ -78,28 +80,49 @@ const { data } = Astro.props;
     cursor: pointer;
     display: grid;
     place-items: center;
+    border-radius: 12px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.1);
   }
   .video-bg {
     position: absolute;
     inset: 0;
     background-size: cover;
     background-position: center;
+    transition: transform 1s var(--ease);
+  }
+  .video-section:hover .video-bg {
+    transform: scale(1.05);
   }
   .play-btn {
     position: relative;
     z-index: 2;
-    width: 4.2rem;
-    height: 4.2rem;
-    border: 1px solid #fff;
-    display: grid;
-    place-items: center;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s var(--ease), background 0.4s var(--ease);
   }
-  .play-btn::after {
-    content: "";
-    border-style: solid;
-    border-width: 7px 0 7px 12px;
-    border-color: transparent transparent transparent #fff;
-    margin-left: 3px;
+  .video-section:hover .play-btn {
+    transform: scale(1.1);
+    background: rgba(255,255,255,0.2);
   }
-  @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
+  .play-triangle {
+    width: 0; 
+    height: 0; 
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 14px solid #fff;
+    margin-left: 4px;
+  }
+  
+  @media (max-width: 900px) { 
+    .grid { grid-template-columns: 1fr; gap: 3rem; } 
+    .video-section { margin: 0 -1.5rem; border-radius: 0; }
+  }
 </style>

@@ -8,10 +8,10 @@ export interface Props {
 const { data } = Astro.props;
 ---
 
-<section class="stats">
-  <div class="wrap wrap--wide row">
+<section class="stats section">
+  <div class="wrap wrap--wide row" data-reveal-group>
     {data.map((stat, i) => (
-      <div class="stat-item">
+      <div class="stat-item" data-reveal="up" style={`transition-delay: ${i * 0.1}s`}>
         <small>{String(i + 1).padStart(2, "0")}</small>
         <span class="stat-value font-display">{stat.value}</span>
         <span class="stat-label">{stat.label}</span>
@@ -22,30 +22,48 @@ const { data } = Astro.props;
 
 <style>
   .stats {
-    border-block: 1px solid var(--color-line);
-    margin-top: 3.5rem;
+    background: #1b1512;
+    color: #fff;
+    padding-block: clamp(4rem, 6vw, 5rem);
+    margin-top: -3rem;
+    position: relative;
+    z-index: 2;
   }
   .row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
   }
   .stat-item {
-    display: grid;
-    gap: 0.25rem;
-    padding: 1.6rem 1.2rem 1.6rem 0;
-    border-right: 1px solid var(--color-line);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-left: 2rem;
+    border-left: 1px solid rgba(255,255,255,0.1);
   }
-  .stat-item:last-child { border-right: none; }
-  small { font-size: 0.62rem; letter-spacing: 0.16em; color: var(--color-gold); }
-  .stat-value { font-size: clamp(2rem, 3.4vw, 3rem); line-height: 1; }
+  .stat-item:first-child { border-left: none; padding-left: 0; }
+  
+  small { font-size: 0.7rem; letter-spacing: 0.16em; color: #e4c9a4; }
+  
+  .stat-value {
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    line-height: 1;
+    font-weight: 400;
+  }
+  
   .stat-label {
-    font-size: 0.68rem;
-    letter-spacing: 0.16em;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--color-ink-soft);
+    color: rgba(255,255,255,0.6);
   }
-  @media (max-width: 800px) {
-    .row { grid-template-columns: 1fr 1fr; }
-    .stat-item:nth-child(2) { border-right: none; }
+  
+  @media (max-width: 900px) {
+    .row { grid-template-columns: repeat(2, 1fr); gap: 3rem 2rem; }
+    .stat-item:nth-child(3) { border-left: none; padding-left: 0; }
+  }
+  @media (max-width: 500px) {
+    .row { grid-template-columns: 1fr; gap: 3rem; }
+    .stat-item { border-left: none; padding-left: 0; text-align: center; }
   }
 </style>

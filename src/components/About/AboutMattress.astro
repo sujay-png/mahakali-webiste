@@ -8,18 +8,18 @@ export interface Props {
 const { data } = Astro.props;
 ---
 
-<section class="mattress">
-  <div class="wrap wrap--wide grid">
-    <div>
+<section class="mattress section">
+  <div class="wrap wrap--wide grid" data-reveal-group>
+    <div class="intro" data-reveal="up">
       <p class="eyebrow light">Rest</p>
-      <h2>{data.title}</h2>
+      <h2 class="font-display">{data.title}</h2>
       <p class="lead">{data.lead}</p>
     </div>
-    <ol>
+    <ol class="mattress-list">
       {data.bullets.map((bullet, i) => (
-        <li>
-          <span>{String(i + 1).padStart(2, "0")}</span>
-          {bullet}
+        <li data-reveal="up" style={`transition-delay: ${i * 0.15}s`}>
+          <span class="font-display">{String(i + 1).padStart(2, "0")}</span>
+          <p>{bullet}</p>
         </li>
       ))}
     </ol>
@@ -30,29 +30,65 @@ const { data } = Astro.props;
   .mattress {
     background: var(--color-walnut);
     color: #f4efe8;
-    padding-block: clamp(3.5rem, 7vw, 5.5rem);
+    padding-block: clamp(5rem, 10vw, 8rem);
+    position: relative;
+    overflow: hidden;
   }
   .grid {
     display: grid;
     grid-template-columns: 0.9fr 1.1fr;
-    gap: clamp(2rem, 5vw, 4.5rem);
-    align-items: start;
+    gap: clamp(4rem, 8vw, 6rem);
+    align-items: center;
+    position: relative;
+    z-index: 2;
   }
-  h2 { color: #fff; max-width: 14ch; margin: 0.7rem 0 1rem; font-size: clamp(2rem, 3.5vw, 3.2rem); }
-  .lead { color: rgba(244,239,232,0.7); font-weight: 300; max-width: 42ch; }
+  .intro h2 { 
+    color: #fff; 
+    max-width: 14ch; 
+    margin: 1.5rem 0 1.5rem; 
+    font-size: clamp(2.5rem, 4.5vw, 4rem); 
+    line-height: 1.1;
+  }
+  .lead { 
+    color: rgba(244,239,232,0.8); 
+    font-weight: 300; 
+    max-width: 35ch; 
+    font-size: 1.15rem;
+    line-height: 1.7;
+  }
   .eyebrow.light { color: #e4c9a4; }
   .eyebrow.light::before { background: #e4c9a4; }
-  ol { display: grid; gap: 0; }
-  li {
-    display: grid;
-    grid-template-columns: 2.4rem 1fr;
-    gap: 0.8rem;
-    padding: 1rem 0;
-    border-top: 1px solid rgba(244,239,232,0.12);
-    color: rgba(244,239,232,0.88);
-    font-weight: 300;
+  
+  .mattress-list { 
+    display: flex;
+    flex-direction: column;
+    gap: 0; 
   }
-  li:last-child { border-bottom: 1px solid rgba(244,239,232,0.12); }
-  span { color: #e4c9a4; font-size: 0.75rem; letter-spacing: 0.12em; padding-top: 0.15rem; }
-  @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 2.5rem 0;
+    border-top: 1px solid rgba(244,239,232,0.1);
+    color: rgba(244,239,232,0.9);
+  }
+  li:last-child { border-bottom: 1px solid rgba(244,239,232,0.1); }
+  
+  li span { 
+    color: #e4c9a4; 
+    font-size: 2rem; 
+    line-height: 1;
+    font-weight: 400;
+  }
+  li p {
+    font-weight: 300;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    max-width: 40ch;
+  }
+  
+  @media (max-width: 900px) { 
+    .grid { grid-template-columns: 1fr; gap: 4rem; } 
+    li { padding: 2rem 0; }
+  }
 </style>

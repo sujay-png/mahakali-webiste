@@ -1,4 +1,17 @@
-export const galleryCategories = [
+export type GalleryItem = {
+  name: string;
+  image: string;
+  category?: string;
+  action?: string;
+  colSpan?: number;
+};
+
+export type GalleryCategory = {
+  title: string;
+  items: GalleryItem[];
+};
+
+export const galleryCategories: GalleryCategory[] = [
   {
     title: "UPHOLSTERED",
     items: [

@@ -5,44 +5,102 @@ export interface Props { data: typeof PromoStripType; }
 const { data } = Astro.props;
 ---
 
-<section class="offers">
-  <div class="wrap wrap--wide row">
-    {data.map((promo) => (
-      <a href={promo.cta.href} class="offer">
-        <small>{promo.tag}</small>
-        <strong class="font-display">{promo.title}</strong>
-        <span class="link-arrow">{promo.cta.label} <Icon name="arrow-right" /></span>
+<section class="offers section">
+  <div class="wrap wrap--wide bento-grid">
+    {data.map((promo, i) => (
+      <a href={promo.cta.href} class={`bento-card bento-card--${i + 1}`} data-reveal="fade">
+        <div class="bg-image" style={`background-image: url('${promo.image}')`}></div>
+        <div class="content">
+          <small>{promo.tag}</small>
+          <strong class="font-display">{promo.title}</strong>
+          <span class="link-arrow">{promo.cta.label} <Icon name="arrow-right" /></span>
+        </div>
       </a>
     ))}
   </div>
 </section>
 
 <style>
-  .offers {
-    padding-block: 0.5rem 2.5rem;
-  }
-  .row {
+  .offers { padding-block: 2rem 4rem; }
+  .bento-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    border-top: 1px solid var(--color-line);
+    grid-auto-rows: 280px;
+    gap: 1.5rem;
   }
-  .offer {
-    display: grid;
-    gap: 0.35rem;
-    padding: 1.4rem 1.5rem 1.4rem 0;
-    border-right: 1px solid var(--color-line);
+  .bento-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--color-ink);
+    display: flex;
+    align-items: flex-end;
+    padding: 2rem;
+    background: var(--color-cream);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
   }
-  .offer:last-child { border-right: none; padding-right: 0; }
-  .offer:first-child { padding-left: 0; }
-  small {
+  .bento-card--1 {
+    grid-column: span 2;
+  }
+  .bento-card--2, .bento-card--3 {
+    grid-column: span 1;
+  }
+  .bg-image {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.6s var(--ease);
+    z-index: 1;
+  }
+  .bento-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(36,28,24,0.6) 0%, rgba(36,28,24,0) 60%);
+    z-index: 2;
+  }
+  .content {
+    position: relative;
+    z-index: 3;
+    color: #fff;
+    transform: translateY(10px);
+    transition: transform 0.4s var(--ease);
+  }
+  .content small {
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    font-size: 0.62rem;
-    color: var(--color-gold);
+    font-size: 0.65rem;
+    color: #e4c9a4;
+    display: block;
+    margin-bottom: 0.5rem;
   }
-  strong { font-size: 1.35rem; font-weight: 500; line-height: 1.2; max-width: 16ch; }
-  @media (max-width: 800px) {
-    .row { grid-template-columns: 1fr; }
-    .offer { border-right: none; border-bottom: 1px solid var(--color-line); padding: 1.2rem 0; }
+  .content strong {
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    font-weight: 500;
+    line-height: 1.1;
+    display: block;
+    margin-bottom: 1rem;
+    max-width: 14ch;
+  }
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    opacity: 0.9;
+  }
+  .bento-card:hover .bg-image { transform: scale(1.05); }
+  .bento-card:hover .content { transform: translateY(0); }
+  .bento-card:hover .link-arrow { opacity: 1; }
+  
+  @media (max-width: 900px) {
+    .bento-grid {
+      grid-template-columns: 1fr;
+      grid-auto-rows: 240px;
+    }
+    .bento-card--1 { grid-column: span 1; }
   }
 </style>

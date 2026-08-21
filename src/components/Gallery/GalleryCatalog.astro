@@ -10,43 +10,30 @@ const { data } = Astro.props;
 
 <section class="gallery-catalog wrap wrap--wide section">
   <div class="catalog-container">
-    {data.map((category) => (
-      <div class="category-section">
-        <p class="eyebrow">{category.title}</p>
-        <h2 class="font-display category-title">{category.title}</h2>
-
-        <div class="grid" data-reveal-group>
-          {category.items.map((item) => (
-            <div class={`gallery-card ${item.colSpan === 4 ? "col-span-full" : ""}`} data-reveal>
-              {!item.action ? (
-                <>
-                  <div class="image-wrapper" data-media>
-                    <img src={item.image} alt={item.name} class="gallery-image" />
-                  </div>
-                  <div class="card-content">
-                    <h3 class="font-display">{item.name}</h3>
-                    <p>{item.category}</p>
-                  </div>
-                </>
-              ) : (
-                <div class="card-content centered-content">
-                  {item.image && (
-                    <div class="hover-bg" style={`background-image: url('${item.image}')`}></div>
-                  )}
-                  <h3 class="font-display action-title">{item.name}</h3>
-                  <p class="action-text">{item.action}</p>
-                </div>
+    <div class="grid" data-reveal-group>
+      {data.flatMap(category => category.items).map((item) => (
+        <div class={`gallery-card ${item.colSpan === 4 ? "col-span-full" : ""}`} data-reveal="up">
+          {!item.action ? (
+            <>
+              <div class="image-wrapper" data-media>
+                <img src={item.image} alt={item.name} class="gallery-image" />
+              </div>
+              <div class="card-content">
+                <h3 class="font-display">{item.name}</h3>
+                <p>{item.category}</p>
+              </div>
+            </>
+          ) : (
+            <div class="card-content centered-content">
+              {item.image && (
+                <div class="hover-bg" style={`background-image: url('${item.image}')`}></div>
               )}
+              <h3 class="font-display action-title">{item.name}</h3>
+              <p class="action-text">{item.action}</p>
             </div>
-          ))}
+          )}
         </div>
-      </div>
-    ))}
-
-    <div class="load-more">
-      <button class="btn btn-outline" type="button">
-        Load more catalog items
-      </button>
+      ))}
     </div>
   </div>
 </section>
@@ -54,40 +41,60 @@ const { data } = Astro.props;
 <style>
   .catalog-container { display: flex; flex-direction: column; gap: 5.5rem; }
   .category-title { margin: 0.6rem 0 2.2rem; max-width: 14ch; }
+  
   .grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.6rem;
+    column-count: 2;
+    column-gap: 1rem;
   }
   @media (min-width: 768px) {
-    .grid { grid-template-columns: repeat(2, 1fr); }
+    .grid { column-count: 3; column-gap: 1.5rem; }
   }
   @media (min-width: 1024px) {
-    .grid { grid-template-columns: repeat(4, 1fr); }
-    .category-section:nth-child(1) .grid,
-    .category-section:nth-child(2) .grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
+    .grid { column-count: 4; column-gap: 2rem; }
   }
-  .gallery-card { display: flex; flex-direction: column; cursor: pointer; }
-  .gallery-card.col-span-full { }
-  @media (min-width: 1024px) {
-    .gallery-card.col-span-full { grid-column: span 4; }
+  
+  .gallery-card { 
+    display: flex; 
+    flex-direction: column; 
+    cursor: pointer; 
+    break-inside: avoid;
+    margin-bottom: 2rem;
   }
-  .image-wrapper { overflow: hidden; aspect-ratio: 4/5; background: var(--color-cream); }
-  .gallery-image { width: 100%; height: 100%; object-fit: cover; }
-  .card-content { padding: 1.1rem 0 0; }
-  .card-content h3 { font-size: 1.45rem; margin-bottom: 0.25rem; }
-  .card-content p { color: var(--color-ink-soft); font-weight: 300; }
+  .gallery-card.col-span-full { 
+    /* Col-span doesn't work well with column-count, so we'll just style the card nicely */
+  }
+  
+  .image-wrapper { 
+    overflow: hidden; 
+    background: var(--color-cream); 
+    border-radius: 16px;
+    /* Use a slightly varying aspect ratio based on child elements if needed, 
+       but removing the fixed aspect ratio allows natural image heights */
+  }
+  .gallery-image { 
+    width: 100%; 
+    height: auto;
+    object-fit: cover; 
+    display: block;
+    max-height: 500px; /* Limit height to prevent huge images */
+  }
+  
+  .card-content { padding: 0.8rem 0 0; }
+  .card-content h3 { font-size: 1.25rem; margin-bottom: 0.15rem; }
+  .card-content p { color: var(--color-ink-soft); font-weight: 300; font-size: 0.9rem; }
+  
   .centered-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    text-align: center;
     min-height: 180px;
     padding: 2rem;
     position: relative;
     overflow: hidden;
     background: var(--color-cream);
+    border-radius: 16px;
   }
   .hover-bg {
     position: absolute;
@@ -104,13 +111,16 @@ const { data } = Astro.props;
     background: rgba(36, 28, 24, 0.55);
   }
   .gallery-card:hover .hover-bg { opacity: 1; }
-  .action-title, .action-text { position: relative; z-index: 2; }
+  .action-title, .action-text { position: relative; z-index: 2; transition: color 0.4s var(--ease); }
+  .centered-content .action-title { font-size: 1.5rem; }
   .centered-content .action-text {
     font-size: 0.7rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
+    margin-top: 0.5rem;
   }
   .gallery-card:hover .centered-content .action-title,
   .gallery-card:hover .centered-content .action-text { color: #fff; }
+  
   .load-more { text-align: left; margin-top: 1rem; }
 </style>
