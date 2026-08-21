@@ -2,6 +2,8 @@
 import type { gallery as GalleryType } from "../../data/home";
 export interface Props { data: typeof GalleryType; }
 const { data } = Astro.props;
+const rowA = [...data.images, ...data.images];
+const rowB = [...data.images.slice().reverse(), ...data.images.slice().reverse()];
 ---
 
 <section class="section gallery">
@@ -13,30 +15,66 @@ const { data } = Astro.props;
       </div>
       <a href="/gallery" class="link-arrow">Open gallery</a>
     </div>
-    <div class="mosaic" data-reveal-group>
-      {data.images.map((img, i) => (
-        <figure class={`cell cell--${i + 1}`} data-reveal="fade" data-media>
-          <img src={img.src} alt={img.alt} loading="lazy" />
-        </figure>
-      ))}
+  </div>
+
+  <div class="gallery-marquee" aria-label="Photo gallery">
+    <div class="marquee marquee--slow">
+      <div class="marquee__track">
+        {rowA.map((img, i) => (
+          <a href="/gallery" class={`frame frame--${(i % 3) + 1}`} aria-hidden={i >= data.images.length ? "true" : undefined} tabindex={i >= data.images.length ? -1 : undefined}>
+            <img src={img.src} alt={i >= data.images.length ? "" : img.alt} loading="lazy" />
+          </a>
+        ))}
+      </div>
+    </div>
+    <div class="marquee marquee--slow marquee--reverse">
+      <div class="marquee__track">
+        {rowB.map((img, i) => (
+          <a href="/gallery" class={`frame frame--${((i + 1) % 3) + 1}`} aria-hidden={i >= data.images.length ? "true" : undefined} tabindex={i >= data.images.length ? -1 : undefined}>
+            <img src={img.src} alt="" loading="lazy" />
+          </a>
+        ))}
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  h2 { max-width: 12ch; }
-  .mosaic {
+  h2 { max-width: 14ch; }
+  .gallery { padding-bottom: clamp(4rem, 8vw, 6rem); }
+  .gallery-marquee {
     display: grid;
-    grid-template-columns: 1.3fr 0.8fr 1fr;
-    grid-template-rows: 280px 220px;
-    gap: 0.9rem;
+    gap: 1.1rem;
+    perspective: 1200px;
   }
-  .cell { overflow: hidden; margin: 0; }
-  .cell--1 { grid-row: 1 / 3; }
-  .cell--4 { grid-column: 2 / 4; }
-  @media (max-width: 800px) {
-    .mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
-    .cell--1, .cell--4 { grid-row: auto; grid-column: auto; }
-    .cell { aspect-ratio: 4/3; }
+  .frame {
+    position: relative;
+    flex: 0 0 auto;
+    overflow: hidden;
+    background: var(--color-cream);
+    transform: rotateY(-8deg) rotateX(2deg);
+    transform-style: preserve-3d;
+    transition: transform 0.7s var(--ease);
+  }
+  .frame--1 { width: min(38vw, 420px); aspect-ratio: 4 / 5; }
+  .frame--2 { width: min(46vw, 520px); aspect-ratio: 16 / 10; }
+  .frame--3 { width: min(32vw, 340px); aspect-ratio: 1; }
+  .frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.08);
+    transition: transform 1.1s var(--ease);
+  }
+  .frame:hover {
+    transform: rotateY(0deg) rotateX(0deg) translateZ(28px);
+    z-index: 2;
+  }
+  .frame:hover img { transform: scale(1); }
+  @media (max-width: 700px) {
+    .frame--1, .frame--2, .frame--3 { width: 68vw; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .frame { transform: none; }
   }
 </style>
