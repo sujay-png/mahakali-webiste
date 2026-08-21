@@ -4,107 +4,91 @@ import type { topCategories as TopCategoriesType } from "../../data/home";
 
 export interface Props { data: typeof TopCategoriesType; }
 const { data } = Astro.props;
-const [featured, ...rest] = data.items;
 ---
 
-<section class="section collections">
+<section class="collections">
   <div class="wrap wrap--wide">
-    <div class="row-head">
+    <div class="head">
       <div>
         <p class="eyebrow">{data.eyebrow}</p>
-        <h2 data-reveal="fade">{data.title}</h2>
+        <h2>{data.title}</h2>
       </div>
       <a href={data.viewAllHref} class="link-arrow">All collections <Icon name="arrow-right" /></a>
     </div>
 
-    <div class="layout">
-      {featured && (
-        <a href={featured.href} class="featured" data-reveal="fade">
-          <span class="featured__media" data-media>
-            <img src={featured.image} alt={featured.name} loading="lazy" />
-          </span>
-          <span class="featured__copy">
-            <small>Featured</small>
-            <strong class="font-display">{featured.name}</strong>
-            <em>Explore collection</em>
-          </span>
-        </a>
-      )}
-      <div class="rail" data-reveal-group>
-        {rest.map((item) => (
-          <a href={item.href} class="rail-item" data-reveal="fade">
-            <span class="rail-item__media" data-media>
+    <ul class="index">
+      {data.items.map((item, i) => (
+        <li>
+          <a href={item.href} class="item">
+            <span class="media" data-media>
               <img src={item.image} alt={item.name} loading="lazy" />
             </span>
-            <span>
-              <strong>{item.name}</strong>
-              <em>View</em>
+            <span class="meta">
+              <small>{String(i + 1).padStart(2, "0")}</small>
+              <strong class="font-display">{item.name}</strong>
             </span>
           </a>
-        ))}
-      </div>
-    </div>
+        </li>
+      ))}
+    </ul>
   </div>
 </section>
 
 <style>
-  .row-head h2 { max-width: 14ch; }
-  .layout {
+  .collections {
+    padding-block: clamp(3rem, 6vw, 4.75rem);
+  }
+  .head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.75rem;
+  }
+  h2 {
+    max-width: 18ch;
+    font-size: clamp(1.7rem, 2.6vw, 2.35rem);
+    line-height: 1.15;
+    font-weight: 500;
+  }
+  .index {
     display: grid;
-    grid-template-columns: 1.35fr 0.9fr;
-    gap: 1.25rem;
-    align-items: stretch;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.85rem 1rem;
   }
-  .featured {
-    position: relative;
-    min-height: 72vh;
-    color: #fff;
-    overflow: hidden;
-    display: block;
-  }
-  .featured__media { position: absolute; inset: 0; }
-  .featured__copy {
-    position: absolute;
-    left: 2rem;
-    bottom: 2rem;
+  .item {
     display: grid;
-    gap: 0.4rem;
-    z-index: 1;
+    gap: 0.7rem;
+    color: inherit;
   }
-  .featured__copy small {
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    font-size: 0.68rem;
-    color: #e4c9a4;
+  .media {
+    aspect-ratio: 5 / 4;
+    background: var(--color-cream);
   }
-  .featured__copy strong { font-size: clamp(2.4rem, 4vw, 4rem); color: #fff; }
-  .featured__copy em { font-style: normal; letter-spacing: 0.16em; text-transform: uppercase; font-size: 0.7rem; }
-
-  .rail { display: grid; gap: 1.25rem; }
-  .rail-item {
+  .meta {
     display: grid;
-    grid-template-columns: 42% 1fr;
-    gap: 1.2rem;
-    align-items: center;
+    gap: 0.15rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--color-line);
   }
-  .rail-item__media { aspect-ratio: 4/3; }
-  .rail-item strong {
-    display: block;
-    font-family: var(--font-display);
-    font-size: 1.7rem;
-    font-weight: 400;
-  }
-  .rail-item em {
-    font-style: normal;
-    font-size: 0.68rem;
+  small {
+    font-size: 0.62rem;
     letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--color-ink-soft);
+    color: var(--color-gold);
   }
+  strong {
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  .item:hover strong { color: var(--color-primary); }
 
-  @media (max-width: 900px) {
-    .layout { grid-template-columns: 1fr; }
-    .featured { min-height: 62vh; }
-    .rail-item { grid-template-columns: 38% 1fr; }
+  @media (max-width: 1100px) {
+    .index { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .index { grid-template-columns: repeat(2, 1fr); gap: 1rem 0.75rem; }
+    h2 { font-size: 1.65rem; }
   }
 </style>
