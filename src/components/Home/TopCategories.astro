@@ -21,18 +21,15 @@ const { data } = Astro.props;
       </a>
     </div>
 
-    <div class="carousel" data-reveal-group>
-      <div class="carousel__viewport">
+    <div class="category-track" data-reveal-group>
+      <div class="category-track__viewport">
         {
           data.items.map((item) => (
-            <a href={item.href} class="cat-card" data-reveal="scale">
-              <!-- Clear Background Image & Minimal Contrast Gradient -->
+            <a href={item.href} class="cat-card" data-reveal="fade">
               <div class="cat-card__bg">
                 <img src={item.image} alt={item.name} loading="lazy" />
                 <div class="cat-card__overlay" />
               </div>
-
-              <!-- Content -->
               <div class="cat-card__content">
                 <span class="cat-card__name">{item.name}</span>
                 <span class="cat-card__action">EXPLORE CATEGORY</span>
@@ -46,16 +43,24 @@ const { data } = Astro.props;
 </section>
 
 <style>
-  @media (min-width: 961px) {
-    .categories-wrap {
-      transform: translateX(-24px); /* Shift entire section a bit left */
-    }
+  .categories {
+    overflow: visible;
+    isolation: isolate;
   }
 
-  .carousel__viewport {
+  .categories-wrap {
+    overflow: visible;
+  }
+
+  .category-track,
+  .category-track__viewport {
+    overflow: visible;
+  }
+
+  .category-track__viewport {
     display: grid;
-    grid-template-columns: repeat(6, 1fr); /* Fit all 6 exactly in one row */
-    gap: 1rem; /* Reduced gap to fit more */
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 1rem;
     padding-top: 10px;
     padding-bottom: 20px;
   }
@@ -176,15 +181,16 @@ const { data } = Astro.props;
 
   /* --- Responsive Fallback --- */
   @media (max-width: 960px) {
-    .carousel__viewport {
+    .category-track__viewport {
       display: flex;
       overflow-x: auto;
+      overflow-y: visible;
       scroll-snap-type: x mandatory;
       padding-inline: 1.5rem;
       scroll-padding-inline: 1.5rem;
       scrollbar-width: none;
     }
-    .carousel__viewport::-webkit-scrollbar {
+    .category-track__viewport::-webkit-scrollbar {
       display: none;
     }
     .cat-card {

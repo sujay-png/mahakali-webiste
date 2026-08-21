@@ -7,30 +7,41 @@ export interface Props {
 const { data } = Astro.props;
 ---
 
-<section class="section section--tight">
+<section class="section section--tight trending-section">
   <div class="wrap">
     <p class="eyebrow" data-reveal="fade">{data.eyebrow}</p>
-    <div class="trending" data-reveal="scale">
-      <img
-        class="trending__bg"
-        src={data.image}
-        alt="Styled living room with yellow sofa and pendant lights"
-        loading="lazy"
-      />
-      <div class="trending__scrim"></div>
-      <div class="trending__content">
-        <span class="trending__kicker">{data.kicker}</span>
-        <h2>{data.title}</h2>
-        <p>{data.copy}</p>
-        <a class="btn btn-primary" href={data.cta.href}
-          >{data.cta.label} <Icon name="arrow-right" /></a
-        >
+    <div class="trending-frame" data-reveal="fade">
+      <div class="trending">
+        <img
+          class="trending__bg"
+          src={data.image}
+          alt="Styled living room with yellow sofa and pendant lights"
+          loading="lazy"
+        />
+        <div class="trending__scrim"></div>
+        <div class="trending__content">
+          <span class="trending__kicker">{data.kicker}</span>
+          <h2>{data.title}</h2>
+          <p>{data.copy}</p>
+          <a class="btn btn-primary" href={data.cta.href}
+            >{data.cta.label} <Icon name="arrow-right" /></a
+          >
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <style>
+  .trending-section {
+    overflow: visible;
+    isolation: isolate;
+  }
+
+  .trending-frame {
+    overflow: visible;
+  }
+
   .trending {
     position: relative;
     min-height: clamp(260px, 40vw, 400px);
