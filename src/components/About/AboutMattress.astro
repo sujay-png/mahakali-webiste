@@ -1,0 +1,77 @@
+---
+import Icon from "../global/UI/Icon.astro";
+import type { aboutMattress as AboutMattressType } from "../../data/about/mattress";
+
+export interface Props {
+  data: typeof AboutMattressType;
+}
+
+const { data } = Astro.props;
+---
+
+<section class="section section--ink text-center">
+  <div class="wrap">
+    <h2>{data.title}</h2>
+    <p
+      class="about__lead mx-auto"
+      style="margin-inline: auto; max-width: 900px; color: #f2e9da; opacity: 0.9;"
+    >
+      {data.lead}
+    </p>
+
+    <ul
+      class="about__bullets justify-center mt-5"
+      style="max-width: 900px; margin-inline: auto;"
+    >
+      {
+        data.bullets.map((bullet) => (
+          <li style="color: #fff;">
+            <Icon name="tag" class="icon-16" /> {bullet}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .text-center {
+    text-align: center;
+  }
+  .mx-auto {
+    margin-inline: auto;
+  }
+  .mt-5 {
+    margin-top: 2.5rem;
+  }
+
+  .about__lead {
+    margin-top: 1.1rem;
+    color: var(--color-ink-soft);
+    max-width: 58ch;
+  }
+  .about__bullets {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .about__bullets li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-walnut);
+    text-align: left;
+  }
+  .icon-16 {
+    width: 20px;
+    height: 20px;
+    color: var(--color-primary);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .justify-center {
+    justify-content: center;
+  }
+</style>

@@ -1,0 +1,171 @@
+---
+import Icon from "../global/UI/Icon.astro";
+import type { dealBanner as DealBannerType } from "../../data/home";
+export interface Props {
+  data: typeof DealBannerType;
+}
+const { data } = Astro.props;
+---
+
+<section class="deal">
+  <div class="wrap deal__grid">
+    <div class="deal__copy" data-reveal="left">
+      <p class="eyebrow eyebrow--light">{data.eyebrow}</p>
+      <h2>{data.title}</h2>
+      <p>{data.copy}</p>
+    </div>
+
+    <div class="deal__card chamfer-card" data-reveal="right">
+      <img
+        src={data.productImage}
+        alt={data.title}
+        width="220"
+        height="220"
+        loading="lazy"
+      />
+      <div class="deal__card-body">
+        <h3>{data.title}</h3>
+        <div class="deal__price">
+          <span>{data.price}</span>
+          <s>{data.oldPrice}</s>
+        </div>
+        <ul>
+          {
+            data.features.map((f) => (
+              <li>
+                <Icon name="tag" class="icon-14" />
+                {f}
+              </li>
+            ))
+          }
+        </ul>
+        <a class="btn btn-primary" href={data.cta.href}
+          >{data.cta.label} <Icon name="arrow-right" /></a
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .deal {
+    background: linear-gradient(
+      120deg,
+      var(--color-gold),
+      #bb9954 55%,
+      var(--color-gold)
+    );
+    position: relative;
+    overflow: hidden;
+  }
+  .deal::before {
+    content: "DEAL";
+    position: absolute;
+    left: 2.5rem;
+    top: 80%;
+    transform: translateY(-50%) rotate(-90deg);
+    transform-origin: left center;
+    font-family: var(--font-display);
+    font-size: 6rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.18);
+    letter-spacing: 0.1em;
+    pointer-events: none;
+  }
+  .deal__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: center;
+    padding-block: clamp(3rem, 6vw, 5rem);
+    position: relative;
+  }
+  .eyebrow--light {
+    color: var(--color-walnut);
+  }
+  .eyebrow--light::before {
+    background: var(--color-walnut);
+  }
+  .deal__copy {
+    padding-left: clamp(3rem, 6vw, 6rem);
+  }
+  .deal__copy h2 {
+    margin-top: 0.6rem;
+    color: var(--color-walnut);
+  }
+  .deal__copy p {
+    margin-top: 1rem;
+    max-width: 42ch;
+    color: rgba(74, 46, 31, 0.85);
+  }
+
+  .deal__card {
+    background: #fff;
+    display: flex;
+    gap: 1.3rem;
+    padding: 1.6rem;
+    box-shadow: var(--shadow-lg);
+    align-items: center;
+  }
+  .deal__card img {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    flex-shrink: 0;
+    clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%);
+  }
+  .deal__card-body h3 {
+    font-size: 1.1rem;
+  }
+  .deal__price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    margin-top: 0.4rem;
+  }
+  .deal__price span {
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+  .deal__price s {
+    color: var(--color-ink-soft);
+    font-size: 0.88rem;
+  }
+  .deal__card-body ul {
+    margin-top: 0.7rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .deal__card-body li {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    color: var(--color-ink-soft);
+  }
+  :global(.icon-14) {
+    width: 13px;
+    height: 13px;
+    color: var(--color-primary);
+  }
+  .deal__card-body .btn {
+    margin-top: 0.9rem;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 860px) {
+    .deal__grid {
+      grid-template-columns: 1fr;
+    }
+    .deal__card {
+      flex-direction: column;
+      text-align: center;
+    }
+    .deal__card-body ul {
+      align-items: center;
+    }
+  }
+</style>

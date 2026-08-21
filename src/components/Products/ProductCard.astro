@@ -1,0 +1,151 @@
+---
+import Icon from "../global/UI/Icon.astro";
+
+export interface Props {
+  name: string;
+  price: string;
+  stars: number;
+  image: string;
+  link: string;
+  category?: string;
+}
+
+const { name, price, stars, image, link, category = "" } = Astro.props;
+
+// Calculate stars to render
+const fullStars = Math.floor(stars);
+const hasHalfStar = stars % 1 !== 0;
+const emptyStars = 5 - Math.ceil(stars);
+
+const numericPrice = parseFloat(price.replace(/[^0-9.-]+/g, ""));
+---
+
+<a href={link} class="product-card" data-name={name.toLowerCase()} data-price={numericPrice} data-category={category.toLowerCase()}>
+  <div class="card-image-container">
+    <img src={image} alt={name} class="card-image" loading="lazy" />
+    <div class="hover-overlay"></div>
+    <span class="quick-view-btn">Quick View</span>
+  </div>
+  
+  <div class="card-info">
+    <div class="card-details">
+      <h3 class="product-name font-display">{name}</h3>
+      <div class="star-rating">
+        {Array.from({ length: fullStars }).map(() => (
+          <Icon name="star-filled" class="star-icon" />
+        ))}
+        {hasHalfStar && <Icon name="star-half" class="star-icon" />}
+        {Array.from({ length: emptyStars }).map(() => (
+          <Icon name="star" class="star-icon" />
+        ))}
+      </div>
+    </div>
+    <span class="product-price">{price}</span>
+  </div>
+</a>
+
+<style>
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+  }
+  .product-card:hover .card-image {
+    transform: scale(1.05);
+  }
+  .product-card:hover .hover-overlay {
+    background: rgba(0, 0, 0, 0.05);
+  }
+  .product-card:hover .quick-view-btn {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  .product-card:hover .product-name {
+    color: #570000; /* primary */
+  }
+
+  .card-image-container {
+    position: relative;
+    aspect-ratio: 4/3;
+    background-color: #f6f3f2; /* surface-container-low */
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    border-radius: 0.125rem;
+  }
+
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+  }
+
+  .hover-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.3s ease;
+  }
+
+  .quick-view-btn {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translate(-50%, 1rem);
+    opacity: 0;
+    background: rgba(252, 249, 248, 0.9); /* surface/90 */
+    backdrop-filter: blur(8px);
+    color: #1c1b1b;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.25rem;
+    font-family: var(--font-nav);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+  }
+  .quick-view-btn:hover {
+    background: #570000;
+    color: #ffffff;
+  }
+
+  .card-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .card-details {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product-name {
+    font-size: 1.25rem;
+    color: #1c1b1b;
+    margin-bottom: 0.5rem;
+    transition: color 0.2s ease;
+  }
+
+  .star-rating {
+    display: flex;
+    color: #7c5730; /* secondary */
+    gap: 2px;
+  }
+  :global(.star-icon) {
+    width: 16px;
+    height: 16px;
+  }
+
+  .product-price {
+    font-family: var(--font-nav);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #5a413d; /* on-surface-variant */
+    margin-top: 0.25rem;
+  }
+</style>

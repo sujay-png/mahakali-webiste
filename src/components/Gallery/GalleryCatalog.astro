@@ -1,0 +1,254 @@
+---
+import { galleryCategories } from "../../data/gallery/catalog";
+
+export interface Props {
+  data: typeof galleryCategories;
+}
+
+const { data } = Astro.props;
+---
+
+<section class="gallery-catalog wrap section">
+  <div class="catalog-container">
+    {data.map((category) => (
+      <div class="category-section">
+        <h2 class="font-display category-title">{category.title}</h2>
+        
+        <div class="grid">
+          {category.items.map((item) => (
+            <div 
+              class={`gallery-card rounded-card ${item.colSpan === 4 ? 'col-span-full' : ''}`}
+            >
+              {!item.action ? (
+                <>
+                  <div class="image-wrapper">
+                    <img src={item.image} alt={item.name} class="gallery-image" />
+                  </div>
+                  <div class="card-content">
+                    <h3>{item.name}</h3>
+                    <p>{item.category}</p>
+                  </div>
+                </>
+              ) : (
+                <div class="card-content centered-content">
+                  {item.image && (
+                    <div class="hover-bg" style={`background-image: url('${item.image}')`}></div>
+                  )}
+                  <h3 class="font-display action-title">{item.name}</h3>
+                  <p class="action-text">{item.action}</p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+    
+    <div class="load-more">
+      <button class="btn btn-outline uppercase">
+        Load More Catalog Items
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .catalog-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+  .category-title {
+    color: var(--color-primary);
+    border-bottom: 1px solid var(--color-line);
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    text-transform: uppercase;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  @media (min-width: 768px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1024px) {
+    .grid {
+      grid-template-columns: repeat(4, 1fr); /* Actually the design uses 3 for the first two, 4 for the last, but let's stick to standard 3 or 4 based on content... I'll just use a responsive grid with auto-fit or specific classes */
+    }
+  }
+  
+  /* Specific override for the 3-column layout vs 4-column layout */
+  .category-section:nth-child(1) .grid,
+  .category-section:nth-child(2) .grid {
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  .gallery-card {
+    border: 1px solid var(--color-line);
+    background: var(--color-surface);
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+  }
+  .gallery-card:hover {
+    box-shadow: var(--shadow-sm);
+  }
+  .gallery-card.col-span-full {
+    @media (min-width: 1024px) {
+      grid-column: span 4;
+    }
+  }
+  
+  .image-wrapper {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+  }
+  .gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s var(--ease);
+  }
+  .gallery-card:hover .gallery-image {
+    transform: scale(1.05);
+  }
+  
+
+  .card-content {
+    padding: 1.5rem;
+    background: var(--color-surface);
+  }
+  .card-content h3 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    color: var(--color-ink);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+  }
+  .card-content p {
+    color: var(--color-ink-soft);
+    font-size: 1rem;
+  }
+  
+  .centered-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 160px;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--color-surface);
+  }
+  
+  .hover-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+    transform: scale(1.05);
+    z-index: 1;
+  }
+  
+  /* Overlay inside the hover-bg to darken it slightly for text readability */
+  .hover-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .gallery-card:hover .hover-bg {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .action-title,
+  .action-text {
+    position: relative;
+    z-index: 2;
+    transition: color 0.3s var(--ease), text-shadow 0.3s var(--ease);
+  }
+  
+  .centered-content h3 {
+    color: var(--color-primary);
+  }
+  .centered-content .action-text {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  
+  /* On hover, text becomes white */
+  .gallery-card:hover .centered-content .action-title,
+  .gallery-card:hover .centered-content .action-text {
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+  }
+  
+  .col-span-full .centered-content {
+    min-height: 120px;
+  }
+  
+  .load-more {
+    text-align: center;
+    margin-top: 4rem;
+  }
+  .uppercase {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+</style>
+
+<script>
+  import { inView, animate, stagger } from "motion";
+
+  function initGalleryAnimation() {
+    const sections = document.querySelectorAll('.gallery-catalog .category-section');
+    
+    sections.forEach((section) => {
+      const cards = section.querySelectorAll('.gallery-card');
+      if (cards.length === 0) return;
+      
+      // Set initial state manually before animating to prevent flashing
+      cards.forEach(card => {
+        card.style.opacity = "0";
+        card.style.transform = "translateY(30px)";
+      });
+
+      inView(section, () => {
+        animate(
+          cards,
+          { opacity: [0, 1], transform: ['translateY(30px)', 'none'] },
+          { 
+            delay: stagger(0.1), 
+            duration: 0.6, 
+            easing: [0.22, 1, 0.36, 1] 
+          }
+        );
+      }, { margin: "-10% 0px" });
+    });
+  }
+
+  // Support both initial load and Astro View Transitions
+  document.addEventListener('astro:page-load', initGalleryAnimation);
+</script>

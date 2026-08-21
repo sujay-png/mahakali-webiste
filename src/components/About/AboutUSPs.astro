@@ -1,0 +1,91 @@
+---
+import Icon from "../global/UI/Icon.astro";
+---
+
+<section class="section section--cream">
+  <div class="wrap">
+    <div class="usp-bar" data-reveal="fade-up">
+      <div class="usp-item">
+        <Icon name="truck" class="icon-32 usp-icon" />
+        <div class="usp-text-wrapper">
+          <span class="usp-title">Free Delivery</span>
+          <span class="usp-desc">For Any Orders</span>
+        </div>
+      </div>
+      <div class="usp-item">
+        <Icon name="refresh-ccw" class="icon-32 usp-icon" />
+        <div class="usp-text-wrapper">
+          <span class="usp-title">No Refund</span>
+          <span class="usp-desc">There Is No Refund</span>
+        </div>
+      </div>
+      <div class="usp-item">
+        <Icon name="shield" class="icon-32 usp-icon" />
+        <div class="usp-text-wrapper">
+          <span class="usp-title">Safe Payment</span>
+          <span class="usp-desc">100% Secure Payment</span>
+        </div>
+      </div>
+      <div class="usp-item">
+        <Icon name="clock" class="icon-32 usp-icon" />
+        <div class="usp-text-wrapper">
+          <span class="usp-title">9:30AM - 7:00PM Support</span>
+          <span class="usp-desc">Feel Free To Call Us</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .usp-bar {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    padding: 3rem 2rem;
+    background-color: var(--color-surface);
+    border: 1px solid rgba(139, 74, 59, 0.15);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    margin-bottom: 5rem;
+  }
+  
+  @media (min-width: 768px) {
+    .usp-bar {
+      grid-template-columns: repeat(4, 1fr);
+      padding: 3rem;
+    }
+  }
+
+  .usp-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  :global(.usp-icon) {
+    width: 42px;
+    height: 42px;
+    color: var(--color-primary);
+  }
+
+  .usp-text-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .usp-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    font-family: var(--font-nav);
+    color: var(--color-ink);
+  }
+  
+  .usp-desc {
+    font-size: 0.85rem;
+    color: var(--color-ink-soft);
+  }
+</style>

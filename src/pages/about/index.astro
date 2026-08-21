@@ -1,0 +1,51 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+// Components
+import AboutHero from "../../components/About/AboutHero.astro";
+import AboutExpertise from "../../components/About/AboutExpertise.astro";
+import AboutVideo from "../../components/About/AboutVideo.astro";
+import AboutUSPs from "../../components/About/AboutUSPs.astro";
+import AboutMattress from "../../components/About/AboutMattress.astro";
+import AboutStats from "../../components/About/AboutStats.astro";
+import AboutSocial from "../../components/About/AboutSocial.astro";
+
+import { heroData } from "../../data/about/hero";
+import { expertiseData } from "../../data/about/expertise";
+import { videoData } from "../../data/about/video";
+import { statsData } from "../../data/about/stats";
+import { socialData } from "../../data/about/social";
+import { aboutMattress } from "../../data/about/mattress";
+---
+
+<Layout
+  title="About Us"
+  description="Mahakali Sofas & Curtains – Udupi’s most trusted name for comfort, elegance & timeless living."
+  path="/about"
+>
+  <Fragment slot="head">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+    </style>
+  </Fragment>
+
+  <main style="padding-top: 2rem;">
+    <AboutHero data={heroData} />
+    <AboutUSPs />
+    <AboutExpertise data={expertiseData} />
+    <AboutMattress data={aboutMattress} />
+    <AboutVideo data={videoData} />
+    <AboutStats data={statsData} />
+    <AboutSocial data={socialData} />
+  </main>
+</Layout>

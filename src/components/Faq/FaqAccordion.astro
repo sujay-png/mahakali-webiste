@@ -1,0 +1,201 @@
+---
+import { faqData } from "../../data/faq";
+import Icon from "../global/UI/Icon.astro";
+---
+
+<section class="faq-accordion-section section wrap">
+  <div class="faq-container" data-accordion>
+    {faqData.map((item, index) => (
+      <div class={`faq-item ${index === 0 ? 'is-open' : ''}`} data-accordion-item>
+        <button class="faq-question" aria-expanded={index === 0 ? "true" : "false"}>
+          <div class="faq-q-left">
+            <span class="faq-icon">?</span>
+            <span class="faq-title">{item.question}</span>
+          </div>
+          <span class="faq-chevron">
+            <Icon name="chevron-down" class="icon-20" />
+          </span>
+        </button>
+        <div class="faq-answer-wrapper" aria-hidden={index === 0 ? "false" : "true"}>
+          <div class="faq-answer-inner">
+            <p>{item.answer}</p>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  function setupAccordion() {
+    const accordions = document.querySelectorAll('[data-accordion]');
+    
+    accordions.forEach(accordion => {
+      // Prevent attaching multiple event listeners on Astro page transitions
+      if (accordion.hasAttribute('data-initialized')) return;
+      accordion.setAttribute('data-initialized', 'true');
+
+      const items = accordion.querySelectorAll('[data-accordion-item]');
+      
+      items.forEach(item => {
+        const button = item.querySelector('.faq-question');
+        const wrapper = item.querySelector('.faq-answer-wrapper');
+        
+        button?.addEventListener('click', () => {
+          const isOpen = item.classList.contains('is-open');
+          
+          // Close all other items (Radix type="single" behavior)
+          items.forEach(otherItem => {
+            otherItem.classList.remove('is-open');
+            otherItem.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false');
+            otherItem.querySelector('.faq-answer-wrapper')?.setAttribute('aria-hidden', 'true');
+          });
+
+          // Toggle current item
+          if (!isOpen) {
+            item.classList.add('is-open');
+            button.setAttribute('aria-expanded', 'true');
+            wrapper?.setAttribute('aria-hidden', 'false');
+          }
+        });
+      });
+    });
+  }
+  
+  // Run after Astro view transitions (which also fires on initial load)
+  document.addEventListener('astro:page-load', setupAccordion);
+</script>
+
+<style>
+  .faq-accordion-section {
+    padding-top: 4rem;
+    padding-bottom: 6rem;
+  }
+  
+  .faq-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .faq-item {
+    background: #ffffff; /* White background only */
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: box-shadow 0.3s var(--ease), border-color 0.3s var(--ease), transform 0.2s var(--ease);
+  }
+  
+  .faq-item:hover {
+    border-color: rgba(139, 74, 59, 0.4);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-2px);
+  }
+  
+  /* Remove default button styles */
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    font: inherit;
+    padding: 0;
+  }
+  
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.3s var(--ease);
+  }
+  
+  .faq-question:hover {
+    background: rgba(246, 243, 242, 0.5); /* Subtle cream hover */
+  }
+  
+  .faq-q-left {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+  
+  .faq-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--color-primary);
+    color: #ffffff;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  
+  .faq-title {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--color-primary);
+    line-height: 1.4;
+  }
+  
+  .faq-chevron {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-ink-soft);
+    transition: transform 0.3s var(--ease);
+  }
+  
+  /* Rotate chevron when open */
+  .faq-item.is-open .faq-chevron {
+    transform: rotate(180deg);
+  }
+  
+  /* Smooth Height Transition via Grid */
+  .faq-answer-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .faq-item.is-open .faq-answer-wrapper {
+    grid-template-rows: 1fr;
+  }
+  
+  .faq-answer-inner {
+    overflow: hidden;
+  }
+  
+  .faq-answer-inner p {
+    padding: 0 1.5rem 1.5rem 4.75rem; /* Indented to align with text */
+    color: var(--color-ink-soft);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+    
+    /* Fade and slide in content */
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  .faq-item.is-open .faq-answer-inner p {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.1s; /* Slight delay to let it open first */
+  }
+  
+  @media (max-width: 600px) {
+    .faq-answer-inner p {
+      padding: 0 1.5rem 1.5rem 1.5rem;
+    }
+  }
+</style>

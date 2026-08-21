@@ -1,0 +1,137 @@
+---
+import { galleryCTA } from "../../data/gallery/cta";
+
+export interface Props {
+  data: typeof galleryCTA;
+}
+
+const { data } = Astro.props;
+---
+
+<section class="gallery-cta section section--cream">
+  <div class="wrap">
+    <div class="cta-grid">
+      <div class="cta-content">
+        <h2 class="font-display">{data.title}</h2>
+        <p class="lead">{data.subtitle}</p>
+        <button class="btn btn-primary uppercase">
+          Schedule Consultation
+        </button>
+      </div>
+      
+      <div class="cta-slider-container">
+        <div class="slider-wrapper" id="cta-slider">
+          {data.images.map((img) => (
+            <div class="slide">
+              <img src={img} alt="Gallery Showcase" />
+            </div>
+          ))}
+        </div>
+        
+        <div class="slider-nav">
+          <button class="nav-btn" aria-label="Previous image" onclick="document.getElementById('cta-slider').scrollLeft -= document.getElementById('cta-slider').offsetWidth">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+          <button class="nav-btn" aria-label="Next image" onclick="document.getElementById('cta-slider').scrollLeft += document.getElementById('cta-slider').offsetWidth">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gallery-cta {
+    border-top: 1px solid var(--color-line);
+    margin-top: 4rem;
+  }
+  .cta-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  @media (min-width: 768px) {
+    .cta-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .cta-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+  .cta-content h2 {
+    color: var(--color-primary);
+    margin: 0;
+  }
+  .cta-content .lead {
+    color: var(--color-ink-soft);
+    font-size: 1.125rem;
+    max-width: 400px;
+    margin: 0;
+  }
+  .uppercase {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  
+  .cta-slider-container {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    aspect-ratio: 4/3;
+  }
+  .slider-wrapper {
+    display: flex;
+    height: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+  }
+  .slide {
+    min-width: 100%;
+    height: 100%;
+    scroll-snap-align: start;
+  }
+  .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .slider-nav {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+    opacity: 0;
+    transition: opacity 0.3s var(--ease);
+    pointer-events: none;
+  }
+  .cta-slider-container:hover .slider-nav {
+    opacity: 1;
+  }
+  .nav-btn {
+    pointer-events: auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(4px);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s var(--ease), color 0.3s var(--ease);
+  }
+  .nav-btn:hover {
+    background: var(--color-primary);
+    color: #fff;
+  }
+</style>

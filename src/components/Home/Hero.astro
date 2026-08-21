@@ -1,0 +1,407 @@
+---
+import Icon from "../global/UI/Icon.astro";
+
+interface Slide {
+  eyebrow: string;
+  title: string;
+  titleAccent: string;
+  copy: string;
+  ctaPrimary: { label: string; href: string };
+  ctaSecondary: { label: string; href: string };
+  image: { src: string; alt: string };
+}
+
+interface Props {
+  slides: Slide[];
+}
+
+const { slides } = Astro.props;
+---
+
+<section class="hero-carousel-container" id="hero-section">
+  <div class="slides-wrapper">
+    {slides.map((slide, index) => (
+      <div class={`hero-slide ${index === 0 ? 'slide-active' : 'slide-hidden'}`} data-index={index}>
+        <!-- Background image for glassmorphism texture -->
+        <img class="hero-bg-blur" src={slide.image.src} alt="" aria-hidden="true" />
+        
+        <!-- Glassmorphism Light Brown Gradient Overlay -->
+        <div class="hero-overlay-glass"></div>
+        
+        <!-- Crisp Product Image on the right -->
+        <img class="hero-product-img" src={slide.image.src} alt={slide.image.alt} />
+        
+        <div class="hero-content wrap">
+          <div class="hero-content-inner">
+            <span class="eyebrow fade-in" style="animation-delay: 0.1s;">{slide.eyebrow}</span>
+            <h1 class="title fade-in" style="animation-delay: 0.2s;">
+              {slide.title} <span class="accent">{slide.titleAccent}</span>
+            </h1>
+            <p class="copy fade-in" style="animation-delay: 0.3s;">
+              {slide.copy}
+            </p>
+            <div class="actions fade-in" style="animation-delay: 0.4s;">
+              <a href={slide.ctaPrimary.href} class="btn-primary">
+                {slide.ctaPrimary.label}
+              </a>
+              <a href={slide.ctaSecondary.href} class="btn-secondary">
+                {slide.ctaSecondary.label}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <div class="slider-controls">
+    {slides.map((_, index) => (
+      <button 
+        aria-label={`Go to slide ${index + 1}`} 
+        class={`dot ${index === 0 ? 'active' : ''}`}
+        data-index={index}
+      ></button>
+    ))}
+  </div>
+</section>
+
+<style>
+  .hero-carousel-container {
+    position: relative;
+    width: 100%;
+    height: calc(100vh + 120px);
+    min-height: 580px;
+    overflow: hidden;
+    background: #000;
+    margin-top: -120px; /* Pulls hero under the glassmorphism header */
+  }
+
+  .slides-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    transition: opacity 0.8s ease-in-out;
+  }
+
+  .slide-hidden {
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .slide-active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 2;
+  }
+
+  .hero-bg-blur {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    transform: scale(1.1); /* Prevent blurred edges from bleeding in */
+  }
+
+  .hero-overlay-glass {
+    position: absolute;
+    inset: 0;
+    /* Glassmorphism light brown gradient overlay */
+    background: linear-gradient(135deg, rgba(253, 251, 249, 0.85) 0%, rgba(220, 195, 175, 0.85) 100%);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    z-index: 1;
+  }
+
+  .hero-product-img {
+    position: absolute;
+    right: 8%; /* Pulled in from the right edge */
+    bottom: 30px; /* 30px breathing room below the chair */
+    width: 45%; /* Scaled down slightly (~90% of previous size) */
+    max-width: 720px;
+    height: 75%; /* Reduced height to prevent clipping */
+    object-fit: contain;
+    object-position: bottom center;
+    z-index: 5;
+    /* Soft warm drop shadow */
+    filter: drop-shadow(0 20px 40px rgba(139, 74, 59, 0.15)) drop-shadow(0 10px 15px rgba(44, 22, 0, 0.1));
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: var(--max-width, 1240px);
+    margin: 0 auto;
+    padding: 0 var(--gutter, 2rem);
+    margin-top: -60px; /* Offset the 120px header underlap to perfectly center in visible viewport */
+  }
+
+  .hero-content-inner {
+    position: relative;
+    max-width: 650px;
+    width: 100%;
+  }
+  
+  /* Subtle decorative accent to reduce left-side flatness */
+  .hero-content-inner::before {
+    content: "";
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(139, 74, 59, 0.06) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .eyebrow {
+    display: block;
+    font-family: var(--font-nav);
+    font-size: 0.95rem;
+    color: #8b4a3b; /* Rust/terracotta to match brand */
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+  }
+
+  .title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    color: #1a1513; /* Near black / deep espresso brown */
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+
+  .accent {
+    color: #5c3227; /* Deeper brown for the accent */
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  .copy {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    color: #4a3e3b; /* Dark brown for readability */
+    font-weight: 400; /* Clean, lighter weight */
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+    max-width: 500px; /* Adjusted to ~500px for natural line breaks */
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .btn-primary {
+    background: #6D4C41; /* Light dark brown (Mocha) */
+    color: #fff;
+    padding: 1rem 2.2rem;
+    border-radius: 18px;
+    font-family: var(--font-nav);
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s ease, background 0.3s ease, box-shadow 0.3s ease;
+  }
+  .btn-primary:hover {
+    background: #5D4037;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(109, 76, 65, 0.25);
+  }
+
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.35); /* Translucent white for glass effect */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    color: #4a3e3b;
+    padding: 1rem 2.2rem;
+    border-radius: 18px;
+    font-family: var(--font-nav);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.55);
+    border-color: rgba(255, 255, 255, 0.8);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  }
+
+  .slider-controls {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.8rem;
+    z-index: 20;
+    align-items: center;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 9999px; /* Fully rounded */
+    background: #c9b1a5; /* Tan color */
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    padding: 0;
+  }
+
+  .dot:hover {
+    background: #a98d7e;
+  }
+
+  .dot.active {
+    width: 32px; /* Elongated pill shape */
+    background: #8b4a3b; /* Brand terracotta */
+  }
+
+  /* Fade-in Animation */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  .slide-active .fade-in {
+    animation: fadeIn 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 960px) {
+    .hero-carousel-container {
+      height: 100vh; /* Don't oversize on mobile */
+      min-height: 600px;
+    }
+    .hero-content {
+      margin-top: 0; /* Reset desktop centering offset */
+      padding-top: 6rem;
+    }
+    .hero-product-img {
+      width: 80%;
+      height: 60%;
+      right: 10%;
+      top: 60%;
+      bottom: auto; /* override desktop bottom: 0 */
+      transform: translateY(-50%);
+      opacity: 0.15; /* Fade heavily so dark text is readable over it */
+      z-index: 0;
+      filter: none; /* Remove drop shadow on mobile to avoid muddying text */
+    }
+    .hero-overlay-glass {
+      background: linear-gradient(to bottom, rgba(253, 251, 249, 0.535) 0%, rgba(220, 195, 175, 0.95) 100%);
+      z-index: 1;
+    }
+    .hero-slide {
+      align-items: flex-start;
+      padding-top: 10rem;
+    }
+    .title {
+      font-size: 2.5rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const heroSection = document.getElementById('hero-section');
+    if (!heroSection) return;
+
+    const slides = heroSection.querySelectorAll('.hero-slide');
+    const dots = heroSection.querySelectorAll('.dot');
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+    let slideInterval: number;
+
+    function updateSlider() {
+      slides.forEach((slide, i) => {
+        if (i === currentSlide) {
+          slide.classList.remove('slide-hidden');
+          slide.classList.add('slide-active');
+          
+          // Retrigger animations
+          const animElements = slide.querySelectorAll('.fade-in');
+          animElements.forEach(el => {
+            (el as HTMLElement).style.animation = 'none';
+            void (el as HTMLElement).offsetHeight; // trigger reflow
+            (el as HTMLElement).style.animation = '';
+          });
+
+        } else {
+          slide.classList.add('slide-hidden');
+          slide.classList.remove('slide-active');
+        }
+      });
+
+      dots.forEach((dot, i) => {
+        if (i === currentSlide) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateSlider();
+    }
+
+    function goToSlide(index: number) {
+      currentSlide = index;
+      updateSlider();
+      resetInterval();
+    }
+
+    function startInterval() {
+      slideInterval = window.setInterval(nextSlide, 6000);
+    }
+
+    function resetInterval() {
+      window.clearInterval(slideInterval);
+      startInterval();
+    }
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const index = parseInt(dot.getAttribute('data-index') || '0', 10);
+        goToSlide(index);
+      });
+    });
+
+    // Initialize
+    if(totalSlides > 1) {
+      startInterval();
+    }
+  });
+</script>

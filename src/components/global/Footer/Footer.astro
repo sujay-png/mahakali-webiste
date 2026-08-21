@@ -1,0 +1,295 @@
+---
+import Icon from "../UI/Icon.astro";
+import {
+  siteInfo,
+  topBar,
+  branches,
+  quickLinks,
+  supportCenter,
+  footerNote,
+} from "../../../data/site";
+---
+
+<footer class="site-footer">
+  <div class="wrap footer__grid">
+    <!-- Brand Column -->
+    <div class="footer__col footer__brand">
+      <a href="/" class="brand brand--light">
+        <span class="brand__text">
+          <img
+            src="/images/new-logo.png"
+            alt={siteInfo.name}
+            class="footer__logo"
+          />
+        </span>
+      </a>
+      <p>{siteInfo.description}</p>
+      <div class="footer__social">
+        {
+          topBar.social.map((s) => (
+            <a
+              href={s.href}
+              aria-label={s.label}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icon name={s.icon} class="icon-16" />
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Quick Links Column -->
+    <div class="footer__col">
+      <h3>Quick Links</h3>
+      <ul class="footer__links">
+        {
+          quickLinks.map((link) => (
+            <li>
+              <a href={link.href}>{link.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <!-- Support Center Column -->
+    <div class="footer__col">
+      <h3>Support Center</h3>
+      <ul class="footer__links">
+        {
+          supportCenter.map((link) => (
+            <li>
+              <a href={link.href}>{link.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+      <a href={`mailto:${siteInfo.email}`} class="footer__mail">
+        <Icon name="mail" class="icon-14" />
+        <span>{siteInfo.email}</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Branches Row (Single Compact Row) -->
+  <div class="wrap footer__branches-section">
+    <h3>Our Branches</h3>
+    <ul class="footer__branches">
+      {
+        branches.map((b) => (
+          <li class="footer__branch-item">
+            <strong>{b.name}</strong>
+            {b.lines.map((line) => (
+              <span>{line}</span>
+            ))}
+            <a href={`tel:${b.phone.replace(/\s/g, "")}`}>
+              <Icon name="phone" class="icon-14" />
+              <span>{b.phone}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <div class="footer__bottom">
+    <div class="wrap footer__bottom-inner">
+      <p>{footerNote}</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-ink);
+    color: rgba(242, 233, 218, 0.82);
+    font-size: 0.85rem;
+  }
+
+  /* Compact Grid */
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 1.5rem;
+    padding-top: 1.75rem;
+    padding-bottom: 1rem;
+  }
+
+  .footer__logo {
+    height: 70px; /* Reduced for better proportion */
+    max-height: none;
+    width: auto;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer__brand p {
+    margin: 0.5rem 0 0.6rem;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    max-width: 32ch;
+  }
+
+  .footer__social {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  .footer__social a {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid rgba(242, 233, 218, 0.25);
+    display: grid;
+    place-items: center;
+    color: inherit;
+    transition:
+      background 0.2s,
+      border-color 0.2s,
+      color 0.2s;
+  }
+
+  .footer__social a:hover {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
+  }
+
+  /* Global Icon Fixes */
+  :global(.icon-14),
+  :global(.icon-16) {
+    display: inline-block;
+    vertical-align: middle;
+    flex-shrink: 0;
+  }
+
+  :global(.icon-14) {
+    width: 14px;
+    height: 14px;
+  }
+
+  :global(.icon-16) {
+    width: 16px;
+    height: 16px;
+  }
+
+  .site-footer h3 {
+    color: #fff;
+    font-size: 0.88rem;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  /* Branches Section */
+  .footer__branches-section {
+    padding-block: 1rem;
+    border-top: 1px solid rgba(242, 233, 218, 0.08);
+  }
+
+  .footer__branches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer__branch-item {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .footer__branches strong {
+    display: block;
+    color: #fff;
+    font-size: 0.82rem;
+    margin-bottom: 0.15rem;
+  }
+
+  .footer__branches > li > span {
+    display: block;
+    font-size: 0.78rem;
+    opacity: 0.75;
+    line-height: 1.35;
+  }
+
+  /* Force single line phone layout */
+  .footer__branches a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.3rem;
+    font-size: 0.78rem;
+    color: var(--color-gold);
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  /* Links & Mail */
+  .footer__links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer__links a {
+    font-size: 0.82rem;
+    line-height: 1.2;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .footer__links a:hover {
+    color: var(--color-gold);
+  }
+
+  .footer__mail {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--color-gold);
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  /* Footer Bottom */
+  .footer__bottom {
+    border-top: 1px solid rgba(242, 233, 218, 0.08);
+  }
+
+  .footer__bottom-inner {
+    padding-block: 0.6rem;
+    text-align: center;
+    font-size: 0.75rem;
+    opacity: 0.7;
+  }
+
+  .footer__bottom-inner p {
+    margin: 0;
+  }
+
+  @media (max-width: 960px) {
+    .footer__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer__grid {
+      grid-template-columns: 1fr;
+    }
+    .footer__branch-item {
+      flex: 1 1 100%;
+    }
+  }
+</style>

@@ -1,0 +1,65 @@
+---
+import Layout from "../layouts/Layout.astro";
+import GrainDivider from "../components/global/UI/GrainDivider.astro";
+
+import Hero from "../components/Home/Hero.astro";
+import TopCategories from "../components/Home/TopCategories.astro";
+import PromoStrip from "../components/Home/PromoStrip.astro";
+import TrendingBanner from "../components/Home/TrendingBanner.astro";
+import TrustBar from "../components/Home/TrustBar.astro";
+import WhyChooseUs from "../components/Home/WhyChooseUs.astro";
+import AboutSection from "../components/Home/AboutSection.astro";
+import DealBanner from "../components/Home/DealBanner.astro";
+import ProductLists from "../components/Home/ProductLists.astro";
+import Gallery from "../components/Home/Gallery.astro";
+import Testimonials from "../components/Home/Testimonials.astro";
+import BlogSection from "../components/Home/BlogSection.astro";
+import InstagramStrip from "../components/Home/InstagramStrip.astro";
+
+import {
+  heroSlides,
+  topCategories,
+  promoStrip,
+  trendingBanner,
+  trustBar,
+  whyChooseUs,
+  aboutSection,
+  dealBanner,
+  productLists,
+  gallery,
+  testimonials,
+  blogSection,
+  instagramStrip,
+} from "../data/home";
+---
+
+<Layout
+  title="Mahakali Home Furnitures & Interiors | Premium Sofas, Cots & Curtains in Udupi"
+  description="Udupi's most trusted furniture store since 1997. Handcrafted sofas, wooden cots, dining sets and curtains with free delivery and 28+ years of quality craftsmanship."
+  path="/"
+>
+  <main>
+    <Hero slides={heroSlides} />
+    <TopCategories data={topCategories} />
+    <PromoStrip data={promoStrip} />
+
+    <GrainDivider variant="cream" />
+    <TrendingBanner data={trendingBanner} />
+    <GrainDivider variant="cream" flip />
+
+    <TrustBar data={trustBar} />
+
+    <WhyChooseUs data={whyChooseUs} />
+    <AboutSection data={aboutSection} />
+
+    <DealBanner data={dealBanner} />
+    <ProductLists data={productLists} />
+
+    <GrainDivider variant="cream" />
+    <Gallery data={gallery} />
+
+    <Testimonials data={testimonials} />
+    <BlogSection data={blogSection} />
+    <InstagramStrip data={instagramStrip} />
+  </main>
+</Layout>

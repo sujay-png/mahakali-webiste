@@ -1,0 +1,197 @@
+---
+import Icon from "../global/UI/Icon.astro";
+import type { topCategories as TopCategoriesType } from "../../data/home";
+
+export interface Props {
+  data: typeof TopCategoriesType;
+}
+
+const { data } = Astro.props;
+---
+
+<section class="section section--tight categories">
+  <div class="wrap categories-wrap">
+    <div class="row-head">
+      <div>
+        <p class="eyebrow">{data.eyebrow}</p>
+        <h2>{data.title}</h2>
+      </div>
+      <a href={data.viewAllHref} class="link-arrow">
+        View More <Icon name="arrow-right" />
+      </a>
+    </div>
+
+    <div class="carousel" data-reveal-group>
+      <div class="carousel__viewport">
+        {
+          data.items.map((item) => (
+            <a href={item.href} class="cat-card" data-reveal="scale">
+              <!-- Clear Background Image & Minimal Contrast Gradient -->
+              <div class="cat-card__bg">
+                <img src={item.image} alt={item.name} loading="lazy" />
+                <div class="cat-card__overlay" />
+              </div>
+
+              <!-- Content -->
+              <div class="cat-card__content">
+                <span class="cat-card__name">{item.name}</span>
+                <span class="cat-card__action">EXPLORE CATEGORY</span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (min-width: 961px) {
+    .categories-wrap {
+      transform: translateX(-24px); /* Shift entire section a bit left */
+    }
+  }
+
+  .carousel__viewport {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* Fit all 6 exactly in one row */
+    gap: 1rem; /* Reduced gap to fit more */
+    padding-top: 10px;
+    padding-bottom: 20px;
+  }
+
+  /* Rectangular Card */
+  .cat-card {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    overflow: hidden;
+    
+    min-height: 110px; /* Reduced minimum height */
+    padding: 1.25rem 1rem; /* Reduced padding to fit 6 in a row */
+    border-radius: 8px;
+    
+    background: linear-gradient(135deg, rgba(168, 107, 72, 0.15), rgba(168, 107, 72, 0.03));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(190, 80, 50, 0.35);
+    
+    transition: 
+      transform 0.3s ease, 
+      border-color 0.3s ease, 
+      box-shadow 0.3s ease;
+  }
+
+  /* Background Image Container */
+  .cat-card__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.35s ease-in-out;
+  }
+
+  /* Sharp & Clear Image */
+  .cat-card__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.04);
+    transition: transform 0.45s ease-out;
+  }
+
+  /* Subtle Dark Vignette for Text Contrast (No Blurring) */
+  .cat-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.25) 0%,
+      rgba(0, 0, 0, 0.45) 100%
+    );
+  }
+
+  /* Text Content */
+  .cat-card__content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  /* Title: "WOODEN COT" */
+  .cat-card__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem; /* Reduced font size */
+    color: var(--color-primary, #6b1414);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+  }
+
+  /* Subtext: "EXPLORE CATEGORY" */
+  .cat-card__action {
+    font-size: 0.65rem; /* Reduced font size */
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--color-ink-soft, #3e4c59);
+    text-transform: uppercase;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+  }
+
+  /* --- Hover State --- */
+  .cat-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-primary, #6b1414);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Show the full image */
+  .cat-card:hover .cat-card__bg {
+    opacity: 1;
+  }
+
+  .cat-card:hover .cat-card__bg img {
+    transform: scale(1);
+  }
+
+  /* Switch text to crisp white + subtle shadow */
+  .cat-card:hover .cat-card__name {
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  }
+
+  .cat-card:hover .cat-card__action {
+    color: #f6e6c2; /* Soft warm gold/white */
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.6);
+  }
+
+  /* --- Responsive Fallback --- */
+  @media (max-width: 960px) {
+    .carousel__viewport {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-inline: 1.5rem;
+      scroll-padding-inline: 1.5rem;
+      scrollbar-width: none;
+    }
+    .carousel__viewport::-webkit-scrollbar {
+      display: none;
+    }
+    .cat-card {
+      flex: 0 0 clamp(180px, 45vw, 240px); /* Restored fixed width for mobile scrolling */
+      scroll-snap-align: center;
+      min-height: 110px;
+      padding: 1rem;
+    }
+  }
+</style>

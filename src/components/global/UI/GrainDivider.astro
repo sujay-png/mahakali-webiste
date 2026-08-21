@@ -1,0 +1,13 @@
+---
+export interface Props {
+  variant?: 'bg' | 'cream' | 'ink';
+  flip?: boolean;
+}
+const { variant = 'bg', flip = false } = Astro.props;
+const cls = ['grain-divider', variant !== 'bg' ? `grain-divider--${variant}` : '', flip ? 'grain-divider--flip' : '']
+  .filter(Boolean)
+  .join(' ');
+---
+<svg class={cls} viewBox="0 0 1200 34" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0 18c60-14 120-14 180 0s120 14 180 0 120-14 180 0 120 14 180 0 120-14 180 0 120 14 180 0 120-14 180 0V34H0Z" />
+</svg>

@@ -1,0 +1,231 @@
+---
+import Icon from "../../global/UI/Icon.astro";
+import ProductSpecs from "./ProductSpecs.astro";
+
+export interface Props {
+  title: string;
+  rating: number;
+  stars: number;
+  currentPrice: string;
+  originalPrice: string;
+  discountText: string;
+  discountLabel: string;
+  productCode: string;
+  sku: string;
+  stockStatus: string;
+}
+
+const { 
+  title, 
+  rating, 
+  stars, 
+  currentPrice, 
+  originalPrice, 
+  discountText, 
+  discountLabel,
+  productCode,
+  sku,
+  stockStatus
+} = Astro.props;
+---
+
+<div class="product-info-wrapper">
+  <div class="info-header">
+    <h1 class="product-title font-display">{title}</h1>
+    <div class="rating-container">
+      {Array.from({ length: stars }).map(() => (
+        <Icon name="star" class="star-icon" />
+      ))}
+      <span class="rating-text">({rating.toFixed(1)})</span>
+    </div>
+  </div>
+
+  <div class="pricing-container">
+    <div class="price-details">
+      <span class="discount-label">{discountLabel}</span>
+      <div class="price-row">
+        <span class="current-price font-display">{currentPrice}</span>
+        <span class="original-price">{originalPrice}</span>
+      </div>
+    </div>
+    <span class="discount-badge">{discountText}</span>
+  </div>
+
+  <div class="meta-container">
+    <p class="product-codes">
+      PRODUCT CODE {productCode}<br/>
+      SKU: {sku}
+    </p>
+    <p class="stock-status">
+      <Icon name="info" class="info-icon" /> {stockStatus}
+    </p>
+  </div>
+
+  <!-- Specs injected here via slot or directly if we prefer. Given the layout, Specs go here before Add to Cart -->
+  <slot />
+
+  <button class="add-to-cart-btn">
+    <Icon name="shopping-bag" class="cart-icon" />
+    Add to Cart
+  </button>
+</div>
+
+<style>
+  .product-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .info-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-bottom: 1px solid rgba(226, 191, 185, 0.3);
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .product-title {
+    font-size: 2.5rem; /* text-display-lg */
+    line-height: 1.2;
+    color: #570000; /* primary */
+  }
+
+  .rating-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-nav);
+    font-size: 0.75rem; /* text-label-sm */
+    color: #5a413d; /* on-surface-variant */
+  }
+
+  :global(.star-icon) {
+    width: 16px;
+    height: 16px;
+    color: #F59E0B; /* amber-500 */
+    fill: currentColor;
+  }
+
+  .rating-text {
+    margin-left: 0.5rem;
+  }
+
+  .pricing-container {
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(226, 191, 185, 0.3);
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .price-details {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .discount-label {
+    font-family: var(--font-nav);
+    font-size: 0.75rem;
+    color: #5a413d;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.25rem;
+  }
+
+  .price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  .current-price {
+    font-size: 2rem; /* text-headline-lg */
+    font-weight: 700;
+    color: #1c1b1b;
+  }
+
+  .original-price {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: #5a413d;
+    text-decoration: line-through;
+  }
+
+  .discount-badge {
+    font-family: var(--font-nav);
+    font-size: 0.75rem;
+    color: #ba1a1a; /* error */
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+    margin-left: auto;
+  }
+
+  .meta-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .product-codes {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: #5a413d;
+    line-height: 1.5;
+  }
+
+  .stock-status {
+    font-family: var(--font-nav);
+    font-size: 0.75rem;
+    color: #93000a; /* on-error-container */
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  :global(.info-icon) {
+    width: 16px;
+    height: 16px;
+  }
+
+  .add-to-cart-btn {
+    background-color: #570000; /* primary */
+    color: #ffffff; /* on-primary */
+    font-family: var(--font-nav);
+    font-size: 0.875rem; /* text-label-lg */
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 1rem 2rem;
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  @media (min-width: 768px) {
+    .add-to-cart-btn {
+      width: auto;
+    }
+  }
+
+  .add-to-cart-btn:hover {
+    background-color: #800000; /* primary-container */
+  }
+
+  :global(.cart-icon) {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+  }
+</style>

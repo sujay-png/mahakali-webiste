@@ -1,0 +1,164 @@
+---
+import type { showrooms } from "../../data/contact/data";
+
+export interface Props {
+  data: typeof showrooms;
+}
+
+const { data } = Astro.props;
+---
+
+<section class="wrap section">
+  <div class="showrooms-header">
+    <h2 class="font-display coffee-text">Our Showrooms</h2>
+    <p class="lead">Visit our elegant spaces to experience our collections firsthand.</p>
+  </div>
+  
+  <div class="showrooms-grid">
+    {data.map((showroom) => (
+      <div class="showroom-card rounded-card">
+        <div class="bg-icon">
+          <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">{showroom.icon}</span>
+        </div>
+        
+        <div class="card-content">
+          <div class="icon-wrapper">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">location_on</span>
+          </div>
+          <h3 class="font-display coffee-text">{showroom.title}</h3>
+          <p class="address">{showroom.address}</p>
+          
+          <div class="contact-details">
+            <a href={`tel:${showroom.phone}`} class="contact-link">
+              <span class="material-symbols-outlined">call</span>
+              {showroom.phone}
+            </a>
+            <a href={`mailto:${showroom.email}`} class="contact-link">
+              <span class="material-symbols-outlined">mail</span>
+              {showroom.email}
+            </a>
+            <div class="hours">
+              <span class="material-symbols-outlined">schedule</span>
+              {showroom.hours}
+            </div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .coffee-text {
+    color: var(--color-walnut) !important;
+  }
+  
+  .showrooms-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .showrooms-header h2 {
+    margin-bottom: 1rem;
+  }
+  .showrooms-header .lead {
+    color: var(--color-ink-soft);
+    font-size: 1.125rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .showrooms-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  @media (min-width: 768px) {
+    .showrooms-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .showroom-card {
+    position: relative;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--color-surface);
+    border-radius: 1.5rem; /* rounded-2xl */
+    border: 1px solid var(--color-line);
+    transition: box-shadow var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+  }
+  .showroom-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+  }
+  .bg-icon {
+    position: absolute;
+    top: -2rem;
+    right: -2rem;
+    color: var(--color-walnut);
+    opacity: 0.05;
+    pointer-events: none;
+    transition: transform 0.5s var(--ease);
+  }
+  .bg-icon span {
+    font-size: 160px;
+  }
+  .showroom-card:hover .bg-icon {
+    transform: scale(1.1);
+  }
+  .card-content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .icon-wrapper {
+    width: 48px;
+    height: 48px;
+    background: rgba(74, 46, 31, 0.1); /* walnut tint */
+    color: var(--color-walnut);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+  .card-content h3 {
+    margin-bottom: 1rem;
+  }
+  .address {
+    color: var(--color-ink-soft);
+    margin-bottom: 2rem;
+    flex-grow: 1;
+    line-height: 1.6;
+  }
+  .contact-details {
+    border-top: 1px solid var(--color-line);
+    padding-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--color-ink);
+    transition: color var(--dur-fast) var(--ease);
+  }
+  .contact-link:hover {
+    color: var(--color-walnut);
+  }
+  .contact-link span, .hours span {
+    color: var(--color-gold);
+    font-size: 1.25rem;
+  }
+  .hours {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--color-ink-soft);
+    margin-top: 0.5rem;
+  }
+</style>

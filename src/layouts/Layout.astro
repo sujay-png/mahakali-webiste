@@ -1,0 +1,105 @@
+---
+import "../styles/global.css";
+import { siteInfo } from "../data/site";
+import Header from "../components/global/Header/Header.astro";
+import Footer from "../components/global/Footer/Footer.astro";
+import { ViewTransitions } from "astro:transitions";
+
+export interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  path?: string;
+}
+
+const {
+  title,
+  description = siteInfo.description,
+  image = "/og-cover.jpg",
+  path = "/",
+} = Astro.props;
+
+const canonicalURL = new URL(path, siteInfo.url).toString();
+const pageTitle = title.includes("Mahakali")
+  ? title
+  : `${title} | Mahakali Home Furnitures & Interiors`;
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "FurnitureStore",
+  name: siteInfo.legalName,
+  description: siteInfo.description,
+  url: siteInfo.url,
+  telephone: siteInfo.phones[0],
+  email: siteInfo.email,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Udupi",
+    addressRegion: "Karnataka",
+    addressCountry: "IN",
+  },
+  areaServed: "Udupi, Karnataka",
+  priceRange: "₹₹",
+  foundingDate: String(siteInfo.founded),
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <ViewTransitions />
+
+    <!-- Primary SEO -->
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#a8431e" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteInfo.legalName} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta
+      property="og:image"
+      content={new URL(image, siteInfo.url).toString()}
+    />
+    <meta property="og:locale" content="en_IN" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta
+      name="twitter:image"
+      content={new URL(image, siteInfo.url).toString()}
+    />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Structured data -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(localBusinessSchema)}
+    />
+
+    <slot name="head" />
+  </head>
+  <body>
+    <Header />
+    <slot />
+    <Footer />
+
+    <script>
+      import "../scripts/scroll-reveal.js";
+      import "../scripts/carousel.js";
+    </script>
+  </body>
+</html>

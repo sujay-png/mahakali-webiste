@@ -1,0 +1,93 @@
+---
+export interface Props {
+  title: string;
+  subtitle: string;
+  image?: string;
+}
+
+const { title, subtitle, image = "/images/gallery/gallery-cta-4.jpg" } = Astro.props;
+---
+
+<section class="returns-hero" style={`background-image: url('${image}')`}>
+  <div class="overlay"></div>
+  <div class="wrap relative z-10 text-center flex flex-col items-center">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">HOME</a>
+      <span class="separator">/</span>
+      <span class="current">RETURNS</span>
+    </nav>
+    <h1 class="font-display">{title}</h1>
+    <p class="hero-subtitle">{subtitle}</p>
+  </div>
+</section>
+
+<style>
+  .returns-hero {
+    position: relative;
+    min-height: 400px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+  @media (min-width: 768px) {
+    .returns-hero {
+      min-height: 450px;
+      padding-top: 10rem;
+      padding-bottom: 10rem;
+    }
+  }
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgb(0 0 0 / 19%), rgb(199 201 206 / 0%));
+  }
+  .breadcrumb {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  .breadcrumb a:hover {
+    color: #fff;
+  }
+  .breadcrumb .current {
+    color: #fff;
+  }
+  h1.font-display {
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+    line-height: 1.1;
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+    h1.font-display {
+      font-size: 4rem;
+    }
+  }
+  .hero-subtitle {
+    font-size: 1rem;
+    max-width: 38rem;
+    margin: 0 auto;
+    color: #ffffff;
+    font-weight: 500;
+    text-align: center;
+    line-height: 1.5;
+  }
+  @media (min-width: 768px) {
+    .hero-subtitle {
+      font-size: 1.25rem;
+      max-width: 48rem;
+    }
+  }
+</style>

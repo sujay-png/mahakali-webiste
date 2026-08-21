@@ -1,0 +1,19 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import GalleryHero from "../../components/Gallery/GalleryHero.astro";
+import GalleryCatalog from "../../components/Gallery/GalleryCatalog.astro";
+import GalleryCTA from "../../components/Gallery/GalleryCTA.astro";
+import GalleryLightbox from "../../components/Gallery/GalleryLightbox.astro";
+import { galleryHero } from "../../data/gallery/hero";
+import { galleryCategories } from "../../data/gallery/catalog";
+import { galleryCTA } from "../../data/gallery/cta";
+---
+
+<Layout title="Our Gallery | Mahakali Interiors">
+  <main class="gallery-page">
+    <GalleryHero data={galleryHero} />
+    <GalleryCatalog data={galleryCategories} />
+    <GalleryCTA data={galleryCTA} />
+    <GalleryLightbox />
+  </main>
+</Layout>

@@ -1,0 +1,108 @@
+---
+import Icon from "../global/UI/Icon.astro";
+import type { blogSection as BlogSectionType } from "../../data/home";
+export interface Props {
+  data: typeof BlogSectionType;
+}
+const { data } = Astro.props;
+---
+
+<section class="section blog">
+  <div class="wrap">
+    <div
+      class="section-heading"
+      style="margin-inline:auto; text-align:center;"
+      data-reveal="fade"
+    >
+      <p class="eyebrow" style="justify-content:center;">{data.eyebrow}</p>
+      <h2>{data.title} <span class="accent">{data.titleAccent}</span></h2>
+    </div>
+
+    <div class="blog__grid" data-reveal-group>
+      {
+        data.posts.map((post) => (
+          <article class="blog-card chamfer-card" data-reveal="fade">
+            <a href={post.href} class="blog-card__image">
+              <img
+                src={post.image}
+                alt={post.title}
+                width="500"
+                height="340"
+                loading="lazy"
+              />
+              <time>{post.date}</time>
+            </a>
+            <div class="blog-card__body">
+              <h3>
+                <a href={post.href}>{post.title}</a>
+              </h3>
+              <p>{post.excerpt}</p>
+              <a href={post.href} class="link-arrow">
+                Read More <Icon name="arrow-right" />
+              </a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .blog__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 350px));
+    justify-content: center;
+    gap: 1.75rem;
+  }
+  .blog-card {
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition:
+      box-shadow 0.3s var(--ease),
+      transform 0.3s var(--ease);
+  }
+  .blog-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+  }
+  .blog-card__image {
+    position: relative;
+    display: block;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+  }
+  .blog-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s var(--ease);
+  }
+  .blog-card:hover .blog-card__image img {
+    transform: scale(1.06);
+  }
+  .blog-card__image time {
+    position: absolute;
+    left: 1rem;
+    bottom: -0.9rem;
+    background: var(--color-primary);
+    color: #fff;
+    font-size: 0.76rem;
+    font-weight: 700;
+    padding: 0.4rem 0.8rem;
+  }
+  .blog-card__body {
+    padding: 1.7rem 1.5rem 1.5rem;
+  }
+  .blog-card__body h3 {
+    font-size: 1.15rem;
+  }
+  .blog-card__body h3 a:hover {
+    color: var(--color-primary);
+  }
+  .blog-card__body p {
+    margin: 0.8rem 0 1.1rem;
+    color: var(--color-ink-soft);
+    font-size: 0.92rem;
+  }
+</style>

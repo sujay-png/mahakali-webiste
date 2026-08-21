@@ -1,0 +1,63 @@
+---
+import Icon from "../../global/UI/Icon.astro";
+import type { BreadcrumbItem } from "../../../data/products/alen-gold-sofa/breadcrumbs";
+
+export interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav class="breadcrumb-nav">
+  {items.map((item, index) => (
+    <>
+      {item.link ? (
+        <a href={item.link} class="breadcrumb-link">{item.label}</a>
+      ) : (
+        <span class="breadcrumb-current">{item.label}</span>
+      )}
+      {index < items.length - 1 && (
+        <Icon name="chevron-right" class="breadcrumb-separator" />
+      )}
+    </>
+  ))}
+</nav>
+
+<style>
+  .breadcrumb-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-block: 1rem;
+    margin-bottom: 1rem;
+    font-family: var(--font-nav);
+    font-size: 0.875rem; /* text-label-sm */
+    color: #5a413d; /* on-surface-variant */
+  }
+
+  @media (min-width: 768px) {
+    .breadcrumb-nav {
+      margin-bottom: 2rem;
+    }
+  }
+
+  .breadcrumb-link {
+    transition: color 0.2s ease;
+  }
+  
+  .breadcrumb-link:hover {
+    color: #570000; /* primary */
+  }
+
+  .breadcrumb-current {
+    color: #570000; /* primary */
+    font-weight: 600;
+  }
+
+  :global(.breadcrumb-separator) {
+    width: 14px;
+    height: 14px;
+    stroke-width: 2;
+  }
+</style>

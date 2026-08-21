@@ -1,0 +1,78 @@
+---
+import Icon from "../global/UI/Icon.astro";
+import type { trustBar as TrustBarType } from "../../data/home";
+export interface Props {
+  data: typeof TrustBarType;
+}
+const { data } = Astro.props;
+---
+
+<section class="trust-bar">
+  <div class="wrap trust-bar__grid" data-reveal-group>
+    {
+      data.map((item) => (
+        <div class="trust-item" data-reveal="fade">
+          <span class="trust-item__icon">
+            <Icon name={item.icon} class="icon-24" />
+          </span>
+          <span>
+            <strong>{item.title}</strong>
+            <em>{item.copy}</em>
+          </span>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .trust-bar {
+    background: var(--color-walnut);
+  }
+  .trust-bar__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    padding-block: 2rem;
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    color: #f2e9da;
+  }
+  .trust-item__icon {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--color-gold);
+    clip-path: polygon(14% 0, 100% 0, 100% 86%, 86% 100%, 0 100%, 0 14%);
+  }
+  .icon-24 {
+    width: 22px;
+    height: 22px;
+  }
+  .trust-item strong {
+    display: block;
+    font-size: 0.95rem;
+  }
+  .trust-item em {
+    font-style: normal;
+    font-size: 0.8rem;
+    color: rgba(242, 233, 218, 0.65);
+  }
+
+  @media (max-width: 820px) {
+    .trust-bar__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 480px) {
+    .trust-bar__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

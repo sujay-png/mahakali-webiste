@@ -1,0 +1,112 @@
+---
+import Icon from "../global/UI/Icon.astro";
+import type { whyChooseUs as WhyChooseUsType } from "../../data/home";
+export interface Props {
+  data: typeof WhyChooseUsType;
+}
+const { data } = Astro.props;
+---
+
+<section class="section why">
+  <div class="wrap why__grid">
+    <div class="why__visual" data-reveal="left">
+      <div class="chamfer-card why__frame">
+        <img
+          src={data.image.src}
+          alt={data.image.alt}
+          width="700"
+          height="560"
+          loading="lazy"
+        />
+      </div>
+    </div>
+
+    <div class="why__copy" data-reveal="right">
+      <p class="eyebrow">{data.eyebrow}</p>
+      <h2>{data.title}</h2>
+      <p class="why__lead">{data.copy}</p>
+
+      <ul class="why__points" data-reveal-group>
+        {
+          data.points.map((point) => (
+            <li data-reveal="fade">
+              <span class="why__points-icon">
+                <Icon name={point.icon} class="icon-20" />
+              </span>
+              <div>
+                <h3>{point.title}</h3>
+                <p>{point.copy}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .why__grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+  .why__frame {
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  .why__frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 5/4;
+  }
+
+  .why__lead {
+    margin-top: 1.1rem;
+    color: var(--color-ink-soft);
+    max-width: 56ch;
+  }
+
+  .why__points {
+    margin-top: 2.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .why__points li {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .why__points-icon {
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    background: var(--color-cream);
+    color: var(--color-primary);
+    border-radius: 50%;
+  }
+  :global(.icon-20) {
+    width: 20px;
+    height: 20px;
+  }
+  .why__points h3 {
+    font-size: 1.02rem;
+  }
+  .why__points p {
+    margin-top: 0.3rem;
+    color: var(--color-ink-soft);
+    font-size: 0.92rem;
+    max-width: 52ch;
+  }
+
+  @media (max-width: 860px) {
+    .why__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

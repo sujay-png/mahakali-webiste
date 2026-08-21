@@ -1,0 +1,101 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ProductBreadcrumbs from "../../components/Products/ProductDetails/ProductBreadcrumbs.astro";
+import ProductGallery from "../../components/Products/ProductDetails/ProductGallery.astro";
+import ProductInfo from "../../components/Products/ProductDetails/ProductInfo.astro";
+import ProductSpecs from "../../components/Products/ProductDetails/ProductSpecs.astro";
+import RelatedProducts from "../../components/Products/ProductDetails/RelatedProducts.astro";
+
+import { productBreadcrumbs } from "../../data/products/alen-gold-sofa/breadcrumbs";
+import { productHero } from "../../data/products/alen-gold-sofa/hero";
+import { productInfo } from "../../data/products/alen-gold-sofa/info";
+import { productSpecs } from "../../data/products/alen-gold-sofa/specs";
+import { relatedProducts } from "../../data/products/alen-gold-sofa/related";
+---
+
+<Layout 
+  title={`${productInfo.title} | Mahakali Interiors`} 
+  description={productHero.alt}
+>
+  <main class="product-details-page">
+    <div class="content-wrapper">
+      <ProductBreadcrumbs items={productBreadcrumbs} />
+      
+      <div class="product-grid-layout">
+        <!-- Left: Imagery (Hero) -->
+        <div class="gallery-column">
+          <ProductGallery 
+            image={productHero.image} 
+            alt={productHero.alt} 
+            dataAlt={productHero.dataAlt} 
+          />
+        </div>
+        
+        <!-- Right: Product Details -->
+        <div class="info-column">
+          <ProductInfo 
+            title={productInfo.title}
+            rating={productInfo.rating}
+            stars={productInfo.stars}
+            currentPrice={productInfo.currentPrice}
+            originalPrice={productInfo.originalPrice}
+            discountText={productInfo.discountText}
+            discountLabel={productInfo.discountLabel}
+            productCode={productInfo.productCode}
+            sku={productInfo.sku}
+            stockStatus={productInfo.stockStatus}
+          >
+            <!-- Inject Specs directly before Add to Cart -->
+            <ProductSpecs 
+              features={productSpecs.features}
+              specifications={productSpecs.specifications}
+              productCodeRef={productSpecs.productCodeRef}
+            />
+          </ProductInfo>
+        </div>
+      </div>
+      
+      <RelatedProducts products={relatedProducts} />
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .product-details-page {
+    padding-top: 5rem; /* pt-[80px] */
+    padding-bottom: 4rem; /* pb-section-gap */
+  }
+
+  @media (min-width: 768px) {
+    .product-details-page {
+      padding-top: 6.25rem; /* pt-[100px] */
+    }
+  }
+
+  .content-wrapper {
+    max-width: 1450px;
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  .product-grid-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem; /* gap-section-gap */
+    align-items: start;
+  }
+
+  @media (min-width: 1024px) {
+    .product-grid-layout {
+      grid-template-columns: repeat(12, 1fr);
+    }
+
+    .gallery-column {
+      grid-column: span 7;
+    }
+
+    .info-column {
+      grid-column: span 5;
+    }
+  }
+</style>

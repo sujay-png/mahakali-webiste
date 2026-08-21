@@ -1,0 +1,89 @@
+---
+import Icon from "../global/UI/Icon.astro";
+import type { trendingBanner as TrendingBannerType } from "../../data/home";
+export interface Props {
+  data: typeof TrendingBannerType;
+}
+const { data } = Astro.props;
+---
+
+<section class="section section--tight">
+  <div class="wrap">
+    <p class="eyebrow" data-reveal="fade">{data.eyebrow}</p>
+    <div class="trending" data-reveal="scale">
+      <img
+        class="trending__bg"
+        src={data.image}
+        alt="Styled living room with yellow sofa and pendant lights"
+        loading="lazy"
+      />
+      <div class="trending__scrim"></div>
+      <div class="trending__content">
+        <span class="trending__kicker">{data.kicker}</span>
+        <h2>{data.title}</h2>
+        <p>{data.copy}</p>
+        <a class="btn btn-primary" href={data.cta.href}
+          >{data.cta.label} <Icon name="arrow-right" /></a
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .trending {
+    position: relative;
+    min-height: clamp(260px, 40vw, 400px);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% calc(100% - 28px),
+      calc(100% - 28px) 100%,
+      0 100%
+    );
+  }
+  .trending__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .trending__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      100deg,
+      rgba(36, 27, 20, 0.82) 0%,
+      rgba(36, 27, 20, 0.45) 48%,
+      rgba(36, 27, 20, 0.1) 78%
+    );
+  }
+  .trending__content {
+    position: relative;
+    color: #fff;
+    padding: clamp(2rem, 6vw, 4rem);
+    max-width: 480px;
+  }
+  .trending__kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--color-gold);
+  }
+  .trending__content h2 {
+    color: #fff;
+    margin-top: 0.6rem;
+  }
+  .trending__content p {
+    margin-top: 0.9rem;
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 40ch;
+  }
+  .trending__content .btn {
+    margin-top: 1.6rem;
+  }
+</style>

@@ -1,0 +1,88 @@
+---
+import Icon from "../global/UI/Icon.astro";
+---
+
+<section class="collection-cta">
+  <div class="wrap cta-content">
+    <Icon name="chair" class="cta-icon" />
+    <h2 class="font-display cta-title">Commission a Masterpiece</h2>
+    <p class="cta-description">
+      Can't find exactly what you're looking for? Our craftsmen specialize in bespoke upholstery tailored to your exact specifications, fabrics, and dimensions.
+    </p>
+    <a href="/contact" class="cta-btn">
+      Bespoke Consultation
+      <Icon name="arrow-right" class="icon-16" />
+    </a>
+  </div>
+</section>
+
+<style>
+  .collection-cta {
+    padding-block: 4rem; /* section-gap */
+    background-color: #f6f3f2; /* surface-container-low */
+    margin-top: 2rem;
+  }
+
+  .cta-content {
+    max-width: 56rem;
+    margin: 0 auto;
+    padding-inline: var(--gutter, 1.5rem);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  :global(.cta-icon) {
+    width: 36px;
+    height: 36px;
+    color: #7c5730; /* secondary */
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-title {
+    font-size: 2rem;
+    color: #1c1b1b;
+    margin-bottom: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .cta-title {
+      font-size: 2.5rem;
+    }
+  }
+
+  .cta-description {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    color: #5a413d; /* on-surface-variant */
+    margin-bottom: 2rem;
+    max-width: 42rem;
+    line-height: 1.6;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #570000; /* primary */
+    color: #ffffff;
+    padding: 1rem 2rem;
+    border-radius: 0.25rem;
+    font-family: var(--font-nav);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.3s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+  
+  .cta-btn:hover {
+    background: #800000; /* primary-container */
+  }
+
+  :global(.icon-16) {
+    width: 16px;
+    height: 16px;
+  }
+</style>
