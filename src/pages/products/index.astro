@@ -50,20 +50,20 @@ const counts = Object.fromEntries(countsList.map((c) => [c.id, c.count]));
 
 <style>
   .content-wrapper {
-    max-width: 1450px;
-    margin: 2rem auto 0;
+    max-width: var(--max-width);
+    margin: 4.5rem auto 0;
     padding: 0 var(--gutter);
     display: grid;
-    gap: 2rem;
+    gap: 3rem;
   }
   @media (min-width: 1024px) {
-    .content-wrapper { grid-template-columns: 300px 1fr; gap: 3rem; }
+    .content-wrapper { grid-template-columns: 260px 1fr; gap: 4rem; }
   }
   .category-mosaic {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.1rem;
-    padding-bottom: 3rem;
+    gap: 1.6rem;
+    padding-bottom: 5rem;
   }
   @media (min-width: 700px) {
     .category-mosaic { grid-template-columns: 1fr 1fr; }

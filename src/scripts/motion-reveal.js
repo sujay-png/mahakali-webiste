@@ -17,35 +17,26 @@ function revealElement(el, delay = 0) {
   const type = el.getAttribute("data-reveal");
   const from =
     type === "left"
-      ? "translateX(-24px)"
+      ? "translate3d(-32px,0,0)"
       : type === "right"
-        ? "translateX(24px)"
+        ? "translate3d(32px,0,0)"
         : type === "scale"
-          ? "translateY(16px)"
-          : type === "fade"
-            ? "none"
-            : "translateY(18px)";
-
-  markVisible(el);
+          ? "translate3d(0,28px,0)"
+          : "translate3d(0,28px,0)";
 
   animate(
     el,
-    { opacity: [0, 1], transform: from === "none" ? ["none", "none"] : [from, "none"] },
-    { delay, duration: 0.65, easing: [0.22, 1, 0.36, 1] },
-  ).finished.catch(() => {}).then(() => markVisible(el));
+    { opacity: [0, 1], transform: [from, "none"] },
+    { delay, duration: 0.95, easing: [0.16, 1, 0.3, 1] },
+  )
+    .finished.catch(() => {})
+    .then(() => markVisible(el));
 }
 
 function bindInView(el, onEnter) {
   if (!(el instanceof HTMLElement) || el.dataset.motionBound === "true") return;
   el.dataset.motionBound = "true";
-
-  inView(
-    el,
-    () => {
-      onEnter();
-    },
-    { amount: 0.08, margin: "0px 0px -6% 0px" },
-  );
+  inView(el, () => onEnter(), { amount: 0.12, margin: "0px 0px -10% 0px" });
 }
 
 function initMotion() {
@@ -57,7 +48,7 @@ function initMotion() {
   document.querySelectorAll("[data-reveal-group]").forEach((group) => {
     bindInView(group, () => {
       group.querySelectorAll("[data-reveal]").forEach((child, index) => {
-        revealElement(child, index * 0.06);
+        revealElement(child, index * 0.09);
       });
     });
   });

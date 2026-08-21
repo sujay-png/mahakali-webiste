@@ -1,16 +1,14 @@
 ---
 import Icon from "../UI/Icon.astro";
-import { siteInfo, mainNav } from "../../../data/site";
+import { mainNav } from "../../../data/site";
 ---
 
 <header class="site-header">
   <div class="header__inner">
-    {/* Logo */}
     <a href="/" class="brand">
       <img src="/images/new-logo.png" alt="Mahakali Furnishing" class="brand-logo-img" />
     </a>
 
-    {/* Navigation */}
     <nav class="nav" id="primary-nav" aria-label="Primary">
       <ul>
         {
@@ -42,15 +40,8 @@ import { siteInfo, mainNav } from "../../../data/site";
       </ul>
     </nav>
 
-    {/* Actions */}
     <div class="header__actions">
-      <button class="icon-action search-btn" aria-label="Search"
-        ><Icon name="search" class="icon-22" /></button
-      >
-      <button class="icon-action cart-btn" aria-label="Cart"
-        ><Icon name="bag" class="icon-22" /></button
-      >
-      <a href="/contact/" class="btn-inquiry"> Inquire </a>
+      <a href="/contact/" class="btn-inquiry">Enquire</a>
       <button
         class="icon-action nav-toggle"
         aria-label="Open menu"
@@ -69,243 +60,130 @@ import { siteInfo, mainNav } from "../../../data/site";
     position: sticky;
     top: 0;
     z-index: 50;
-     background: rgba(243, 238, 228, 0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid transparent;
-    border-bottom: 1px solid rgba(139, 74, 59, 0.1);
-    border-radius: 0;
-    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    max-width: 100%;
-    width: 100%;
-    margin: 0 auto;
-  }
-
-  .site-header.is-scrolled {
-    top: 15px;
-    background: rgba(243, 238, 228, 0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(139, 74, 59, 0.15);
-    border-radius: 10px;
-    max-width: 1450px;
-    width: calc(100% - 30px);
+    background: rgba(247, 243, 238, 0.88);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(42, 34, 28, 0.06);
   }
 
   .header__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-block: 16px; 
-    padding-inline: clamp(1.5rem, 3vw, 2.5rem);
-    max-width: 1450px;
+    padding-block: 1.05rem;
+    padding-inline: var(--gutter);
+    max-width: 1320px;
     margin: 0 auto;
-    transition: padding-block 0.4s ease;
-  }
-
-  .site-header.is-scrolled .header__inner {
-    padding-block: 10px;
   }
 
   .brand-logo-img {
-  height: 59px;
+    height: 42px;
     width: auto;
     object-fit: contain;
-    mix-blend-mode: multiply;  /* Helps hide the white background if the header isn't pure white */
+    mix-blend-mode: multiply;
   }
 
   .nav ul {
     display: flex;
     align-items: center;
-    gap: 40px; /* evenly spaced ~40px */
+    gap: 2.2rem;
   }
-  .nav > ul > li {
-    position: relative;
-  }
+  .nav > ul > li { position: relative; }
   .nav > ul > li > a {
     display: inline-flex;
     align-items: center;
     gap: 0.3rem;
-    font-family: var(--font-nav);
-    font-weight: 500;
-    font-size: 1.05rem;
-    color: #1a1a1a; /* black/near-black */
-    padding-block: 0.2rem;
-    position: relative;
-    text-underline-offset: 6px;
-    transition: color 0.2s ease;
-    text-decoration: none;
+    font-weight: 400;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-ink);
+    padding-block: 0.35rem;
   }
+  .nav > ul > li > a:hover,
+  .nav > ul > li > a.is-active { color: var(--color-primary); }
 
-  .nav > ul > li > a:hover {
-    color: #8b4a3b;
-  }
-
-  .nav > ul > li > a.is-active {
-    font-weight: 600;
-    text-decoration: underline;
-    text-decoration-color: #8b4a3b;
-    text-decoration-thickness: 1.5px;
-  }
-
-  .caret {
-    transition: transform 0.3s ease;
-    margin-top: -1px;
-  }
+  .caret { transition: transform 0.35s var(--ease); }
   .has-children:hover .caret,
   .has-children:focus-within .caret,
-  .has-children.is-open .caret {
-    transform: rotate(180deg);
-  }
-
+  .has-children.is-open .caret { transform: rotate(180deg); }
   .has-children::after {
     content: "";
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
-    height: 20px;
+    height: 18px;
   }
 
   .nav .dropdown {
     position: absolute;
     top: 100%;
     left: 0;
-    transform: translateY(10px);
-    background: rgba(243, 238, 228, 0.97);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    transform: translateY(12px);
+    background: rgba(247, 243, 238, 0.97);
+    backdrop-filter: blur(18px);
     border: 1px solid var(--color-line);
-    border-radius: 14px;
-    padding: 8px 0;
-    min-width: 260px;
+    padding: 0.7rem 0;
+    min-width: 240px;
     max-height: min(70vh, 480px);
     overflow-y: auto;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    list-style: none;
+    box-shadow: var(--shadow-md);
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.4s var(--ease);
     pointer-events: none;
     z-index: 1050;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    align-items: stretch;
   }
   .has-children:hover .dropdown,
   .has-children:focus-within .dropdown,
   .has-children.is-open .dropdown {
     opacity: 1;
     visibility: visible;
-    transform: translateY(4px);
+    transform: translateY(6px);
     pointer-events: auto;
   }
-
-  .dropdown li {
-    width: 100%;
-  }
-
   .dropdown li a {
     display: block;
-    padding: 10px 20px;
-    color: #1a1a1a;
-    font-family: var(--font-nav);
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-    transition:
-      background 0.2s ease,
-      color 0.2s ease;
-    white-space: nowrap;
+    padding: 0.55rem 1.2rem;
+    font-size: 0.82rem;
   }
-  .dropdown li a:hover {
-    background: rgba(139, 74, 59, 0.05);
-    color: #8b4a3b;
-    font-weight: 700;
-  }
+  .dropdown li a:hover { color: var(--color-primary); }
 
-  .header__actions {
-    display: flex;
-    align-items: center;
-    gap: 1.2rem; /* evenly spaced icons */
-  }
-
+  .header__actions { display: flex; align-items: center; gap: 0.8rem; }
   .btn-inquiry {
-    position: relative;
-    background: #8b4a3b; /* solid rust-brown fill */
-    color: #ffffff; /* white serif text */
-    font-family: var(--font-nav);
-    font-size: 0.95rem;
-    font-weight: 500;
-    padding: 0.65rem 1.8rem; /* generous horizontal padding */
-    border-radius: 9999px; /* fully rounded corners (pill) */
-    text-decoration: none;
-    transition:
-      background 0.2s ease,
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
-    margin-left: 0.8rem;
+    border: 1px solid rgba(42, 34, 28, 0.18);
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 0.7rem 1.3rem;
+    border-radius: 999px;
+    transition: background 0.35s var(--ease), color 0.35s var(--ease), border-color 0.35s var(--ease);
   }
   .btn-inquiry:hover {
-    background: #733c30;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(139, 74, 59, 0.3);
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
   }
-
-  .cart-btn {
-    /* removed margin-left since it's no longer the last item */
-  }
-
-  .icon-action {
-    display: grid;
-    place-items: center;
-    color: #1a1a1a;
-    transition: color 0.2s ease;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-  }
-  .icon-action:hover {
-    color: #8b4a3b;
-  }
-  .icon-22 {
-    width: 22px;
-    height: 22px;
-  }
-  .icon-22 {
-    width: 22px;
-    height: 22px;
-  }
-  .nav-toggle {
-    display: none;
-  }
+  .icon-action { display: grid; place-items: center; cursor: pointer; }
+  .icon-22 { width: 22px; height: 22px; }
+  .nav-toggle { display: none; }
 
   @media (max-width: 960px) {
     .nav {
       position: fixed;
       inset: 0 0 0 auto;
-      width: min(320px, 85vw);
-      background: #f3eee4;
+      width: min(320px, 86vw);
+      background: var(--color-bg);
       transform: translateX(100%);
-      transition: transform 0.3s var(--ease);
+      transition: transform 0.45s var(--ease);
       box-shadow: var(--shadow-lg);
-      padding: 5rem 1.5rem 2rem;
+      padding: 5.5rem 1.8rem 2rem;
       overflow-y: auto;
     }
-    .nav.is-open {
-      transform: translateX(0);
-    }
-    .nav ul {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
-      width: 100%;
-    }
-    .nav > ul > li {
-      width: 100%;
-    }
+    .nav.is-open { transform: translateX(0); }
+    .nav ul { flex-direction: column; align-items: flex-start; gap: 1.1rem; width: 100%; }
+    .nav > ul > li { width: 100%; }
     .dropdown {
       position: static;
       box-shadow: none;
@@ -315,28 +193,20 @@ import { siteInfo, mainNav } from "../../../data/site";
       visibility: visible;
       transform: none;
       display: none;
-      padding-left: 1rem;
     }
-    .has-children.is-open .dropdown {
-      display: block;
-    }
-    .nav-toggle {
-      display: grid;
-    }
-    .btn-inquiry {
-      display: none;
-    }
+    .has-children.is-open .dropdown { display: block; }
+    .nav-toggle { display: grid; }
+    .btn-inquiry { display: none; }
   }
 </style>
 
 <script>
   const toggle = document.getElementById("nav-toggle");
   const nav = document.getElementById("primary-nav");
-  const header = document.querySelector('.site-header');
+  const header = document.querySelector(".site-header");
 
   function syncHeaderState() {
-    const shouldScroll = window.scrollY > 20;
-    header?.classList.toggle('is-scrolled', shouldScroll);
+    header?.classList.toggle("is-scrolled", window.scrollY > 12);
   }
 
   function initHeader() {
@@ -358,11 +228,9 @@ import { siteInfo, mainNav } from "../../../data/site";
   }
 
   initHeader();
-  document.addEventListener('astro:page-load', () => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
+  document.addEventListener("astro:page-load", () => {
     initHeader();
     syncHeaderState();
   });
-
-  window.addEventListener('scroll', syncHeaderState, { passive: true });
+  window.addEventListener("scroll", syncHeaderState, { passive: true });
 </script>

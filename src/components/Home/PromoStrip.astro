@@ -40,27 +40,18 @@ const { data } = Astro.props;
   .promo-strip__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    gap: 1.75rem;
   }
   .promo-card {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
-    padding: 1.8rem;
+    gap: 1.4rem;
+    padding: 2.4rem 2rem;
     overflow: hidden;
-    min-height: 190px;
-    clip-path: polygon(
-      var(--chamfer) 0,
-      100% 0,
-      100% 100%,
-      0 100%,
-      0 var(--chamfer)
-    );
-    transition:
-      transform 0.3s var(--ease),
-      box-shadow 0.3s var(--ease);
+    min-height: 220px;
+    transition: transform 0.7s var(--ease);
   }
   .promo-card:hover {
     transform: translateY(-5px);

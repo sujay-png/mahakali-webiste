@@ -2,7 +2,6 @@
 export const prerender = false;
 
 import Layout from "../layouts/Layout.astro";
-import GrainDivider from "../components/global/UI/GrainDivider.astro";
 
 import Hero from "../components/Home/Hero.astro";
 import TopCategories from "../components/Home/TopCategories.astro";
@@ -15,8 +14,6 @@ import DealBanner from "../components/Home/DealBanner.astro";
 import ProductLists from "../components/Home/ProductLists.astro";
 import Gallery from "../components/Home/Gallery.astro";
 import Testimonials from "../components/Home/Testimonials.astro";
-import BlogSection from "../components/Home/BlogSection.astro";
-import InstagramStrip from "../components/Home/InstagramStrip.astro";
 
 import {
   heroSlides,
@@ -29,8 +26,6 @@ import {
   dealBanner,
   gallery,
   testimonials,
-  blogSection,
-  instagramStrip,
 } from "../data/home";
 import { getHomeShelves } from "../lib/woocommerce/catalog";
 
@@ -63,24 +58,13 @@ const liveProductLists = {
     <Hero slides={heroSlides} />
     <TopCategories data={topCategories} />
     <PromoStrip data={promoStrip} />
-
-    <GrainDivider variant="cream" />
     <TrendingBanner data={trendingBanner} />
-    <GrainDivider variant="cream" flip />
-
     <TrustBar data={trustBar} />
-
     <WhyChooseUs data={whyChooseUs} />
     <AboutSection data={aboutSection} />
-
     <DealBanner data={dealBanner} />
     <ProductLists data={liveProductLists} />
-
-    <GrainDivider variant="cream" />
     <Gallery data={gallery} />
-
     <Testimonials data={testimonials} />
-    <BlogSection data={blogSection} />
-    <InstagramStrip data={instagramStrip} />
   </main>
 </Layout>

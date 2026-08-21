@@ -22,7 +22,7 @@ const { label, title, description, image } = Astro.props;
 <style>
   .collection-hero {
     position: relative;
-    min-height: 52vh;
+    min-height: 42vh;
     display: grid;
     place-items: center;
     overflow: hidden;
@@ -50,24 +50,25 @@ const { label, title, description, image } = Astro.props;
     position: relative;
     z-index: 2;
     text-align: center;
-    max-width: 44rem;
-    padding: 7rem 1.25rem 4.5rem;
+    padding: 8rem 1.25rem 5rem;
+    max-width: 40rem;
   }
 
   .hero-label {
     display: block;
     font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
+    font-weight: 400;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: #f6e6c2;
     margin-bottom: 0.9rem;
   }
 
   .hero-title {
-    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-size: clamp(2.6rem, 5vw, 4.4rem);
+    font-weight: 400;
     color: #fff;
-    margin-bottom: 1rem;
+    margin-bottom: 1.1rem;
   }
 
   .hero-description {
