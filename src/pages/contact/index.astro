@@ -1,12 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-
-// Components
 import ContactHero from "../../components/Contact/ContactHero.astro";
 import ContactShowrooms from "../../components/Contact/ContactShowrooms.astro";
 import ContactForm from "../../components/Contact/ContactForm.astro";
-
-// Data
 import { contactHero, showrooms } from "../../data/contact/data";
 ---
 
@@ -15,16 +11,7 @@ import { contactHero, showrooms } from "../../data/contact/data";
   description="Get in touch with Mahakali Interiors for elegant spaces and timeless furniture."
   path="/contact"
 >
-  <Fragment slot="head">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-    <style>
-      .material-symbols-outlined {
-        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-      }
-    </style>
-  </Fragment>
-
-  <main style="padding-top: 2rem; padding-bottom: 4rem;">
+  <main>
     <ContactHero data={contactHero} />
     <ContactShowrooms data={showrooms} />
     <ContactForm />

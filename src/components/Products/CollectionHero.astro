@@ -5,75 +5,15 @@ export interface Props {
   description: string;
   image: string;
 }
-
 const { label, title, description, image } = Astro.props;
 ---
 
-<section class="collection-hero">
-  <img class="hero-photo" src={image} alt="" />
-  <div class="overlay"></div>
-  <div class="wrap hero-content">
-    <span class="hero-label">{label}</span>
-    <h1 class="font-display hero-title">{title}</h1>
-    <p class="hero-description">{description}</p>
+<section class="page-hero" aria-label={title}>
+  <img src={image} alt="" />
+  <div class="veil"></div>
+  <div class="wrap copy">
+    <p class="eyebrow light">{label}</p>
+    <h1>{title}</h1>
+    <p>{description}</p>
   </div>
 </section>
-
-<style>
-  .collection-hero {
-    position: relative;
-    min-height: 42vh;
-    display: grid;
-    place-items: center;
-    overflow: hidden;
-    background: #2c1600;
-  }
-
-  .hero-photo {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: scale(1.04);
-  }
-
-  .overlay {
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(180deg, rgba(44, 22, 0, 0.15), rgba(44, 22, 0, 0.72)),
-      radial-gradient(circle at 20% 20%, rgba(124, 87, 48, 0.25), transparent 40%);
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    padding: 8rem 1.25rem 5rem;
-    max-width: 40rem;
-  }
-
-  .hero-label {
-    display: block;
-    font-size: 0.8rem;
-    font-weight: 400;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: #f6e6c2;
-    margin-bottom: 0.9rem;
-  }
-
-  .hero-title {
-    font-size: clamp(2.6rem, 5vw, 4.4rem);
-    font-weight: 400;
-    color: #fff;
-    margin-bottom: 1.1rem;
-  }
-
-  .hero-description {
-    color: rgba(255, 255, 255, 0.88);
-    font-size: 1.08rem;
-    line-height: 1.65;
-  }
-</style>

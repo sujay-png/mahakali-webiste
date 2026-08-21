@@ -14,6 +14,7 @@ import DealBanner from "../components/Home/DealBanner.astro";
 import ProductLists from "../components/Home/ProductLists.astro";
 import Gallery from "../components/Home/Gallery.astro";
 import Testimonials from "../components/Home/Testimonials.astro";
+import ShowroomCTA from "../components/Home/ShowroomCTA.astro";
 
 import {
   heroSlides,
@@ -56,15 +57,16 @@ const liveProductLists = {
 >
   <main>
     <Hero slides={heroSlides} />
+    <TrustBar data={trustBar} />
     <TopCategories data={topCategories} />
     <PromoStrip data={promoStrip} />
     <TrendingBanner data={trendingBanner} />
-    <TrustBar data={trustBar} />
     <WhyChooseUs data={whyChooseUs} />
     <AboutSection data={aboutSection} />
     <DealBanner data={dealBanner} />
     <ProductLists data={liveProductLists} />
     <Gallery data={gallery} />
     <Testimonials data={testimonials} />
+    <ShowroomCTA />
   </main>
 </Layout>

@@ -1,100 +1,48 @@
 ---
 import Icon from "../global/UI/Icon.astro";
 import type { promoStrip as PromoStripType } from "../../data/home";
-export interface Props {
-  data: typeof PromoStripType;
-}
+export interface Props { data: typeof PromoStripType; }
 const { data } = Astro.props;
 ---
 
-<section class="section section--tight promo-strip">
-  <div class="wrap promo-strip__grid" data-reveal-group>
-    {
-      data.map((promo) => (
-        <a
-          href={promo.cta.href}
-          class={`promo-card promo-card--${promo.theme}`}
-          data-reveal="fade"
-        >
-          <div class="promo-card__text">
-            <span class="promo-card__tag">{promo.tag}</span>
-            <h3>{promo.title}</h3>
-            <span class="link-arrow">
-              {promo.cta.label} <Icon name="arrow-right" />
-            </span>
-          </div>
-          <img
-            src={promo.image}
-            alt={promo.title}
-            width="220"
-            height="220"
-            loading="lazy"
-          />
-        </a>
-      ))
-    }
+<section class="band">
+  <div class="wrap wrap--wide grid" data-reveal-group>
+    {data.map((promo) => (
+      <a href={promo.cta.href} class="tile" data-reveal="fade">
+        <span data-media class="tile__media">
+          <img src={promo.image} alt={promo.title} loading="lazy" />
+        </span>
+        <span class="tile__copy">
+          <small>{promo.tag}</small>
+          <strong class="font-display">{promo.title}</strong>
+          <em class="link-arrow">{promo.cta.label} <Icon name="arrow-right" /></em>
+        </span>
+      </a>
+    ))}
   </div>
 </section>
 
 <style>
-  .promo-strip__grid {
+  .band { padding-bottom: clamp(4rem, 8vw, 7rem); }
+  .grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.75rem;
+    grid-template-columns: 1.2fr 0.9fr 0.9fr;
+    gap: 1.1rem;
   }
-  .promo-card {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.4rem;
-    padding: 2.4rem 2rem;
-    overflow: hidden;
-    min-height: 220px;
-    transition: transform 0.7s var(--ease);
-  }
-  .promo-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-md);
-  }
-  .promo-card--blush {
-    background: #f6e2da;
-  }
-  .promo-card--sand {
-    background: #f3e6cd;
-  }
-  .promo-card--sky {
-    background: #dbe9f0;
-  }
-
-  .promo-card__tag {
-    display: inline-block;
-    font-size: 0.7rem;
-    font-weight: 700;
+  .tile { display: grid; gap: 1.1rem; }
+  .tile:first-child { grid-row: span 1; }
+  .tile__media { aspect-ratio: 4 / 5; }
+  .tile:first-child .tile__media { aspect-ratio: 4 / 5; }
+  .tile__copy { display: grid; gap: 0.35rem; }
+  .tile__copy small {
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
-    background: var(--color-primary);
-    color: #fff;
-    padding: 0.25rem 0.6rem;
-    margin-bottom: 0.7rem;
+    font-size: 0.66rem;
+    color: var(--color-gold);
   }
-  .promo-card h3 {
-    font-size: 1.2rem;
-    margin-bottom: 0.9rem;
-    max-width: 20ch;
-  }
-  .promo-card img {
-    width: 96px;
-    height: 96px;
-    object-fit: cover;
-    border-radius: 50%;
-    box-shadow: var(--shadow-sm);
-    flex-shrink: 0;
-  }
-
+  .tile__copy strong { font-size: 1.8rem; font-weight: 400; }
   @media (max-width: 860px) {
-    .promo-strip__grid {
-      grid-template-columns: 1fr;
-    }
+    .grid { grid-template-columns: 1fr; }
+    .tile__media { aspect-ratio: 16 / 10; }
   }
 </style>

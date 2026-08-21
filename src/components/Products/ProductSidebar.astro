@@ -12,7 +12,8 @@ const { counts = {}, activeSlug } = Astro.props;
 
 <aside class="product-sidebar">
   <div class="widget">
-    <h4 class="widget-title">Search this page</h4>
+    <p class="eyebrow">Look up</p>
+    <h4 class="widget-title font-display">Search this page</h4>
     <div class="search-input-wrap">
       <input type="text" placeholder="Search by name" class="search-input" id="product-search-input" />
       <Icon name="search" class="search-icon" />
@@ -20,7 +21,8 @@ const { counts = {}, activeSlug } = Astro.props;
   </div>
 
   <div class="widget">
-    <h4 class="widget-title">Collections</h4>
+    <p class="eyebrow">Atelier</p>
+    <h4 class="widget-title font-display">Collections</h4>
     <ul class="category-list">
       <li>
         <a href="/products" class={`category-item ${!activeSlug ? "is-active" : ""}`}>
@@ -34,7 +36,7 @@ const { counts = {}, activeSlug } = Astro.props;
             class={`category-item ${activeSlug === cat.slug ? "is-active" : ""}`}
           >
             <span class="cat-name">{cat.navLabel}</span>
-            <span class="cat-count">({counts[cat.id] ?? "—"})</span>
+            <span class="cat-count">{counts[cat.id] ?? "—"}</span>
           </a>
         </li>
       ))}
@@ -43,67 +45,41 @@ const { counts = {}, activeSlug } = Astro.props;
 </aside>
 
 <style>
-  .product-sidebar { display: grid; gap: 1.25rem; }
-
-  .widget {
-    background: #fff;
-    padding: 1.4rem;
-    border-radius: 16px;
-    border: 1px solid rgba(226, 191, 185, 0.28);
-    box-shadow: 0 8px 24px rgba(44, 22, 0, 0.04);
-  }
-
-  .widget-title {
-    font-family: var(--font-display);
-    font-size: 1.35rem;
-    margin-bottom: 0.9rem;
-  }
-
+  .product-sidebar { display: grid; gap: 3rem; }
+  .widget-title { font-size: 1.7rem; margin: 0.7rem 0 1.2rem; }
   .search-input-wrap { position: relative; }
-
   .search-input {
     width: 100%;
     background: transparent;
-    border: 1px solid rgba(226, 191, 185, 0.45);
-    border-radius: 10px;
-    padding: 0.75rem 1rem;
-    padding-right: 2.5rem;
+    border: none;
+    border-bottom: 1px solid var(--color-line);
+    padding: 0.75rem 2rem 0.75rem 0;
     outline: none;
   }
-  .search-input:focus { border-color: #570000; }
-
+  .search-input:focus { border-bottom-color: var(--color-ink); }
   :global(.search-icon) {
     position: absolute;
-    right: 0.75rem;
+    right: 0;
     top: 50%;
     transform: translateY(-50%);
-    width: 18px;
-    height: 18px;
-    color: #570000;
+    width: 16px;
+    height: 16px;
+    color: var(--color-gold);
     pointer-events: none;
   }
-
-  .category-list { display: flex; flex-direction: column; gap: 0.15rem; }
-
+  .category-list { display: flex; flex-direction: column; }
   .category-item {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
     gap: 0.5rem;
-    padding: 0.55rem 0.4rem;
-    border-radius: 8px;
-    color: #5a413d;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--color-line);
+    color: var(--color-ink-soft);
   }
   .category-item:hover,
-  .category-item.is-active {
-    background: rgba(87, 0, 0, 0.05);
-    color: #570000;
-  }
-
-  .cat-name {
-    font-size: 0.86rem;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-  }
-  .cat-count { font-size: 0.8rem; opacity: 0.7; }
+  .category-item.is-active { color: var(--color-ink); }
+  .category-item.is-active .cat-name { font-style: italic; font-family: var(--font-display); font-size: 1.15rem; }
+  .cat-name { font-size: 0.92rem; }
+  .cat-count { font-size: 0.72rem; letter-spacing: 0.12em; }
 </style>

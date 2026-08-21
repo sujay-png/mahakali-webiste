@@ -9,100 +9,28 @@ import ReturnsHero from "../../components/Returns/ReturnsHero.astro";
   path="/returns"
 >
   <main class="returns-page">
-    <ReturnsHero 
-      title="Returns Policy" 
+    <ReturnsHero
+      title="Returns Policy"
       subtitle="We want you to love your furniture. Here is everything you need to know about our return and exchange process."
     />
-    
-    <section class="policy-section wrap section">
-      <div class="policy-container">
-        <h2 class="font-display">Our Returns Policy</h2>
-        
-        <ol class="returns-list">
-          <li>Furniture, sofas, and custom curtains are non-returnable once delivered, except in cases of manufacturing defects or damage during transport.</li>
-          <li>Customers must report any defect or issue within 48 hours of delivery, along with clear image/video proof.</li>
-          <li>Eligible returns will be picked up and inspected by our support team before approval.</li>
-          <li>Refunds (if applicable) will be processed within 7-14 working days after inspection and approval.</li>
-          <li>Slight differences in color, polish shade, stitching, or texture are normal variations and not considered defects.</li>
-          <li>Products damaged due to mishandling, water exposure, rough usage, or unauthorized alterations after delivery will not be eligible for return or refund.</li>
-          <li>Minor variations in natural materials or screen display differences are not considered defects.</li>
-          <li>Normal wear and tear after delivery — scratches, wrinkles, cushion softening — is not a valid reason for return.</li>
-          <li>Refunds for online payments will be issued to the original method. COD refunds will be processed to the customer's bank account.</li>
-          <li>If the customer refuses delivery without a valid reason, delivery and handling charges will be deducted from the refund.</li>
-          <li>Incorrect product selection (wrong size, color, material) is not eligible for return.</li>
-          <li>Products requiring assembly must be assembled only by authorized technicians. Self-installation damage voids return eligibility.</li>
-          <li>Replacement depends on stock availability. If unavailable, alternatives or refunds will be offered.</li>
-        </ol>
-      </div>
+
+    <section class="policy-prose wrap">
+      <h2>Our returns policy</h2>
+      <ol class="returns-list">
+        <li>Furniture, sofas, and custom curtains are non-returnable once delivered, except in cases of manufacturing defects or damage during transport.</li>
+        <li>Customers must report any defect or issue within 48 hours of delivery, along with clear image/video proof.</li>
+        <li>Eligible returns will be picked up and inspected by our support team before approval.</li>
+        <li>Refunds (if applicable) will be processed within 7-14 working days after inspection and approval.</li>
+        <li>Slight differences in color, polish shade, stitching, or texture are normal variations and not considered defects.</li>
+        <li>Products damaged due to mishandling, water exposure, rough usage, or unauthorized alterations after delivery will not be eligible for return or refund.</li>
+        <li>Minor variations in natural materials or screen display differences are not considered defects.</li>
+        <li>Normal wear and tear after delivery — scratches, wrinkles, cushion softening — is not a valid reason for return.</li>
+        <li>Refunds for online payments will be issued to the original method. COD refunds will be processed to the customer's bank account.</li>
+        <li>If the customer refuses delivery without a valid reason, delivery and handling charges will be deducted from the refund.</li>
+        <li>Incorrect product selection (wrong size, color, material) is not eligible for return.</li>
+        <li>Products requiring assembly must be assembled only by authorized technicians. Self-installation damage voids return eligibility.</li>
+        <li>Replacement depends on stock availability. If unavailable, alternatives or refunds will be offered.</li>
+      </ol>
     </section>
   </main>
 </Layout>
-
-<style>
-  .policy-section {
-    padding-top: 5rem;
-    padding-bottom: 8rem;
-  }
-  .policy-container {
-    max-width: 800px;
-    margin: 0 auto;
-    background: var(--color-surface);
-    padding: 3rem;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--color-line);
-    box-shadow: var(--shadow-sm);
-  }
-  @media (max-width: 600px) {
-    .policy-container {
-      padding: 1.5rem;
-    }
-  }
-  
-  .policy-container p {
-    color: var(--color-ink-soft);
-    line-height: 1.7;
-    margin-bottom: 1.25rem;
-    font-size: 1.05rem;
-  }
-  
-  .policy-container h2 {
-    color: var(--color-primary);
-    font-size: 2.25rem;
-    margin-bottom: 1.5rem;
-    border-bottom: 2px solid var(--color-line);
-    padding-bottom: 0.75rem;
-  }
-  
-  .policy-container h3 {
-    color: var(--color-primary-dark);
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    margin-top: 3rem;
-  }
-  
-  .policy-container ul,
-  .policy-container ol {
-    padding-left: 1.5rem;
-    margin-bottom: 1.5rem;
-    color: var(--color-ink-soft);
-  }
-  
-  .policy-container ul {
-    list-style-type: disc;
-  }
-  
-  .policy-container ol {
-    list-style-type: decimal;
-  }
-  
-  .policy-container li {
-    margin-bottom: 1rem;
-    line-height: 1.6;
-    font-size: 1.05rem;
-  }
-  
-  .policy-container strong {
-    color: var(--color-ink);
-    font-weight: 700;
-  }
-</style>

@@ -1,0 +1,28 @@
+---
+import Icon from "../global/UI/Icon.astro";
+---
+
+<section class="cta">
+  <div class="wrap" data-reveal="fade">
+    <p class="eyebrow light">Come experience it</p>
+    <h2>Let’s create a space you’ll love coming home to.</h2>
+    <p>Visit the Mahakali showrooms in Udupi and Kundapura — sit, feel the grain, and choose with our team beside you.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="/contact">Get in touch <Icon name="arrow-right" /></a>
+      <a class="btn btn-ghost-light" href="/about">Our story</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    background: var(--color-walnut);
+    color: #f4efe8;
+    padding-block: clamp(5.5rem, 10vw, 9rem);
+  }
+  .eyebrow.light, .eyebrow.light::before { color: #e4c9a4; }
+  .eyebrow.light::before { background: #e4c9a4; }
+  h2 { color: #fff; max-width: 14ch; margin: 1.1rem 0 1.3rem; }
+  p { max-width: 38ch; color: rgba(244,239,232,0.72); font-weight: 300; margin-bottom: 2.2rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+</style>

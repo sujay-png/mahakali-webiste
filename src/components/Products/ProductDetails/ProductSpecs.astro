@@ -43,6 +43,8 @@ const { features, specifications, descriptionHtml = "", productCodeRef } = Astro
 <script>
   function bindTabs() {
     document.querySelectorAll("[data-tabs]").forEach((root) => {
+      if (!(root instanceof HTMLElement) || root.dataset.bound === "true") return;
+      root.dataset.bound = "true";
       const buttons = root.querySelectorAll<HTMLButtonElement>("[data-tab]");
       const panels = root.querySelectorAll<HTMLElement>("[data-panel]");
       buttons.forEach((button) => {
@@ -77,14 +79,14 @@ const { features, specifications, descriptionHtml = "", productCodeRef } = Astro
     color: #8a746f;
     border-bottom: 2px solid transparent;
   }
-  .tab-btn.active { color: #570000; border-bottom-color: #570000; }
+  .tab-btn.active { color: var(--color-ink); border-bottom-color: var(--color-ink); }
 
   .rich-text :global(p) { margin-bottom: 0.8rem; color: #5a413d; line-height: 1.7; }
   .rich-text :global(ul) { padding-left: 1.1rem; color: #5a413d; }
   .features-list { display: grid; gap: 0.45rem; }
   .feature-item { display: flex; gap: 0.5rem; color: #5a413d; }
   .bullet {
-    width: 6px; height: 6px; border-radius: 50%; background: #570000; margin-top: 0.55rem; flex-shrink: 0;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--color-gold); margin-top: 0.55rem; flex-shrink: 0;
   }
   .specs-list { display: grid; gap: 0.55rem; }
   .spec-row {

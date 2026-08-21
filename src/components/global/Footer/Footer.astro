@@ -1,287 +1,96 @@
 ---
 import Icon from "../UI/Icon.astro";
-import {
-  siteInfo,
-  topBar,
-  branches,
-  quickLinks,
-  supportCenter,
-  footerNote,
-} from "../../../data/site";
+import { siteInfo, topBar, branches, footerNote, mainNav } from "../../../data/site";
+
+const nav = mainNav.filter((item) => !item.children);
 ---
 
-<footer class="site-footer">
-  <div class="wrap footer__grid">
-    <!-- Brand Column -->
-    <div class="footer__col footer__brand">
-      <a href="/" class="brand brand--light">
-        <span class="brand__text">
-          <img
-            src="/images/new-logo.png"
-            alt={siteInfo.name}
-            class="footer__logo"
-          />
-        </span>
-      </a>
+<footer class="footer">
+  <div class="wrap wrap--wide top">
+    <div>
+      <img src="/images/new-logo.png" alt={siteInfo.name} class="logo" />
       <p>{siteInfo.description}</p>
-      <div class="footer__social">
-        {
-          topBar.social.map((s) => (
-            <a
-              href={s.href}
-              aria-label={s.label}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Icon name={s.icon} class="icon-16" />
-            </a>
-          ))
-        }
-      </div>
     </div>
-
-    <!-- Quick Links Column -->
-    <div class="footer__col">
-      <h3>Quick Links</h3>
-      <ul class="footer__links">
-        {
-          quickLinks.map((link) => (
-            <li>
-              <a href={link.href}>{link.label}</a>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-
-    <!-- Support Center Column -->
-    <div class="footer__col">
-      <h3>Support Center</h3>
-      <ul class="footer__links">
-        {
-          supportCenter.map((link) => (
-            <li>
-              <a href={link.href}>{link.label}</a>
-            </li>
-          ))
-        }
-      </ul>
-      <a href={`mailto:${siteInfo.email}`} class="footer__mail">
-        <Icon name="mail" class="icon-14" />
-        <span>{siteInfo.email}</span>
-      </a>
-    </div>
-  </div>
-
-  <!-- Branches Row (Single Compact Row) -->
-  <div class="wrap footer__branches-section">
-    <h3>Our Branches</h3>
-    <ul class="footer__branches">
-      {
-        branches.map((b) => (
-          <li class="footer__branch-item">
+    <div>
+      <p class="label">Visit</p>
+      <ul>
+        {branches.map((b) => (
+          <li>
             <strong>{b.name}</strong>
-            {b.lines.map((line) => (
-              <span>{line}</span>
-            ))}
-            <a href={`tel:${b.phone.replace(/\s/g, "")}`}>
-              <Icon name="phone" class="icon-14" />
-              <span>{b.phone}</span>
-            </a>
+            <span>{b.lines.join(" ")}</span>
+            <a href={`tel:${b.phone.replace(/\s/g, "")}`}>{b.phone}</a>
           </li>
-        ))
-      }
-    </ul>
+        ))}
+      </ul>
+    </div>
+    <div>
+      <p class="label">Navigate</p>
+      <ul class="links">
+        {nav.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+        <li><a href="/products">Collections</a></li>
+        <li><a href="/faq">FAQs</a></li>
+        <li><a href="/terms">Terms</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+      </ul>
+    </div>
   </div>
-
-  <div class="footer__bottom">
-    <div class="wrap footer__bottom-inner">
-      <p>{footerNote}</p>
+  <div class="wrap wrap--wide bottom">
+    <p>{footerNote}</p>
+    <div class="social">
+      {topBar.social.map((s) => (
+        <a href={s.href} aria-label={s.label} target="_blank" rel="noopener noreferrer">
+          <Icon name={s.icon} class="icon-16" />
+        </a>
+      ))}
     </div>
   </div>
 </footer>
 
 <style>
-  .site-footer {
-    background: var(--color-ink);
-    color: rgba(242, 233, 218, 0.82);
-    font-size: 0.85rem;
+  .footer {
+    background: #1b1512;
+    color: rgba(244, 239, 232, 0.72);
+    padding-top: 5.5rem;
   }
-
-  /* Compact Grid */
-  .footer__grid {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr;
-    gap: 3.5rem;
-    padding-top: 5rem;
-    padding-bottom: 3rem;
-  }
-
-  .footer__logo {
-    height: 52px;
+  .logo {
+    height: 44px;
     width: auto;
-    display: block;
-    margin-bottom: 1.1rem;
+    margin-bottom: 1.4rem;
+    filter: brightness(0) invert(1);
   }
-
-  .footer__brand p {
-    margin: 0 0 1.4rem;
-    font-size: 0.95rem;
-    line-height: 1.7;
-    max-width: 36ch;
-    font-weight: 300;
-  }
-
-  .footer__social {
-    display: flex;
-    gap: 0.4rem;
-  }
-
-  .footer__social a {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    border: 1px solid rgba(242, 233, 218, 0.25);
+  .top {
     display: grid;
-    place-items: center;
-    color: inherit;
-    transition:
-      background 0.2s,
-      border-color 0.2s,
-      color 0.2s;
+    grid-template-columns: 1.2fr 1.1fr 0.7fr;
+    gap: 3.5rem;
+    padding-bottom: 4rem;
   }
-
-  .footer__social a:hover {
-    background: var(--color-primary);
-    border-color: var(--color-primary);
-    color: #fff;
-  }
-
-  /* Global Icon Fixes */
-  :global(.icon-14),
-  :global(.icon-16) {
-    display: inline-block;
-    vertical-align: middle;
-    flex-shrink: 0;
-  }
-
-  :global(.icon-14) {
-    width: 14px;
-    height: 14px;
-  }
-
-  :global(.icon-16) {
-    width: 16px;
-    height: 16px;
-  }
-
-  .site-footer h3 {
-    color: #fff;
-    font-family: var(--font-body);
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
+  .top p { max-width: 38ch; font-weight: 300; line-height: 1.7; }
+  .label {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
+    color: #e4c9a4;
     margin-bottom: 1.3rem;
-    font-weight: 500;
   }
-
-  /* Branches Section */
-  .footer__branches-section {
-    padding-block: 2.4rem;
-    border-top: 1px solid rgba(242, 233, 218, 0.08);
-  }
-
-  .footer__branches {
+  ul { display: grid; gap: 1.3rem; }
+  .links { gap: 0.55rem; }
+  strong { display: block; color: #fff; font-weight: 500; margin-bottom: 0.25rem; }
+  span { display: block; font-weight: 300; font-size: 0.92rem; }
+  a:hover { color: #fff; }
+  .bottom {
     display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .footer__branch-item {
-    flex: 1;
-    min-width: 200px;
-  }
-
-  .footer__branches strong {
-    display: block;
-    color: #fff;
-    font-size: 0.82rem;
-    margin-bottom: 0.15rem;
-  }
-
-  .footer__branches > li > span {
-    display: block;
-    font-size: 0.78rem;
-    opacity: 0.75;
-    line-height: 1.35;
-  }
-
-  /* Force single line phone layout */
-  .footer__branches a {
-    display: inline-flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 0.35rem;
-    margin-top: 0.3rem;
-    font-size: 0.78rem;
-    color: var(--color-gold);
-    white-space: nowrap;
-    text-decoration: none;
-  }
-
-  /* Links & Mail */
-  .footer__links {
-    display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
-  }
-  .footer__links a { font-size: 0.92rem; font-weight: 300; }
-
-  .footer__links a:hover {
-    color: var(--color-gold);
-  }
-
-  .footer__mail {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    margin-top: 0.5rem;
+    gap: 1rem;
+    padding-block: 1.4rem;
+    border-top: 1px solid rgba(244,239,232,0.08);
     font-size: 0.8rem;
-    color: var(--color-gold);
-    white-space: nowrap;
-    text-decoration: none;
   }
-
-  /* Footer Bottom */
-  .footer__bottom {
-    border-top: 1px solid rgba(242, 233, 218, 0.08);
-  }
-
-  .footer__bottom-inner {
-    padding-block: 1.3rem;
-    font-size: 0.8rem;
-    opacity: 0.7;
-  }
-
-  .footer__bottom-inner p {
-    margin: 0;
-  }
-
-  @media (max-width: 960px) {
-    .footer__grid {
-      grid-template-columns: 1fr 1fr;
-      gap: 1.25rem;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .footer__grid {
-      grid-template-columns: 1fr;
-    }
-    .footer__branch-item {
-      flex: 1 1 100%;
-    }
+  .social { display: flex; gap: 0.9rem; }
+  @media (max-width: 860px) {
+    .top { grid-template-columns: 1fr; gap: 2.5rem; }
+    .bottom { flex-direction: column; align-items: flex-start; }
   }
 </style>

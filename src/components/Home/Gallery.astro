@@ -1,114 +1,42 @@
 ---
-import Icon from "../global/UI/Icon.astro";
 import type { gallery as GalleryType } from "../../data/home";
-export interface Props {
-  data: typeof GalleryType;
-}
+export interface Props { data: typeof GalleryType; }
 const { data } = Astro.props;
 ---
 
 <section class="section gallery">
-  <div class="wrap">
-    <div
-      class="section-heading"
-      data-reveal="fade"
-      style="margin-inline:auto; text-align:center;"
-    >
-      <p class="eyebrow" style="justify-content:center;">{data.eyebrow}</p>
-      <h2>{data.title} <span class="accent">{data.titleAccent}</span></h2>
+  <div class="wrap wrap--wide">
+    <div class="row-head">
+      <div>
+        <p class="eyebrow">{data.eyebrow}</p>
+        <h2>{data.title} <em class="accent">{data.titleAccent}</em></h2>
+      </div>
+      <a href="/gallery" class="link-arrow">Open gallery</a>
     </div>
-
-    <div class="carousel" data-autoplay="5000">
-      <div class="carousel__viewport">
-        {
-          data.images.map((img) => (
-            <figure class="gallery-card">
-              <img
-                src={img.src}
-                alt={img.alt}
-                width="380"
-                height="300"
-                loading="lazy"
-              />
-            </figure>
-          ))
-        }
-      </div>
-      <div class="carousel__controls">
-        <button
-          type="button"
-          class="carousel__btn"
-          data-action="prev"
-          aria-label="Previous photos"><Icon name="chevron-left" /></button
-        >
-        <div class="carousel__dots"></div>
-        <button
-          type="button"
-          class="carousel__btn"
-          data-action="next"
-          aria-label="Next photos"><Icon name="chevron-right" /></button
-        >
-      </div>
+    <div class="mosaic" data-reveal-group>
+      {data.images.map((img, i) => (
+        <figure class={`cell cell--${i + 1}`} data-reveal="fade" data-media>
+          <img src={img.src} alt={img.alt} loading="lazy" />
+        </figure>
+      ))}
     </div>
   </div>
 </section>
 
-<script>
-  function setupHomeGalleryCarousel() {
-    const root = document.querySelector('.gallery .carousel') as HTMLElement | null;
-    if (!root || root.dataset.galleryReady === 'true') return;
-    root.dataset.galleryReady = 'true';
-
-    const viewport = root.querySelector('.carousel__viewport') as HTMLElement | null;
-    const nextBtn = root.querySelector('[data-action="next"]') as HTMLButtonElement | null;
-    const prevBtn = root.querySelector('[data-action="prev"]') as HTMLButtonElement | null;
-
-    if (!viewport || !nextBtn || !prevBtn) return;
-
-    const moveBy = () => {
-      const firstCard = viewport.querySelector('.gallery-card') as HTMLElement | null;
-      const gap = parseFloat(getComputedStyle(viewport).gap || getComputedStyle(viewport).columnGap || '0') || 0;
-      const step = firstCard ? firstCard.getBoundingClientRect().width + gap : viewport.clientWidth * 0.8;
-      return step;
-    };
-
-    const clampScroll = (value: number) => Math.max(0, Math.min(value, viewport.scrollWidth - viewport.clientWidth));
-
-    const move = (direction: number) => {
-      const nextScroll = clampScroll(viewport.scrollLeft + direction * moveBy());
-      viewport.scrollTo({ left: nextScroll, behavior: 'smooth' });
-    };
-
-    nextBtn.addEventListener('click', () => move(1));
-    prevBtn.addEventListener('click', () => move(-1));
-  }
-
-  document.addEventListener('DOMContentLoaded', setupHomeGalleryCarousel);
-  document.addEventListener('astro:page-load', setupHomeGalleryCarousel);
-</script>
-
 <style>
-  .gallery-card {
-    flex: 0 0 clamp(220px, 32vw, 340px);
-    margin: 0;
-    overflow: hidden;
-    aspect-ratio: 4/3;
-    clip-path: polygon(
-      0 0,
-      100% 0,
-      100% calc(100% - 20px),
-      calc(100% - 20px) 100%,
-      0 100%
-    );
-    box-shadow: var(--shadow-sm);
+  h2 { max-width: 12ch; }
+  .mosaic {
+    display: grid;
+    grid-template-columns: 1.3fr 0.8fr 1fr;
+    grid-template-rows: 280px 220px;
+    gap: 0.9rem;
   }
-  .gallery-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s var(--ease);
-  }
-  .gallery-card:hover img {
-    transform: scale(1.07);
+  .cell { overflow: hidden; margin: 0; }
+  .cell--1 { grid-row: 1 / 3; }
+  .cell--4 { grid-column: 2 / 4; }
+  @media (max-width: 800px) {
+    .mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .cell--1, .cell--4 { grid-row: auto; grid-column: auto; }
+    .cell { aspect-ratio: 4/3; }
   }
 </style>

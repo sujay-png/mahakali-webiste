@@ -26,16 +26,17 @@ export const topBar = {
 
 export const mainNav = [
   { label: 'Home', href: '/' },
-  { label: 'About Us', href: '/about' },
+  { label: 'About', href: '/about' },
   { label: 'Gallery', href: '/gallery' },
   {
-    label: 'Products',
+    label: 'Collections',
     href: '/products',
     children: CATALOG_CATEGORIES.map((category) => ({
       label: category.navLabel,
       href: categoryPath(category.slug),
     })),
-  }
+  },
+  { label: 'Contact', href: '/contact' },
 ];
 
 export const branches = [

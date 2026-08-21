@@ -14,10 +14,8 @@ import PrivacyHero from "../../components/Privacy/PrivacyHero.astro";
       subtitle="We value your privacy. Read about how we collect, use, and protect your personal information."
     />
     
-    <section class="policy-section wrap section">
-      <div class="policy-container">
-        <h2 class="font-display">Privacy Policy</h2>
-        
+    <section class="policy-prose wrap">
+        <h2>How we hold your details</h2>
         <ol class="privacy-list">
           <li>We collect customer details such as name, phone number, address, and email to process and deliver orders.</li>
           <li>Customer data is stored securely and used only for communication and invoicing purposes.</li>
@@ -33,49 +31,6 @@ import PrivacyHero from "../../components/Privacy/PrivacyHero.astro";
           <li>Users below the age of 18 should use the website only under the supervision of a parent or guardian.</li>
           <li>If any changes are made to our Privacy Policy, they will be updated on this page. Continued use of the website implies acceptance of revised policies.</li>
         </ol>
-      </div>
     </section>
   </main>
 </Layout>
-
-<style>
-  .policy-section {
-    padding-top: 5rem;
-    padding-bottom: 8rem;
-  }
-  .policy-container {
-    max-width: 800px;
-    margin: 0 auto;
-    background: var(--color-surface);
-    padding: 3rem;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--color-line);
-    box-shadow: var(--shadow-sm);
-  }
-  @media (max-width: 600px) {
-    .policy-container {
-      padding: 1.5rem;
-    }
-  }
-  
-  .policy-container h2 {
-    color: var(--color-primary);
-    font-size: 2.25rem;
-    margin-bottom: 2rem;
-    border-bottom: 2px solid var(--color-line);
-    padding-bottom: 0.75rem;
-  }
-  
-  .policy-container ol.privacy-list {
-    list-style-type: decimal;
-    padding-left: 1.5rem;
-    margin-bottom: 1.5rem;
-    color: var(--color-ink-soft);
-  }
-  
-  .policy-container li {
-    margin-bottom: 1.25rem;
-    line-height: 1.6;
-    font-size: 1.05rem;
-  }
-</style>

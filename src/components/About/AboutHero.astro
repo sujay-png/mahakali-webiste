@@ -1,158 +1,37 @@
 ---
 import type { heroData as AboutHeroType } from "../../data/about/hero";
-
-export interface Props {
-  data: typeof AboutHeroType;
-}
-
+export interface Props { data: typeof AboutHeroType; }
 const { data } = Astro.props;
 ---
 
-<section class="wrap">
-  <div class="hero-section">
-    <div class="hero-content" data-reveal="left">
-      <div class="hero-badge">
-        <span
-          class="material-symbols-outlined"
-          style="font-variation-settings: 'FILL' 1; font-size: 14px;"
-          >verified</span
-        >
-        <span class="hero-badge-text">{data.eyebrow}</span>
-      </div>
-      <h1 class="hero-title">{data.title}</h1>
-      <p class="hero-copy">{data.copy}</p>
-      <div class="hero-actions">
-        <a href="#" class="btn btn-primary">Discover More</a>
-        <a href="/contact" class="btn btn-secondary">Contact</a>
+<section class="about-hero">
+  <div class="wrap wrap--wide grid">
+    <div data-reveal="fade">
+      <p class="eyebrow">{data.eyebrow}</p>
+      <h1>Spaces deserve furniture with character.</h1>
+      <p class="copy">{data.copy}</p>
+      <div class="actions">
+        <a href="/contact" class="btn btn-primary">Visit showroom</a>
+        <a href="/products" class="btn btn-secondary">Collections</a>
       </div>
     </div>
-    <div class="hero-image-wrapper" data-reveal="right">
-      <img
-        class="hero-image"
-        src={data.image.src}
-        alt={data.image.alt}
-        loading="eager"
-      />
-    </div>
+    <figure data-media data-reveal="right">
+      <img src={data.image.src} alt={data.image.alt} loading="eager" />
+    </figure>
   </div>
 </section>
 
 <style>
-  .hero-section {
-    display: flex;
-    flex-direction: column;
+  .about-hero { padding-block: clamp(6rem, 10vw, 8.5rem) 4rem; }
+  .grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: clamp(2rem, 5vw, 5rem);
     align-items: center;
-    gap: 3.5rem;
-    padding-top: 5.5rem;
-    padding-bottom: 5.5rem;
   }
-  @media (min-width: 768px) {
-    .hero-section {
-      flex-direction: row;
-    }
-  }
-  .hero-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    padding-right: 0;
-  }
-  @media (min-width: 768px) {
-    .hero-content {
-      padding-right: 3rem;
-    }
-  }
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background-color: var(--color-surface);
-    border-radius: 9999px;
-    border: 1px solid var(--color-cream);
-    width: fit-content;
-  }
-  .hero-badge-text {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-ink-soft);
-    font-weight: bold;
-  }
-  .hero-title {
-    font-size: 2.5rem;
-    line-height: 1.2;
-    color: var(--color-primary);
-    font-family: var(--font-display);
-    margin: 0;
-  }
-  @media (min-width: 768px) {
-    .hero-title {
-      font-size: 3.5rem;
-    }
-  }
-  .hero-copy {
-    font-size: 1.125rem;
-    line-height: 1.6;
-    color: var(--color-ink-soft);
-    max-width: 36rem;
-    margin: 0;
-  }
-  .hero-actions {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding-top: 1rem;
-  }
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.75rem 2rem;
-    border-radius: 9999px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-decoration: none;
-    transition: all 0.2s ease-in-out;
-    cursor: pointer;
-  }
-  .btn-primary {
-    background-color: var(--color-primary);
-    color: var(--color-on-primary, #ffffff);
-    border: none;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  }
-  .btn-primary:hover {
-    opacity: 0.9;
-  }
-  .btn-secondary {
-    background-color: var(--color-surface-container-lowest, #ffffff);
-    color: var(--color-primary);
-    border: 1px solid var(--color-outline, #8e706c);
-  }
-  .btn-secondary:hover {
-    background-color: var(--color-surface-container-low, #f6f3f2);
-  }
-  .hero-image-wrapper {
-    flex: 1;
-    width: 100%;
-    height: 400px;
-    position: relative;
-    border-radius: 0.5rem;
-    overflow: hidden;
-    box-shadow: var(--shadow-lg);
-    background-color: var(--color-cream);
-  }
-  @media (min-width: 768px) {
-    .hero-image-wrapper {
-      height: 600px;
-    }
-  }
-  .hero-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  h1 { max-width: 11ch; margin: 1rem 0 1.4rem; }
+  .copy { color: var(--color-ink-soft); font-weight: 300; max-width: 42ch; margin-bottom: 2rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  figure { aspect-ratio: 4/5; margin: 0; }
+  @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
 </style>

@@ -8,24 +8,23 @@ export interface Props {
 const { data } = Astro.props;
 ---
 
-<section class="gallery-catalog wrap section">
+<section class="gallery-catalog wrap wrap--wide section">
   <div class="catalog-container">
     {data.map((category) => (
       <div class="category-section">
+        <p class="eyebrow">{category.title}</p>
         <h2 class="font-display category-title">{category.title}</h2>
-        
-        <div class="grid">
+
+        <div class="grid" data-reveal-group>
           {category.items.map((item) => (
-            <div 
-              class={`gallery-card rounded-card ${item.colSpan === 4 ? 'col-span-full' : ''}`}
-            >
+            <div class={`gallery-card ${item.colSpan === 4 ? "col-span-full" : ""}`} data-reveal>
               {!item.action ? (
                 <>
-                  <div class="image-wrapper">
+                  <div class="image-wrapper" data-media>
                     <img src={item.image} alt={item.name} class="gallery-image" />
                   </div>
                   <div class="card-content">
-                    <h3>{item.name}</h3>
+                    <h3 class="font-display">{item.name}</h3>
                     <p>{item.category}</p>
                   </div>
                 </>
@@ -43,212 +42,75 @@ const { data } = Astro.props;
         </div>
       </div>
     ))}
-    
+
     <div class="load-more">
-      <button class="btn btn-outline uppercase">
-        Load More Catalog Items
+      <button class="btn btn-outline" type="button">
+        Load more catalog items
       </button>
     </div>
   </div>
 </section>
 
 <style>
-  .catalog-container {
-    max-width: 1600px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
-  }
-  .category-title {
-    color: var(--color-primary);
-    border-bottom: 1px solid var(--color-line);
-    padding-bottom: 1rem;
-    margin-bottom: 2rem;
-    font-size: 2rem;
-    text-transform: uppercase;
-  }
+  .catalog-container { display: flex; flex-direction: column; gap: 5.5rem; }
+  .category-title { margin: 0.6rem 0 2.2rem; max-width: 14ch; }
   .grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.6rem;
   }
   @media (min-width: 768px) {
-    .grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+    .grid { grid-template-columns: repeat(2, 1fr); }
   }
   @media (min-width: 1024px) {
-    .grid {
-      grid-template-columns: repeat(4, 1fr); /* Actually the design uses 3 for the first two, 4 for the last, but let's stick to standard 3 or 4 based on content... I'll just use a responsive grid with auto-fit or specific classes */
-    }
-  }
-  
-  /* Specific override for the 3-column layout vs 4-column layout */
-  .category-section:nth-child(1) .grid,
-  .category-section:nth-child(2) .grid {
-    @media (min-width: 1024px) {
+    .grid { grid-template-columns: repeat(4, 1fr); }
+    .category-section:nth-child(1) .grid,
+    .category-section:nth-child(2) .grid {
       grid-template-columns: repeat(3, 1fr);
     }
   }
-  
-  .gallery-card {
-    border: 1px solid var(--color-line);
-    background: var(--color-surface);
-    overflow: hidden;
-    cursor: pointer;
-    border-radius: var(--radius-sm);
-    display: flex;
-    flex-direction: column;
-    transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+  .gallery-card { display: flex; flex-direction: column; cursor: pointer; }
+  .gallery-card.col-span-full { }
+  @media (min-width: 1024px) {
+    .gallery-card.col-span-full { grid-column: span 4; }
   }
-  .gallery-card:hover {
-    box-shadow: var(--shadow-sm);
-  }
-  .gallery-card.col-span-full {
-    @media (min-width: 1024px) {
-      grid-column: span 4;
-    }
-  }
-  
-  .image-wrapper {
-    position: relative;
-    overflow: hidden;
-    aspect-ratio: 4/3;
-  }
-  .gallery-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s var(--ease);
-  }
-  .gallery-card:hover .gallery-image {
-    transform: scale(1.05);
-  }
-  
-
-  .card-content {
-    padding: 1.5rem;
-    background: var(--color-surface);
-  }
-  .card-content h3 {
-    font-family: var(--font-display);
-    font-size: 1.25rem;
-    color: var(--color-ink);
-    margin-bottom: 0.5rem;
-    text-transform: uppercase;
-  }
-  .card-content p {
-    color: var(--color-ink-soft);
-    font-size: 1rem;
-  }
-  
+  .image-wrapper { overflow: hidden; aspect-ratio: 4/5; background: var(--color-cream); }
+  .gallery-image { width: 100%; height: 100%; object-fit: cover; }
+  .card-content { padding: 1.1rem 0 0; }
+  .card-content h3 { font-size: 1.45rem; margin-bottom: 0.25rem; }
+  .card-content p { color: var(--color-ink-soft); font-weight: 300; }
   .centered-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    text-align: center;
-    min-height: 160px;
-    height: 100%;
+    min-height: 180px;
+    padding: 2rem;
     position: relative;
     overflow: hidden;
-    background-color: var(--color-surface);
+    background: var(--color-cream);
   }
-  
   .hover-bg {
     position: absolute;
     inset: 0;
     background-size: cover;
     background-position: center;
     opacity: 0;
-    transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
-    transform: scale(1.05);
-    z-index: 1;
+    transition: opacity 0.5s var(--ease);
   }
-  
-  /* Overlay inside the hover-bg to darken it slightly for text readability */
   .hover-bg::after {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background: rgba(36, 28, 24, 0.55);
   }
-  
-  .gallery-card:hover .hover-bg {
-    opacity: 1;
-    transform: scale(1);
-  }
-  
-  .action-title,
-  .action-text {
-    position: relative;
-    z-index: 2;
-    transition: color 0.3s var(--ease), text-shadow 0.3s var(--ease);
-  }
-  
-  .centered-content h3 {
-    color: var(--color-primary);
-  }
+  .gallery-card:hover .hover-bg { opacity: 1; }
+  .action-title, .action-text { position: relative; z-index: 2; }
   .centered-content .action-text {
-    font-family: var(--font-body);
-    font-size: 0.875rem;
-    font-weight: 600;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
   }
-  
-  /* On hover, text becomes white */
   .gallery-card:hover .centered-content .action-title,
-  .gallery-card:hover .centered-content .action-text {
-    color: #fff;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.6);
-  }
-  
-  .col-span-full .centered-content {
-    min-height: 120px;
-  }
-  
-  .load-more {
-    text-align: center;
-    margin-top: 4rem;
-  }
-  .uppercase {
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
+  .gallery-card:hover .centered-content .action-text { color: #fff; }
+  .load-more { text-align: left; margin-top: 1rem; }
 </style>
-
-<script>
-  import { inView, animate, stagger } from "motion";
-
-  function initGalleryAnimation() {
-    const sections = document.querySelectorAll('.gallery-catalog .category-section');
-    
-    sections.forEach((section) => {
-      const cards = section.querySelectorAll('.gallery-card');
-      if (cards.length === 0) return;
-      
-      // Set initial state manually before animating to prevent flashing
-      cards.forEach(card => {
-        card.style.opacity = "0";
-        card.style.transform = "translateY(30px)";
-      });
-
-      inView(section, () => {
-        animate(
-          cards,
-          { opacity: [0, 1], transform: ['translateY(30px)', 'none'] },
-          { 
-            delay: stagger(0.1), 
-            duration: 0.6, 
-            easing: [0.22, 1, 0.36, 1] 
-          }
-        );
-      }, { margin: "-10% 0px" });
-    });
-  }
-
-  // Support both initial load and Astro View Transitions
-  document.addEventListener('astro:page-load', initGalleryAnimation);
-</script>

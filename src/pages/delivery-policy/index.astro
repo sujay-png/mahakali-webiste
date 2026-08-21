@@ -9,98 +9,38 @@ import DeliveryHero from "../../components/Delivery/DeliveryHero.astro";
   path="/delivery-policy"
 >
   <main class="delivery-page">
-    <DeliveryHero 
-      title="Delivery & Installation" 
+    <DeliveryHero
+      title="Delivery & Installation"
       subtitle="Everything you need to know about how we deliver and set up your new furniture."
     />
-    
-    <section class="policy-section wrap section">
-      <div class="policy-container">
-        <h2 class="font-display">Delivery & Installation Policy</h2>
-        
-        <ol class="delivery-list">
-          <li>Delivery is available from <strong>Suratkal to Sirsi</strong> and surrounding areas.</li>
-          <li>
-            Delivery timelines:
-            <ul class="nested-list">
-              <li>In-stock products: <strong>3-10 days</strong></li>
-              <li>Custom-made / manufactured products: <strong>15-35 days</strong></li>
-            </ul>
-          </li>
-          <li>The customer will be informed of the estimated delivery date at the time of order confirmation.</li>
-          <li>Free delivery may be offered on selected products or minimum order values. Otherwise, delivery charges will apply.</li>
-          <li>Installation assistance will be provided for products that require assembling.</li>
-          <li>
-            It is the customer's responsibility to check the following before placing an order:
-            <ul class="nested-list">
-              <li>Door size</li>
-              <li>Lift availability</li>
-              <li>Staircase width</li>
-            </ul>
-          </li>
-          <li>If the delivery attempt fails due to customer unavailability, re-delivery charges may apply.</li>
-          <li>Delivery timelines may vary due to traffic, weather, logistics issues, or unforeseen circumstances.</li>
-          <li>Customers must inspect the product at the time of delivery. Any damages must be reported immediately with photos or videos.</li>
-          <li>For multi-floor deliveries without lift access, additional manpower or handling charges may apply.</li>
-        </ol>
-      </div>
+
+    <section class="policy-prose wrap">
+      <h2>Delivery & installation</h2>
+      <ol class="delivery-list">
+        <li>Delivery is available from <strong>Suratkal to Sirsi</strong> and surrounding areas.</li>
+        <li>
+          Delivery timelines:
+          <ul class="nested-list">
+            <li>In-stock products: <strong>3-10 days</strong></li>
+            <li>Custom-made / manufactured products: <strong>15-35 days</strong></li>
+          </ul>
+        </li>
+        <li>The customer will be informed of the estimated delivery date at the time of order confirmation.</li>
+        <li>Free delivery may be offered on selected products or minimum order values. Otherwise, delivery charges will apply.</li>
+        <li>Installation assistance will be provided for products that require assembling.</li>
+        <li>
+          It is the customer's responsibility to check the following before placing an order:
+          <ul class="nested-list">
+            <li>Door size</li>
+            <li>Lift availability</li>
+            <li>Staircase width</li>
+          </ul>
+        </li>
+        <li>If the delivery attempt fails due to customer unavailability, re-delivery charges may apply.</li>
+        <li>Delivery timelines may vary due to traffic, weather, logistics issues, or unforeseen circumstances.</li>
+        <li>Customers must inspect the product at the time of delivery. Any damages must be reported immediately with photos or videos.</li>
+        <li>For multi-floor deliveries without lift access, additional manpower or handling charges may apply.</li>
+      </ol>
     </section>
   </main>
 </Layout>
-
-<style>
-  .policy-section {
-    padding-top: 5rem;
-    padding-bottom: 8rem;
-  }
-  .policy-container {
-    max-width: 800px;
-    margin: 0 auto;
-    background: var(--color-surface);
-    padding: 3rem;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--color-line);
-    box-shadow: var(--shadow-sm);
-  }
-  @media (max-width: 600px) {
-    .policy-container {
-      padding: 1.5rem;
-    }
-  }
-  
-  .policy-container h2 {
-    color: var(--color-primary);
-    font-size: 2.25rem;
-    margin-bottom: 2rem;
-    border-bottom: 2px solid var(--color-line);
-    padding-bottom: 0.75rem;
-  }
-  
-  .policy-container ol.delivery-list {
-    list-style-type: decimal;
-    padding-left: 1.5rem;
-    margin-bottom: 1.5rem;
-    color: var(--color-ink-soft);
-  }
-  
-  .policy-container li {
-    margin-bottom: 1.25rem;
-    line-height: 1.6;
-    font-size: 1.05rem;
-  }
-  
-  .policy-container strong {
-    color: var(--color-ink);
-    font-weight: 700;
-  }
-  
-  .nested-list {
-    list-style-type: disc !important;
-    padding-left: 1.5rem;
-    margin-top: 0.5rem;
-  }
-  
-  .nested-list li {
-    margin-bottom: 0.5rem;
-  }
-</style>

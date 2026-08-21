@@ -1,91 +1,46 @@
 ---
-import Icon from "../global/UI/Icon.astro";
 ---
 
 <section class="section section--cream">
-  <div class="wrap">
-    <div class="usp-bar" data-reveal="fade-up">
-      <div class="usp-item">
-        <Icon name="truck" class="icon-32 usp-icon" />
-        <div class="usp-text-wrapper">
-          <span class="usp-title">Free Delivery</span>
-          <span class="usp-desc">For Any Orders</span>
-        </div>
-      </div>
-      <div class="usp-item">
-        <Icon name="refresh-ccw" class="icon-32 usp-icon" />
-        <div class="usp-text-wrapper">
-          <span class="usp-title">No Refund</span>
-          <span class="usp-desc">There Is No Refund</span>
-        </div>
-      </div>
-      <div class="usp-item">
-        <Icon name="shield" class="icon-32 usp-icon" />
-        <div class="usp-text-wrapper">
-          <span class="usp-title">Safe Payment</span>
-          <span class="usp-desc">100% Secure Payment</span>
-        </div>
-      </div>
-      <div class="usp-item">
-        <Icon name="clock" class="icon-32 usp-icon" />
-        <div class="usp-text-wrapper">
-          <span class="usp-title">9:30AM - 7:00PM Support</span>
-          <span class="usp-desc">Feel Free To Call Us</span>
-        </div>
-      </div>
-    </div>
+  <div class="wrap wrap--wide notes" data-reveal-group>
+    <article data-reveal>
+      <span>01</span>
+      <h3 class="font-display">Free delivery</h3>
+      <p>For qualifying orders across our service area.</p>
+    </article>
+    <article data-reveal>
+      <span>02</span>
+      <h3 class="font-display">Made to last</h3>
+      <p>Custom and showroom pieces are finished for years of use.</p>
+    </article>
+    <article data-reveal>
+      <span>03</span>
+      <h3 class="font-display">Secure payment</h3>
+      <p>In-store and online payments through trusted gateways.</p>
+    </article>
+    <article data-reveal>
+      <span>04</span>
+      <h3 class="font-display">Showroom hours</h3>
+      <p>9:30AM – 7:00PM. Walk in, or call ahead for a consultation.</p>
+    </article>
   </div>
 </section>
 
 <style>
-  .usp-bar {
+  .notes {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    padding: 3rem 2rem;
-    background-color: var(--color-surface);
-    border: 1px solid rgba(139, 74, 59, 0.15);
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-    margin-bottom: 5rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5rem;
+    padding-block: 0.5rem 2rem;
   }
-  
-  @media (min-width: 768px) {
-    .usp-bar {
-      grid-template-columns: repeat(4, 1fr);
-      padding: 3rem;
-    }
+  article { display: grid; gap: 0.7rem; }
+  span {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    color: var(--color-gold);
   }
-
-  .usp-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    text-align: center;
-  }
-
-  :global(.usp-icon) {
-    width: 42px;
-    height: 42px;
-    color: var(--color-primary);
-  }
-
-  .usp-text-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-  }
-
-  .usp-title {
-    font-size: 1.05rem;
-    font-weight: 600;
-    font-family: var(--font-nav);
-    color: var(--color-ink);
-  }
-  
-  .usp-desc {
-    font-size: 0.85rem;
-    color: var(--color-ink-soft);
-  }
+  h3 { font-size: 1.7rem; max-width: 10ch; }
+  p { color: var(--color-ink-soft); font-weight: 300; max-width: 28ch; }
+  @media (max-width: 900px) { .notes { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .notes { grid-template-columns: 1fr; } }
 </style>

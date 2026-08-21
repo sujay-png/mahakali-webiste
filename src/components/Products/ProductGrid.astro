@@ -33,7 +33,8 @@ const {
 <script>
   function bindCatalogFilters() {
     const grid = document.getElementById("product-grid");
-    if (!grid) return;
+    if (!grid || grid.dataset.bound === "true") return;
+    grid.dataset.bound = "true";
 
     const cards = Array.from(grid.querySelectorAll(".product-card")) as HTMLElement[];
     const searchInput = document.getElementById("product-search-input") as HTMLInputElement | null;
@@ -75,37 +76,29 @@ const {
 </script>
 
 <style>
-  .product-grid-section { padding-block: 2.5rem 5rem; }
+  .product-grid-section { padding-block: 2.8rem 6rem; }
 
   .grid-container {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 3rem 1.8rem;
-    padding-inline: 0;
+    gap: 3.5rem 2rem;
   }
 
   @media (min-width: 768px) {
     .grid-container { grid-template-columns: repeat(2, 1fr); }
   }
-  @media (min-width: 1200px) {
-    .grid-container { grid-template-columns: repeat(3, 1fr); }
-  }
 
   .empty {
-    text-align: center;
-    padding: 3.5rem 1.5rem;
-    background: #fff;
-    border: 1px solid rgba(226, 191, 185, 0.35);
-    border-radius: 20px;
+    max-width: 36rem;
+    padding: 2rem 0 5rem;
   }
   .empty-kicker {
-    letter-spacing: 0.16em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #7c5730;
-    margin-bottom: 0.6rem;
+    font-size: 0.68rem;
+    color: var(--color-gold);
+    margin-bottom: 0.8rem;
   }
-  .empty h3 { margin-bottom: 0.7rem; color: #570000; }
-  .empty p { color: #5a413d; max-width: 36rem; margin: 0 auto 1.5rem; }
+  .empty h3 { margin-bottom: 0.8rem; }
+  .empty p { color: var(--color-ink-soft); font-weight: 300; margin: 0 0 1.6rem; }
 </style>

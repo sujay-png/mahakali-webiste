@@ -14,10 +14,8 @@ import TermsHero from "../../components/Terms/TermsHero.astro";
       subtitle="Please read these terms and conditions carefully before using our website or purchasing our products."
     />
     
-    <section class="policy-section wrap section">
-      <div class="policy-container">
-        <h2 class="font-display">TERMS & CONDITIONS</h2>
-        
+    <section class="policy-prose wrap">
+        <h2>Terms of use</h2>
         <ol class="terms-list">
           <li>By accessing, browsing, or purchasing from this website, you agree to comply with all terms, policies, and conditions listed here.</li>
           <li>All products listed are subject to availability. In case a product is unavailable after placing the order, the customer will be informed and can choose refund or replacement.</li>
@@ -34,50 +32,6 @@ import TermsHero from "../../components/Terms/TermsHero.astro";
           <li>Mahakali reserves the right to modify, update, or remove any part of these Terms & Conditions without prior notice.</li>
           <li>By placing an order, the customer acknowledges having read, understood, and agreed to all policies including Terms & Conditions, Privacy Policy, Cancellation Policy, and Refund Policy.</li>
         </ol>
-      </div>
     </section>
   </main>
 </Layout>
-
-<style>
-  .policy-section {
-    padding-top: 5rem;
-    padding-bottom: 8rem;
-  }
-  .policy-container {
-    max-width: 800px;
-    margin: 0 auto;
-    background: var(--color-surface);
-    padding: 3rem;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--color-line);
-    box-shadow: var(--shadow-sm);
-  }
-  @media (max-width: 600px) {
-    .policy-container {
-      padding: 1.5rem;
-    }
-  }
-  
-  .policy-container h2 {
-    color: var(--color-primary);
-    font-size: 2.25rem;
-    margin-bottom: 2rem;
-    border-bottom: 2px solid var(--color-line);
-    padding-bottom: 0.75rem;
-    text-transform: uppercase;
-  }
-  
-  .policy-container ol.terms-list {
-    list-style-type: decimal;
-    padding-left: 1.5rem;
-    margin-bottom: 1.5rem;
-    color: var(--color-ink-soft);
-  }
-  
-  .policy-container li {
-    margin-bottom: 1.25rem;
-    line-height: 1.6;
-    font-size: 1.05rem;
-  }
-</style>

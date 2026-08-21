@@ -1,13 +1,11 @@
 ---
 ---
-<!-- Lightbox Modal -->
 <div id="lightbox" class="lightbox-modal">
-  <button class="close-btn" aria-label="Close Lightbox" onclick="closeLightbox()">
-    <span class="material-symbols-outlined">close</span>
+  <button class="close-btn" type="button" aria-label="Close lightbox" onclick="closeLightbox()">
+    Close
   </button>
-  
   <div class="lightbox-content">
-    <img id="lightbox-img" src="" alt="Gallery Image Enlarged" />
+    <img id="lightbox-img" src="" alt="Gallery image enlarged" />
   </div>
 </div>
 
@@ -16,117 +14,83 @@
     position: fixed;
     inset: 0;
     z-index: 100;
-    background: rgba(30, 30, 30, 0.95);
-    backdrop-filter: blur(4px);
+    background: rgba(27, 21, 18, 0.94);
     display: none;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: opacity 0.3s var(--ease);
+    transition: opacity 0.35s var(--ease);
   }
-  .lightbox-modal.active {
-    display: flex;
-  }
-  .lightbox-modal.visible {
-    opacity: 1;
-  }
-  
+  .lightbox-modal.active { display: flex; }
+  .lightbox-modal.visible { opacity: 1; }
   .close-btn {
     position: absolute;
     top: 1.5rem;
-    right: 1.5rem;
+    right: var(--gutter);
     color: #fff;
-    background: transparent;
-    border: none;
-    padding: 0.5rem;
-    cursor: pointer;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
     z-index: 101;
-    transition: color 0.2s var(--ease);
   }
-  .close-btn:hover {
-    color: var(--color-primary-light, #ffb4a8);
-  }
-  .close-btn span {
-    font-size: 2.5rem;
-  }
-  
   .lightbox-content {
-    position: relative;
     width: 100%;
-    max-width: 1000px;
-    height: 80vh;
+    max-width: 1100px;
+    height: 82vh;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0 1rem;
   }
-  @media (min-width: 768px) {
-    .lightbox-content {
-      padding: 0 4rem;
-    }
-  }
   .lightbox-content img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-    border-radius: var(--radius-sm);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   }
 </style>
 
 <script is:inline>
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightbox-img');
-  
-  // Need to wait for DOM elements to exist when script runs, 
-  // but since Astro components are injected, we attach an event listener to the document
-  
-  document.addEventListener('DOMContentLoaded', () => {
-    const galleryImages = document.querySelectorAll('.gallery-image');
-    
-    galleryImages.forEach(img => {
-      // Find the closest wrapper to attach click event
-      const wrapper = img.closest('.image-wrapper');
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const galleryImages = document.querySelectorAll(".gallery-image");
+    galleryImages.forEach((img) => {
+      const wrapper = img.closest(".image-wrapper");
       if (wrapper) {
-        wrapper.style.cursor = 'pointer';
-        wrapper.addEventListener('click', () => {
+        wrapper.style.cursor = "pointer";
+        wrapper.addEventListener("click", () => {
           if (lightbox && lightboxImg) {
             lightboxImg.src = img.src;
-            lightbox.classList.add('active');
-            // Small delay to allow display:flex to apply before animating opacity
-            setTimeout(() => {
-              lightbox.classList.add('visible');
-            }, 10);
-            document.body.style.overflow = 'hidden';
+            lightbox.classList.add("active");
+            setTimeout(() => lightbox.classList.add("visible"), 10);
+            document.body.style.overflow = "hidden";
           }
         });
       }
     });
   });
 
-  window.closeLightbox = function() {
+  window.closeLightbox = function () {
     if (lightbox) {
-      lightbox.classList.remove('visible');
+      lightbox.classList.remove("visible");
       setTimeout(() => {
-        lightbox.classList.remove('active');
-        document.body.style.overflow = '';
+        lightbox.classList.remove("active");
+        document.body.style.overflow = "";
       }, 300);
     }
   };
 
-  // Close on background click
   if (lightbox) {
-    lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox || e.target.classList.contains('lightbox-content')) {
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox || e.target.classList.contains("lightbox-content")) {
         closeLightbox();
       }
     });
   }
-  
-  // Escape key to close
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && lightbox && lightbox.classList.contains('active')) {
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && lightbox && lightbox.classList.contains("active")) {
       closeLightbox();
     }
   });

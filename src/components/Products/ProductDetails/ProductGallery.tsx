@@ -52,11 +52,9 @@ export default function ProductGallery({ images, title }: Props) {
         .pg { display: grid; gap: 0.9rem; }
         .pg__stage {
           position: relative;
-          aspect-ratio: 4 / 3;
+          aspect-ratio: 4 / 5;
           overflow: hidden;
-          border-radius: 18px;
-          background: #f3eee4;
-          border: 1px solid rgba(226, 191, 185, 0.35);
+          background: #ebe4da;
         }
         .pg__image {
           position: absolute;
@@ -73,11 +71,10 @@ export default function ProductGallery({ images, title }: Props) {
         .pg__thumbs button {
           aspect-ratio: 1;
           overflow: hidden;
-          border-radius: 10px;
-          border: 1px solid rgba(226, 191, 185, 0.4);
+          border: 1px solid transparent;
           padding: 0;
-          opacity: 0.72;
-          transition: opacity 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+          opacity: 0.55;
+          transition: opacity 0.35s ease, border-color 0.35s ease;
         }
         .pg__thumbs button img {
           width: 100%;
@@ -85,10 +82,10 @@ export default function ProductGallery({ images, title }: Props) {
           object-fit: cover;
           display: block;
         }
-        .pg__thumbs button:hover { opacity: 1; transform: translateY(-2px); }
+        .pg__thumbs button:hover { opacity: 1; }
         .pg__thumbs button.is-active {
           opacity: 1;
-          border-color: #570000;
+          border-color: #241c18;
         }
       `}</style>
     </div>

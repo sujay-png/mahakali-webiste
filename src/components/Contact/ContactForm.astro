@@ -1,20 +1,22 @@
 ---
+import Icon from "../global/UI/Icon.astro";
 ---
 
-<section class="wrap section">
+<section class="wrap wrap--wide section">
   <div class="contact-form-section">
-    <div class="form-image" style="background-image: url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-      <div class="image-overlay"></div>
+    <div class="form-image">
+      <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1400&q=80" alt="" />
       <div class="image-card">
-        <h3 class="font-display coffee-text">Design Consultation</h3>
-        <p>Speak with our expert designers to bring your vision to life.</p>
+        <p class="eyebrow light">Atelier</p>
+        <h3 class="font-display">Design consultation</h3>
+        <p>Speak with our designers to bring your room — and its proportions — into focus.</p>
       </div>
     </div>
-    
+
     <div class="form-content">
-      <div class="bg-shape"></div>
-      <h2 class="font-display coffee-text">Get In Touch</h2>
-      
+      <p class="eyebrow">Write to us</p>
+      <h2>Get in touch</h2>
+
       <form id="contactForm" class="form">
         <div class="form-row">
           <div class="form-group">
@@ -26,21 +28,21 @@
             <label for="email">Your Email</label>
           </div>
         </div>
-        
+
         <div class="form-group">
           <input type="text" id="subject" name="subject" class="floating-input" placeholder=" " required />
           <label for="subject">Your Subject</label>
         </div>
-        
+
         <div class="form-group">
           <textarea id="message" name="message" class="floating-input" placeholder=" " required></textarea>
           <label for="message">Write Your Message</label>
         </div>
-        
+
         <div class="form-actions">
           <button type="submit" class="btn btn-primary">
             Send Message via WhatsApp
-            <span class="material-symbols-outlined">send</span>
+            <Icon name="arrow-right" />
           </button>
           <p class="form-hint">This will open WhatsApp to send your inquiry directly to our team.</p>
         </div>
@@ -50,129 +52,57 @@
 </section>
 
 <style>
-  .coffee-text {
-    color: var(--color-walnut) !important;
-  }
-  
   .contact-form-section {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    background: var(--color-surface);
-    border-radius: 1.5rem; /* rounded-3xl */
-    border: 1px solid var(--color-line);
-    box-shadow: var(--shadow-sm);
-  }
-  @media (min-width: 992px) {
-    .contact-form-section {
-      flex-direction: row;
-    }
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: stretch;
   }
   .form-image {
-    min-height: 400px;
     position: relative;
-    background-size: cover;
-    background-position: center;
+    min-height: 420px;
+    overflow: hidden;
+    background: var(--color-cream);
   }
-  @media (min-width: 992px) {
-    .form-image {
-      width: 41.666%; /* 5/12 */
-      min-height: auto;
-    }
-  }
-  .image-overlay {
+  .form-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     position: absolute;
     inset: 0;
-    background: rgba(168, 67, 30, 0.1);
   }
   .image-card {
     position: absolute;
-    bottom: 2rem;
-    left: 2rem;
-    right: 2rem;
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(8px);
-    padding: 1.5rem;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--color-line);
+    left: 1.5rem;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    color: #fff;
+    max-width: 22rem;
   }
-  .image-card h3 {
-    color: var(--color-primary);
-    margin-bottom: 0.5rem;
-  }
-  .image-card p {
-    color: var(--color-ink-soft);
-    font-size: 0.95rem;
-  }
-  
-  .form-content {
-    padding: 2rem;
-    position: relative;
-  }
-  @media (min-width: 992px) {
-    .form-content {
-      width: 58.333%; /* 7/12 */
-      padding: 4rem;
-    }
-  }
-  .bg-shape {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 256px;
-    height: 256px;
-    background: rgba(168, 67, 30, 0.05);
-    border-bottom-left-radius: 120px;
-    pointer-events: none;
-  }
-  .form-content h2 {
-    color: var(--color-primary);
-    margin-bottom: 3rem;
-    position: relative;
-    z-index: 10;
-  }
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    position: relative;
-    z-index: 10;
-  }
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  @media (min-width: 768px) {
-    .form-row {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-  .form-group {
-    position: relative;
-  }
+  .image-card h3 { color: #fff; margin: 0.6rem 0 0.5rem; }
+  .image-card p { color: rgba(255,255,255,0.8); font-weight: 300; }
+
+  .form-content h2 { margin: 0.7rem 0 2.4rem; max-width: 10ch; }
+  .form { display: flex; flex-direction: column; gap: 2rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .form-group { position: relative; }
   .floating-input {
     width: 100%;
     background: transparent;
     border: none;
-    border-bottom: 2px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
     color: var(--color-ink);
-    padding: 0.75rem 0;
+    padding: 0.85rem 0;
     transition: border-color var(--dur-fast) var(--ease);
   }
-  .floating-input:focus {
-    outline: none;
-    border-bottom-color: var(--color-primary);
-  }
-  textarea.floating-input {
-    min-height: 120px;
-    resize: vertical;
-  }
+  .floating-input:focus { outline: none; border-bottom-color: var(--color-ink); }
+  textarea.floating-input { min-height: 120px; resize: vertical; }
   .form-group label {
     position: absolute;
     left: 0;
-    top: 0.75rem;
+    top: 0.85rem;
     color: var(--color-ink-soft);
+    font-size: 0.9rem;
     transition: transform var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
     transform-origin: left;
     pointer-events: none;
@@ -180,55 +110,51 @@
   .floating-input:focus ~ label,
   .floating-input:not(:placeholder-shown) ~ label {
     transform: translateY(-1.5rem) scale(0.85);
-    color: var(--color-primary);
-  }
-  
-  .form-actions {
-    margin-top: 1rem;
-  }
-  .form-actions .btn {
-    width: 100%;
-    justify-content: center;
-  }
-  @media (min-width: 768px) {
-    .form-actions .btn {
-      width: auto;
-    }
+    color: var(--color-gold);
   }
   .form-hint {
-    font-size: 0.75rem;
+    font-size: 0.78rem;
     color: var(--color-ink-soft);
     margin-top: 1rem;
-    text-align: center;
+    font-weight: 300;
   }
-  @media (min-width: 768px) {
-    .form-hint {
-      text-align: left;
-    }
+  @media (max-width: 900px) {
+    .contact-form-section,
+    .form-row { grid-template-columns: 1fr; }
+    .form-image { min-height: 320px; }
   }
 </style>
 
 <script>
-  document.getElementById('contactForm')?.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const nameInput = document.getElementById('name') as HTMLInputElement;
-    const emailInput = document.getElementById('email') as HTMLInputElement;
-    const subjectInput = document.getElementById('subject') as HTMLInputElement;
-    const messageInput = document.getElementById('message') as HTMLTextAreaElement;
-    
-    if (nameInput && emailInput && subjectInput && messageInput) {
-      const name = nameInput.value;
-      const email = emailInput.value;
-      const subject = subjectInput.value;
-      const message = messageInput.value;
-      
-      const text = `*New Inquiry from Website*%0A%0A*Name:* ${name}%0A*Email:* ${email}%0A*Subject:* ${subject}%0A*Message:* ${message}`;
-      
-      const phone = "919148643754"; 
-      const whatsappUrl = `https://wa.me/${phone}?text=${text}`;
-      
-      window.open(whatsappUrl, '_blank');
-    }
-  });
+  function bindContactForm() {
+    const form = document.getElementById("contactForm");
+    if (!(form instanceof HTMLFormElement) || form.dataset.bound === "true") return;
+    form.dataset.bound = "true";
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const nameInput = document.getElementById("name") as HTMLInputElement;
+      const emailInput = document.getElementById("email") as HTMLInputElement;
+      const subjectInput = document.getElementById("subject") as HTMLInputElement;
+      const messageInput = document.getElementById("message") as HTMLTextAreaElement;
+
+      if (nameInput && emailInput && subjectInput && messageInput) {
+        const name = nameInput.value;
+        const email = emailInput.value;
+        const subject = subjectInput.value;
+        const message = messageInput.value;
+
+        const text = `*New Inquiry from Website*%0A%0A*Name:* ${name}%0A*Email:* ${email}%0A*Subject:* ${subject}%0A*Message:* ${message}`;
+
+        const phone = "919148643754";
+        const whatsappUrl = `https://wa.me/${phone}?text=${text}`;
+
+        window.open(whatsappUrl, "_blank");
+      }
+    });
+  }
+
+  bindContactForm();
+  document.addEventListener("astro:page-load", bindContactForm);
 </script>

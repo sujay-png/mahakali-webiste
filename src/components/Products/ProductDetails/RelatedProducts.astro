@@ -10,11 +10,12 @@ const { products } = Astro.props;
 
 {products.length > 0 && (
   <section class="related-masterpieces">
+    <p class="eyebrow">Continue looking</p>
     <h2 class="font-display section-title">From the same workshop</h2>
     <div class="related-grid">
       {products.map((product) => (
         <a href={product.link} class="related-card">
-          <div class="image-wrapper">
+          <div class="image-wrapper" data-media>
             <span class="stock-badge">{product.stockStatus}</span>
             <img src={product.image} alt={product.name} class="related-img" loading="lazy" />
           </div>
@@ -30,46 +31,39 @@ const { products } = Astro.props;
 
 <style>
   .related-masterpieces {
-    margin-top: 4.5rem;
-    padding-top: 3rem;
-    border-top: 1px solid rgba(226, 191, 185, 0.3);
+    margin-top: 5.5rem;
+    padding-top: 3.5rem;
+    border-top: 1px solid var(--color-line);
   }
-  .section-title { font-size: 2rem; color: #570000; margin-bottom: 1.6rem; }
+  .section-title { font-size: clamp(2rem, 4vw, 3.2rem); margin: 0.7rem 0 2.2rem; max-width: 12ch; }
   .related-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.25rem;
+    gap: 1.6rem;
   }
   @media (min-width: 768px) {
     .related-grid { grid-template-columns: repeat(3, 1fr); }
   }
-  .related-card { display: grid; gap: 0.8rem; }
+  .related-card { display: grid; gap: 0.9rem; }
   .image-wrapper {
     position: relative;
-    aspect-ratio: 1.4;
+    aspect-ratio: 4 / 5;
     overflow: hidden;
-    border-radius: 14px;
-    background: #f3eee4;
+    background: var(--color-cream);
   }
   .stock-badge {
     position: absolute;
-    top: 0.6rem;
-    right: 0.6rem;
-    background: rgba(44, 22, 0, 0.78);
+    top: 0.8rem;
+    right: 0.8rem;
+    z-index: 1;
+    background: var(--color-walnut);
     color: #fff;
-    font-size: 10px;
-    letter-spacing: 0.08em;
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    padding: 0.28rem 0.5rem;
-    border-radius: 999px;
+    padding: 0.3rem 0.55rem;
   }
-  .related-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-  }
-  .related-card:hover .related-img { transform: scale(1.05); }
-  .product-title { font-size: 1.15rem; }
-  .product-price { color: #570000; font-weight: 700; font-size: 0.9rem; }
+  .related-img { width: 100%; height: 100%; object-fit: cover; }
+  .product-title { font-size: 1.4rem; max-width: 14ch; }
+  .product-price { color: var(--color-primary); font-size: 0.82rem; letter-spacing: 0.04em; }
 </style>
