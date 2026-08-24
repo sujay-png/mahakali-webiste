@@ -1,0 +1,109 @@
+---
+export const prerender = false;
+
+import Layout from "../../layouts/Layout.astro";
+import CollectionHero from "../../components/Products/CollectionHero.astro";
+import ProductSidebar from "../../components/Products/ProductSidebar.astro";
+import CollectionCTA from "../../components/Products/CollectionCTA.astro";
+import { categoryPath } from "../../lib/woocommerce/categories";
+import { getCategoryCounts } from "../../lib/woocommerce/catalog";
+
+const countsList = await getCategoryCounts();
+const counts = Object.fromEntries(countsList.map((c) => [c.id, c.count]));
+---
+
+<Layout
+  title="Furniture Collections"
+  description="Browse Mahakali's wooden sofas, cots, dining sets, tepoys and upholstered seating — live from the showroom catalog."
+  path="/products"
+>
+  <main class="collection-page">
+    <CollectionHero
+      label="The atelier"
+      title="Every collection, under one roof"
+      description="Ten workshops of seating, dining and rest — each piece finished in Udupi and waiting in our showrooms."
+      image="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=1800&q=80"
+    />
+
+    <div class="content-wrapper">
+      <div class="sidebar-column">
+        <ProductSidebar counts={counts} />
+      </div>
+      <div class="main-column">
+        <div class="category-mosaic">
+          {countsList.map((category) => (
+            <a href={categoryPath(category.slug)} class="mosaic-card">
+              <img src={category.heroImage} alt="" />
+              <span class="mosaic-copy">
+                <small>{category.eyebrow}</small>
+                <strong class="font-display">{category.name}</strong>
+                <em>{category.count} {category.count === 1 ? "piece" : "pieces"}</em>
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+    <CollectionCTA />
+  </main>
+</Layout>
+
+<style>
+  .content-wrapper {
+    max-width: var(--max-width);
+    margin: 4.5rem auto 0;
+    padding: 0 var(--gutter);
+    display: grid;
+    gap: 3rem;
+  }
+  @media (min-width: 1024px) {
+    .content-wrapper { grid-template-columns: 260px 1fr; gap: 4rem; }
+  }
+  .category-mosaic {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+    padding-bottom: 5rem;
+  }
+  @media (min-width: 700px) {
+    .category-mosaic { grid-template-columns: 1fr 1fr; }
+  }
+  .category-mosaic { align-items: stretch; }
+  @media (min-width: 900px) {
+    .category-mosaic { grid-template-columns: 1.15fr 0.85fr; }
+    .mosaic-card:first-child { grid-row: span 2; min-height: 560px; }
+  }
+  .mosaic-card {
+    position: relative;
+    min-height: 280px;
+    overflow: hidden;
+    color: #fff;
+    display: block;
+  }
+  .mosaic-card img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.06);
+    transition: transform 1.4s var(--ease);
+  }
+  .mosaic-card:hover img { transform: scale(1); }
+  .mosaic-copy {
+    position: absolute;
+    inset: auto 0 0;
+    padding: 1.8rem;
+    background: linear-gradient(transparent, rgba(36, 28, 24, 0.86));
+    display: grid;
+    gap: 0.25rem;
+  }
+  .mosaic-copy small {
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 0.66rem;
+    color: #e4c9a4;
+  }
+  .mosaic-copy strong { font-size: 1.85rem; color: #fff; }
+  .mosaic-copy em { font-style: italic; font-family: var(--font-display); opacity: 0.85; font-size: 1.05rem; }
+</style>

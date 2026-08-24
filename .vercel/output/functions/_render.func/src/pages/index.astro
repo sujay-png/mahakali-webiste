@@ -1,0 +1,69 @@
+---
+export const prerender = false;
+
+import Layout from "../layouts/Layout.astro";
+
+import Hero from "../components/Home/Hero.astro";
+import TopCategories from "../components/Home/TopCategories.astro";
+import PromoStrip from "../components/Home/PromoStrip.astro";
+import TrustBar from "../components/Home/TrustBar.astro";
+import WhyChooseUs from "../components/Home/WhyChooseUs.astro";
+import AboutSection from "../components/Home/AboutSection.astro";
+import DealBanner from "../components/Home/DealBanner.astro";
+import ProductLists from "../components/Home/ProductLists.astro";
+import Gallery from "../components/Home/Gallery.astro";
+import Testimonials from "../components/Home/Testimonials.astro";
+import ShowroomCTA from "../components/Home/ShowroomCTA.astro";
+
+import {
+  heroSlides,
+  topCategories,
+  promoStrip,
+  trustBar,
+  whyChooseUs,
+  aboutSection,
+  dealBanner,
+  gallery,
+  testimonials,
+} from "../data/home";
+import { getHomeShelves } from "../lib/woocommerce/catalog";
+
+const shelves = await getHomeShelves();
+const liveProductLists = {
+  onSale: {
+    title: "On Sale",
+    items: shelves.onSale,
+    emptyMessage: "No sale pieces online right now — ask in-store.",
+  },
+  bestSeller: {
+    title: "Best Seller",
+    items: shelves.bestSeller,
+    emptyMessage: "Best sellers will appear once the catalog is connected.",
+  },
+  topRated: {
+    title: "Top Rated",
+    items: shelves.topRated,
+    emptyMessage: "Ratings sync from WooCommerce after keys are added.",
+  },
+};
+---
+
+<Layout
+  title="Mahakali Home Furnitures & Interiors | Premium Sofas, Cots & Curtains in Udupi"
+  description="Udupi's most trusted furniture store since 1997. Handcrafted sofas, wooden cots, dining sets and curtains with free delivery and 28+ years of quality craftsmanship."
+  path="/"
+>
+  <main>
+    <Hero slides={heroSlides} />
+    <TrustBar data={trustBar} />
+    <TopCategories data={topCategories} />
+    <PromoStrip data={promoStrip} />
+    <WhyChooseUs data={whyChooseUs} />
+    <AboutSection data={aboutSection} />
+    <DealBanner data={dealBanner} />
+    <ProductLists data={liveProductLists} />
+    <Gallery data={gallery} />
+    <Testimonials data={testimonials} />
+    <ShowroomCTA />
+  </main>
+</Layout>
