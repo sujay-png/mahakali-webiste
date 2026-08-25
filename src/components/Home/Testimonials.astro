@@ -1,59 +1,388 @@
 ---
+import Icon from "../global/UI/Icon.astro";
+import StarRating from "../global/UI/StarRating.astro";
 import type { testimonials as TestimonialsType } from "../../data/home";
-export interface Props { data: typeof TestimonialsType; }
+export interface Props {
+  data: typeof TestimonialsType;
+}
 const { data } = Astro.props;
-const loop = [...data.items, ...data.items];
 ---
 
-<section class="section quotes">
-  <div class="wrap wrap--wide">
-    <p class="eyebrow">{data.eyebrow}</p>
-    <h2>{data.title} <em class="accent">{data.titleAccent}</em></h2>
-  </div>
+<section class="testimonial-hero">
+  <div class="th-grid">
+    <!-- Left Column: Image -->
+    <div class="th-left">
+      <img src="/images/furniture-composition.jpg" alt="Minimalist Scandinavian Furniture" class="th-image" />
+    </div>
 
-  <div class="quote-marquee marquee marquee--slow" aria-label="Client testimonials">
-    <div class="marquee__track">
-      {loop.map((t, i) => (
-        <blockquote class="card" aria-hidden={i >= data.items.length ? "true" : undefined}>
-          <p>“{t.quote}”</p>
-          <footer>
-            <strong>{t.name}</strong>
-            <span>{t.role}, Udupi</span>
-          </footer>
-        </blockquote>
-      ))}
+    <!-- Right Column: Content -->
+    <div class="th-right">
+      <div class="th-content-wrapper">
+        <!-- Static Top Section -->
+        <div class="th-badge">
+          <span class="th-dot"></span> Happy Customer
+        </div>
+        
+        <h2 class="th-heading">Beautiful Furniture Trusted By<br/>Modern Families</h2>
+        
+        <!-- Dynamic Carousel Section -->
+        <div class="th-carousel" id="testimonial-carousel">
+          <div class="th-carousel-viewport">
+            <div class="th-carousel-track">
+              {data.items.map((t, i) => (
+                <div class={`th-slide ${i === 0 ? 'active' : ''}`} data-index={i}>
+                  <div class="th-stars">
+                    <StarRating rating={t.rating} />
+                  </div>
+                  
+                  <blockquote class="th-quote">
+                    <p class="th-quote-text">"{t.quote}"</p>
+                  </blockquote>
+                  
+                  <div class="th-divider"></div>
+                  
+                  <div class="th-author-section">
+                    <div class="th-author-left">
+                      <div class="th-avatar">
+                        <img src={`https://ui-avatars.com/api/?name=${encodeURIComponent(t.name)}&background=333&color=fff`} alt={t.name} class="th-avatar-img" />
+                      </div>
+                      <div class="th-author-info">
+                        <span class="th-author-name">{t.name}</span>
+                        <span class="th-author-role">{t.role}, Udupi</span>
+                      </div>
+                    </div>
+                    <div class="th-quote-icon">
+                      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 11L8 15H11V19H5V11L7 7H10L10 11ZM20 11L18 15H21V19H15V11L17 7H20L20 11Z" fill="#EAE3D9"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <div class="th-controls">
+            {data.items.map((_, i) => (
+              <button class={`th-dot-btn ${i === 0 ? 'active' : ''}`} aria-label={`Go to slide ${i + 1}`} data-target={i}></button>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .quotes {
-    background: var(--color-surface);
+  .testimonial-hero {
+    width: 100%;
+    min-height: 80vh;
+    background-color: #F5F4F0;
     overflow: hidden;
+    position: relative;
+    font-family: var(--font-body, 'Inter', system-ui, sans-serif);
+    display: flex;
+    align-items: center;
+    padding: 2rem 0;
   }
-  h2 { max-width: 12ch; margin: 0.7rem 0 2.8rem; }
-  .quote-marquee { padding-bottom: 0.5rem; }
-  .card {
-    flex: 0 0 auto;
-    width: min(78vw, 520px);
-    margin: 0;
-    padding: 0 2.4rem 0 0;
-    border-right: 1px solid var(--color-line);
+  
+  .th-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    align-items: center;
   }
-  .card p {
+  
+  .th-left {
+    position: relative;
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Use multiply to blend the flat background of the generated image perfectly */
+  .th-image {
+    width: 100%;
+    max-width: 650px;
+    height: auto;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+  }
+  
+  .th-right {
+    padding: 2rem 6rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .th-content-wrapper {
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  .th-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 1rem;
+    border-radius: 9999px;
+    background-color: transparent;
+    border: 1px solid rgba(0,0,0,0.1);
+    font-size: 0.85rem;
+    color: #333333;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+  }
+  
+  .th-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #C5A059; /* Gold dot */
+  }
+  
+  .th-heading {
+    font-size: clamp(2rem, 3vw, 2.75rem);
+    line-height: 1.15;
+    color: #111111;
+    margin-bottom: 2rem;
+    font-weight: 600;
+    font-family: var(--font-display, 'Inter', system-ui, sans-serif);
+    letter-spacing: -0.02em;
+  }
+  
+  .th-carousel {
+    position: relative;
+    width: 100%;
+  }
+  
+  .th-carousel-viewport {
+    overflow: hidden;
+    width: 100%;
+  }
+  
+  .th-carousel-track {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    align-items: flex-start;
+  }
+  
+  .th-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    padding-right: 1rem;
+    opacity: 0.4;
+    transition: opacity 0.6s ease;
+  }
+  
+  .th-slide.active {
+    opacity: 1;
+  }
+  
+  .th-stars {
+    margin-bottom: 1.5rem;
+    display: flex;
+    color: #C5A059; /* Gold */
+  }
+  
+  .th-quote {
+    position: relative;
+    margin: 0 0 2rem 0;
+  }
+  
+  .th-quote-text {
     font-family: var(--font-display);
-    font-size: clamp(1.55rem, 2.4vw, 2.15rem);
+    font-size: clamp(1.2rem, 1.8vw, 1.55rem);
     font-weight: 500;
     font-style: italic;
-    line-height: 1.28;
+    line-height: 1.4;
     letter-spacing: -0.015em;
-    max-width: 22ch;
+    color: #444;
   }
-  footer {
-    margin-top: 1.6rem;
-    display: grid;
-    gap: 0.15rem;
+  
+  .th-divider {
+    height: 1px;
+    background: rgba(0,0,0,0.08);
+    width: 100%;
+    margin-bottom: 1.5rem;
   }
-  footer strong { font-size: 0.92rem; font-weight: 500; }
-  footer span { color: var(--color-ink-soft); font-size: 0.82rem; }
+  
+  .th-author-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .th-author-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .th-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  
+  .th-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .th-author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+  
+  .th-author-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1A1A1A;
+  }
+  
+  .th-author-role {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: #777777;
+  }
+  
+  .th-quote-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+  }
+  
+  .th-controls {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+  
+  .th-dot-btn {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #D4C8C5;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.3s ease;
+  }
+  
+  .th-dot-btn.active, .th-dot-btn:hover {
+    background: #333333;
+    transform: scale(1.3);
+  }
+  
+  @media (max-width: 960px) {
+    .th-grid {
+      grid-template-columns: 1fr;
+    }
+    .th-left {
+      padding: 3rem 2rem 0;
+    }
+    .th-right {
+      padding: 2rem 2rem 4rem;
+    }
+  }
 </style>
+
+<script>
+  class TestimonialCarousel {
+    el: HTMLElement;
+    track: HTMLElement;
+    slides: NodeListOf<HTMLElement>;
+    dots: NodeListOf<HTMLElement>;
+    currentIndex: number;
+    totalSlides: number;
+    timer: ReturnType<typeof setInterval> | null;
+    isAnimating: boolean;
+    autoPlayInterval: number;
+
+    constructor(element: HTMLElement) {
+      this.el = element;
+      this.track = this.el.querySelector('.th-carousel-track') as HTMLElement;
+      this.slides = this.el.querySelectorAll('.th-slide');
+      this.dots = this.el.querySelectorAll('.th-dot-btn');
+      this.currentIndex = 0;
+      this.totalSlides = this.slides.length;
+      this.timer = null;
+      this.isAnimating = false;
+      this.autoPlayInterval = 6000;
+      
+      this.init();
+    }
+    
+    init() {
+      if (this.totalSlides <= 1) return;
+      
+      this.dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+          if (this.currentIndex !== i && !this.isAnimating) {
+            this.goToSlide(i);
+            this.resetTimer();
+          }
+        });
+      });
+      
+      this.startTimer();
+    }
+    
+    startTimer() {
+      this.timer = setInterval(() => this.nextSlide(), this.autoPlayInterval);
+    }
+    
+    resetTimer() {
+      if (this.timer) clearInterval(this.timer);
+      this.startTimer();
+    }
+    
+    nextSlide() {
+      if (this.isAnimating) return;
+      this.goToSlide((this.currentIndex + 1) % this.totalSlides);
+    }
+    
+    goToSlide(index: number) {
+      this.isAnimating = true;
+      
+      this.dots[this.currentIndex].classList.remove('active');
+      this.dots[index].classList.add('active');
+      
+      this.slides[this.currentIndex].classList.remove('active');
+      this.slides[index].classList.add('active');
+      
+      this.currentIndex = index;
+      
+      // Physically slide the track
+      if (this.track) {
+        this.track.style.transform = `translateX(-${index * 100}%)`;
+      }
+      
+      setTimeout(() => {
+        this.isAnimating = false;
+      }, 600); 
+    }
+  }
+
+  const initCarousels = () => {
+    document.querySelectorAll<HTMLElement>('#testimonial-carousel').forEach(c => {
+      // Prevent multiple initializations
+      if (c.dataset.initialized === 'true') return;
+      c.dataset.initialized = 'true';
+      new TestimonialCarousel(c);
+    });
+  };
+
+  document.addEventListener('DOMContentLoaded', initCarousels);
+  document.addEventListener('astro:page-load', initCarousels);
+</script>
