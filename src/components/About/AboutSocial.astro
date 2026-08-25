@@ -10,8 +10,7 @@ const { data } = Astro.props;
 
 <section class="social section wrap wrap--wide" data-reveal-group>
   <div class="social-header" data-reveal="up">
-    <p class="eyebrow">Studio notes</p>
-    <h2 class="font-display">{data.title}</h2>
+    <h2 class="font-display">{data.title} <em class="accent">{data.handle}</em></h2>
     <p>Follow us on Instagram <a class="social-link" href={data.link} target="_blank" rel="noopener">{data.handle}</a></p>
   </div>
   <div class="social-grid">

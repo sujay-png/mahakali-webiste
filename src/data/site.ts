@@ -15,52 +15,52 @@ export const siteInfo = {
 
 export const topBar = {
   email: 'mahakali@gmail.com',
-  phone: '99486 42754',
+  phone: '091486 43754',
   needHelp: 'Need Help?',
   social: [
-    { label: 'Facebook', href: 'https://facebook.com', icon: 'facebook' },
-    { label: 'Instagram', href: 'https://instagram.com', icon: 'instagram' },
-    { label: 'YouTube', href: 'https://youtube.com', icon: 'youtube' }
+    { label: 'Facebook', href: 'https://www.facebook.com/mahakalisofas/', icon: 'facebook' },
+    { label: 'Instagram', href: 'https://www.instagram.com/mahakalifurnishings/', icon: 'instagram' },
   ]
 };
 
 export const mainNav = [
   { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
+  { label: 'About Us', href: '/about' },
   { label: 'Gallery', href: '/gallery' },
   {
-    label: 'Collections',
+    label: 'Products',
     href: '/products',
     children: CATALOG_CATEGORIES.map((category) => ({
       label: category.navLabel,
       href: categoryPath(category.slug),
     })),
   },
-  { label: 'Contact', href: '/contact' },
+  { label: 'User Dashboard', href: '/user-dashboard' },
+  { label: 'Contact Us', href: '/contact' },
 ];
 
 export const branches = [
   {
-    name: 'Kereebettu Branch',
-    lines: ['First Floor, KSRTC Bus Stand,', 'Baraniya, Udupi', 'Karnataka 576101'],
-    phone: '99486 42754'
+    name: 'Main Branch',
+    lines: ['First Floor, KSRTC Bus Stand,', 'Bananje, Udupi,', 'Karnataka 576101'],
+    phone: '091486 43754'
   },
   {
-    name: 'Brahmagiri Branch',
-    lines: ['Behind Hotel Janardana,', 'near Old KSRTC Bus Stand,', 'Udupi, Karnataka 576101'],
-    phone: '098602 84996'
+    name: 'Kundapura Branch',
+    lines: ['Karanth complex, beside KSRTC,', 'bus depot, Vaderhobli,', 'Kundapura, Karnataka 576201'],
+    phone: '099729 80332'
   },
   {
-    name: 'Kunjibettu Branch',
-    lines: ['Karkeni complex, beside KSRTC,', 'bus depot, Vaderhobli,', 'Kundapura, Karnataka 576201'],
-    phone: '066739 80332'
+    name: 'Our Branch',
+    lines: ['Behind Hotel Janardana', 'near Old KSRTC Bus Stand,', 'Udupi, Karnataka 576101'],
+    phone: '099802 84696'
   }
 ];
 
 export const quickLinks = [
   { label: 'About Us', href: '/about' },
   { label: 'Contact Us', href: '/contact' },
-  { label: 'Latest News', href: '/blog' },
+  { label: 'Update News', href: '/blog' },
   { label: 'Terms Of Service', href: '/terms' },
   { label: 'Privacy Policy', href: '/privacy' },
   { label: 'Delivery & Installation Policy', href: '/delivery-policy' }
@@ -68,8 +68,8 @@ export const quickLinks = [
 
 export const supportCenter = [
   { label: "FAQ's", href: '/faq' },
-  { label: 'Track Your Order', href: '/' },
-  { label: 'Returns Policy', href: '/returns' }
+  { label: 'Track Your Order', href: '/track-order' },
+  { label: 'Returns Policy', href: '/return' }
 ];
 
 export const footerNote = `© ${new Date().getFullYear()} Mahakali Furnitures. All Rights Reserved.`;

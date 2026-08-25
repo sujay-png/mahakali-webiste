@@ -17,7 +17,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     id: 25,
     slug: "upholstered",
     name: "Upholstered",
-    navLabel: "Upholstered",
+    navLabel: "UPHOLSTERED",
     eyebrow: "Curated comfort",
     description:
       "Sofas and sectionals where masterful upholstery meets everyday ease — the pieces that anchor a living room.",
@@ -28,7 +28,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     id: 24,
     slug: "wooden-sofa",
     name: "Wooden Sofa",
-    navLabel: "Wooden Sofa",
+    navLabel: "WOODEN SOFA",
     eyebrow: "Solid timber seating",
     description:
       "Frame-forward sofas in teak and hardwood, built for longevity and the warm grain that only wood can give.",
@@ -39,7 +39,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     id: 23,
     slug: "wooden-cot",
     name: "Wooden Cot",
-    navLabel: "Wooden Cot",
+    navLabel: "WOODEN COT",
     eyebrow: "Rest, crafted",
     description:
       "Bedroom cots and bedsteads in solid wood — quiet silhouettes, honest joinery, and a finish that ages well.",
@@ -50,7 +50,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     id: 22,
     slug: "wooden-jhoola",
     name: "Wooden Jhoola",
-    navLabel: "Wooden Jhoola",
+    navLabel: "WOODEN JOOLA",
     eyebrow: "Swing into stillness",
     description:
       "Traditional wooden jhoolas for verandahs and living rooms — a slow, familiar rhythm for Udupi homes.",
@@ -61,7 +61,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     id: 19,
     slug: "wooden-dining-5-3",
     name: "Wooden Dining 5/3",
-    navLabel: "Dining 5/3",
+    navLabel: "WOODEN DINING 5/3",
     eyebrow: "Table for five",
     description:
       "Dining sets proportioned for everyday family meals — a 5/3 configuration with a solid wooden top.",
@@ -72,7 +72,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     id: 20,
     slug: "wooden-dining-6-3",
     name: "Wooden Dining 6/3",
-    navLabel: "Dining 6/3",
+    navLabel: "WOODEN DINING 6/3",
     eyebrow: "Gather six",
     description:
       "Generous wooden dining sets for six — the weekend table, festival meals, and conversations that linger.",
@@ -83,7 +83,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     id: 21,
     slug: "wooden-dining-glass-4-3",
     name: "Wooden Dining Set with Glass Top 4/3",
-    navLabel: "Dining + Glass Top",
+    navLabel: "WOODEN DINING SET WITH GLASS TOP 4/3",
     eyebrow: "Light on wood",
     description:
       "Four-seater dining with a glass top — the grain shows through, the surface stays easy to live with.",
@@ -94,7 +94,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     id: 18,
     slug: "tepoy",
     name: "Tepoy",
-    navLabel: "Tepoy",
+    navLabel: "TEPOY",
     eyebrow: "Centre & side tables",
     description:
       "Tepoys and occasional tables that complete a seating arrangement — compact, sturdy, and finely finished.",
@@ -105,7 +105,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     id: 17,
     slug: "cushion-chairs",
     name: "Cushion Chairs",
-    navLabel: "Cushion Chairs",
+    navLabel: "CUSHION CHAIRS",
     eyebrow: "A chair of one’s own",
     description:
       "Cushioned lounge and accent chairs — extra seating that still feels like a destination in the room.",
@@ -116,7 +116,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     id: 16,
     slug: "wooden-furniture",
     name: "Wooden furniture",
-    navLabel: "Wooden Furniture",
+    navLabel: "Wooden furniture",
     eyebrow: "The timber atelier",
     description:
       "A wider wooden furniture edit — pieces that sit outside a single collection but share the same workshop DNA.",

@@ -12,13 +12,13 @@ const { data } = Astro.props;
   <div class="wrap wrap--wide hero-grid" data-reveal-group>
     <div class="content" data-reveal="up">
       <p class="eyebrow">{data.eyebrow}</p>
-      <h1 class="font-display">Spaces deserve <br/> <em class="accent">furniture with</em> <br/> character.</h1>
+      <h1 class="font-display" set:html={data.title}></h1>
       
       <div class="copy-box">
         <p>{data.copy}</p>
         <div class="actions">
           <a href="/contact" class="btn btn-primary">Visit showroom</a>
-          <a href="/products" class="btn btn-outline">Collections</a>
+          <a href="/products" class="btn btn-outline">Products</a>
         </div>
       </div>
     </div>

@@ -8,6 +8,7 @@ import { ViewTransitions } from "astro:transitions";
 export interface Props {
   title: string;
   description?: string;
+  keywords?: string;
   image?: string;
   path?: string;
 }
@@ -15,6 +16,7 @@ export interface Props {
 const {
   title,
   description = siteInfo.description,
+  keywords = "",
   image = "/og-cover.jpg",
   path = "/",
 } = Astro.props;
@@ -55,9 +57,19 @@ const localBusinessSchema = {
     <!-- Primary SEO -->
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    {keywords && <meta name="keywords" content={keywords} />}
     <link rel="canonical" href={canonicalURL} />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#f7f3ee" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1PMFXHZMXM"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-1PMFXHZMXM');
+    </script>
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />

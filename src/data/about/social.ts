@@ -1,5 +1,5 @@
 export const socialData = {
-  title: "Social Inspiration",
+  title: "Instagram",
   handle: "@Mahakali",
   link: "#",
   images: [

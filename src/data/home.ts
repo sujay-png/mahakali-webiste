@@ -10,9 +10,9 @@ const categoryImage = (slug: string) =>
 export const heroSlides = [
   {
     eyebrow: 'Welcome to Mahakali!',
-    title: 'Transform your home with',
-    titleAccent: 'Mahakali Udupi',
-    copy: 'At Mahakali Udupi, every sofa, mattress and furnishing is designed with comfort, elegance and lasting quality — so your home feels as beautiful as it looks.',
+    title: 'We craft modern furniture for your',
+    titleAccent: 'dream home',
+    copy: 'At Mahakali Udupi, every sofa, mattress, and furnishing is designed with comfort, elegance, and lasting quality—so your home feels as beautiful as it looks.',
     ctaPrimary: { label: 'Shop Now', href: '/products' },
     ctaSecondary: { label: 'Learn More', href: '/about' },
     image: {
@@ -24,7 +24,7 @@ export const heroSlides = [
     eyebrow: 'Welcome to Mahakali!',
     title: 'Premium comfort with',
     titleAccent: 'timeless style',
-    copy: 'Handcrafted sofas, wooden cots and curated curtains — modern designs meeting trusted craftsmanship for over 28 years.',
+    copy: 'Discover handcrafted sofas, cozy mattresses, and curated curtains at Mahakali Udupi—where modern designs meet trusted craftsmanship for over 28 years.',
     ctaPrimary: { label: 'Shop Now', href: '/products' },
     ctaSecondary: { label: 'Learn More', href: '/about' },
     image: {
@@ -34,9 +34,9 @@ export const heroSlides = [
   },
   {
     eyebrow: 'Welcome to Mahakali!',
-    title: 'Furniture that transforms',
-    titleAccent: 'the way you live',
-    copy: 'From seating to dining and rest, we bring comfort, durability and beauty together for living spaces you will love coming home to.',
+    title: 'Transform your home with',
+    titleAccent: 'Mahakali Udupi',
+    copy: 'From luxurious seating to elegant curtains and custom-made furniture, we bring comfort, durability, and beauty together to create living spaces you’ll love.',
     ctaPrimary: { label: 'Shop Now', href: '/products' },
     ctaSecondary: { label: 'Learn More', href: '/about' },
     image: {
@@ -94,40 +94,40 @@ export const trendingBanner = {
 };
 
 export const trustBar = [
-  { icon: 'truck', title: 'Free Delivery', copy: 'For any order' },
-  { icon: 'refresh', title: 'No Refund', copy: 'There is no refund' },
-  { icon: 'shield', title: 'Safe Payment', copy: '100% secure payment' },
-  { icon: 'headset', title: '9:30 AM – 7:00 PM', copy: 'Feel free to call us' }
+  { icon: 'truck', title: 'Free Delivery', copy: 'For Any Orders' },
+  { icon: 'refresh', title: 'No Refund', copy: 'There Is No Refund' },
+  { icon: 'shield', title: 'Safe Payment', copy: '100% Secure Payment' },
+  { icon: 'headset', title: '9:30AM -7:00PM Support', copy: 'Feel Free To Call Us' }
 ];
 
 export const whyChooseUs = {
   eyebrow: 'Why Choose Us',
-  title: 'Trusted for 28+ years in comfort, style & quality',
+  title: 'Trusted For 28+ Years In Comfort, Style & Quality',
   copy:
-    "Mahakali Sofas & Curtains is Udupi's most trusted destination for premium sofas, mattresses, curtains and custom furniture. We provide long-lasting quality, modern designs, and a smooth shopping experience trusted by thousands of customers.",
+    "Mahakali Sofas & Curtains is Udupi’s most trusted destination for premium sofas, mattresses, curtains, and custom furniture. We provide long-lasting quality, modern designs, and a smooth shopping experience trusted by thousands of customers.",
   image: {
     src: 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=900&q=80',
     alt: 'Beige corner sofa set styled in a bright living room'
   },
   points: [
-    { icon: 'medal', title: '28+ Years Of Trust', copy: 'Serving Udupi since 1997 with top-quality sofas, mattresses, curtains and custom furniture trusted by thousands of happy customers.' },
-    { icon: 'tag', title: 'Affordable Premium Quality', copy: 'We offer modern, elegant and durable designs at prices that fit every budget — without compromising on material quality or comfort.' },
-    { icon: 'van', title: 'Home Delivery Available', copy: 'Hassle-free delivery and installation on request, ensuring your furniture is safely set up exactly the way you want.' }
+    { icon: 'medal', title: '28+ Years of Trust', copy: 'Serving Udupi since 1997 with top-quality sofas, mattresses, curtains & custom furniture trusted by thousands of happy customers.' },
+    { icon: 'tag', title: 'Affordable Premium Quality', copy: 'We offer modern, elegant & durable designs at prices that fit every budget—without compromising on material quality or comfort.' },
+    { icon: 'van', title: 'Home Delivery Available', copy: 'Hassle-free delivery & installation (on request), ensuring your furniture is safely set up exactly the way you want.' }
   ]
 };
 
 export const aboutSection = {
   eyebrow: 'About Us',
-  title: 'Mahakali Sofas & Curtains',
-  titleAccent: "Udupi's Most Trusted Name",
-  titleTail: 'For Comfort, Elegance & Timeless Living.',
+  title: 'Mahakali Sofas & Curtains \u2013',
+  titleAccent: "Udupi’s most trusted name",
+  titleTail: 'for comfort, elegance & timeless living.',
   copy:
-    "For over 28 years, we have been enhancing homes with premium sofas, cosy mattresses, beautiful curtains and customised furniture that perfectly blend comfort and style. Located near Adarsh Hospital in Brahmagiri, we are your reliable destination for quality home furnishings. Our products are crafted to last and our guidance ensures you choose what suits your lifestyle best.",
+    "For over 28 years, we have been enhancing homes with premium sofas, cozy mattresses, beautiful curtains, and customized furniture that perfectly blend comfort and style. Located near Adarsh Hospital in Brahmagiri, we are your reliable destination for quality home furnishings. Our products are crafted to last and our guidance ensures you choose what suits your lifestyle best.",
   bullets: [
-    'Streamlined shopping experience',
-    'Affordable modern design', 
-    'Competitive price & easy to shop',
-    'We made awesome products'
+    'Streamlined Shipping Experience',
+    'Affordable Modern Design', 
+    'Competitive Price & Easy To Shop',
+    'We Made Awesome Products'
   ],
   cta: { label: 'Discover More', href: '/about' },
   badge: '28 Years Of Experience',
@@ -139,7 +139,7 @@ export const aboutSection = {
 };
 
 export const dealBanner = {
-  eyebrow: 'Best Deal',
+  eyebrow: 'Deal',
   title: 'Wooden L Corner Kerala Model',
   copy: 'Get the best deal on premium furniture with the highest discount available today. Upgrade your home with comfort and style.',
   price: '₹38,250.00',
@@ -192,9 +192,9 @@ export const testimonials = {
   title: 'What Our Client',
   titleAccent: "Say's",
   items: [
-    { name: 'Shilpa Bhat', role: 'Customer', rating: 5, quote: 'I recently purchased a sofa set from them and the quality is excellent. The finish, comfort and fabric are exactly as shown. Their team kept me updated till delivery. Truly a satisfying experience.' },
-    { name: 'Vishwanath Nayak', role: 'Customer', rating: 5, quote: 'Very good service and genuine pricing. I ordered a customised TV unit and the workmanship was perfect. The installation team was polite and cooperative. I will surely recommend them to others.' },
-    { name: 'Raghavendra Bhat', role: 'Customer', rating: 4, quote: 'I loved their collection and how they guided me with measurements for my living room. They delivered on time and the furniture looks premium. I am very happy with the purchase and will surely buy again.' }
+    { name: 'Shilpa Bhat', role: 'Customer', rating: 5, quote: 'I recently purchased a sofa set from them and the quality is excellent. The finish, comfort and fabric are exactly as shown. Their team kept me updated till delivery. Truly a satisfying experience!' },
+    { name: 'Vishwanath Nayak', role: 'Customer', rating: 5, quote: 'Very good service and genuine pricing. I ordered a customized TV unit, and the workmanship was perfect. The installation team was polite and cooperative. I will surely recommend them to others.' },
+    { name: 'Raghavendra Bhat', role: 'Customer', rating: 4, quote: 'I loved their collection and how they guided me with measurements for my living room. The delivery was on time and the furniture looks premium. I am very happy with the purchase and will surely buy again!' }
   ]
 };
 

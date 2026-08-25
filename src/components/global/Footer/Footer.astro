@@ -1,8 +1,6 @@
 ---
 import Icon from "../UI/Icon.astro";
-import { siteInfo, topBar, branches, footerNote, mainNav } from "../../../data/site";
-
-const nav = mainNav.filter((item) => !item.children);
+import { siteInfo, topBar, branches, footerNote, quickLinks, supportCenter } from "../../../data/site";
 ---
 
 <footer class="footer">
@@ -12,15 +10,17 @@ const nav = mainNav.filter((item) => !item.children);
       <p>{siteInfo.description}</p>
     </div>
     <div>
-      <p class="label">Navigate</p>
-      <ul class="links">
-        {nav.map((item) => (
+      <p class="label">Quick Links</p>
+      <ul class="links" style="margin-bottom: 2rem;">
+        {quickLinks.map((item) => (
           <li><a href={item.href}>{item.label}</a></li>
         ))}
-        <li><a href="/products">Collections</a></li>
-        <li><a href="/faq">FAQs</a></li>
-        <li><a href="/terms">Terms</a></li>
-        <li><a href="/privacy">Privacy</a></li>
+      </ul>
+      <p class="label">Support Center</p>
+      <ul class="links">
+        {supportCenter.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
       </ul>
     </div>
     <div>
