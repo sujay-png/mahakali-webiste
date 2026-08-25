@@ -28,7 +28,7 @@ export const mainNav = [
   { label: 'About Us', href: '/about' },
   { label: 'Gallery', href: '/gallery' },
   {
-    label: 'Products',
+    label: 'Collections',
     href: '/products',
     children: CATALOG_CATEGORIES.map((category) => ({
       label: category.navLabel,

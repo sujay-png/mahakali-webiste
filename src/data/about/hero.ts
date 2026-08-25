@@ -8,3 +8,5 @@ export const heroData = {
     alt: "A brightly lit, luxurious living room featuring high-end contemporary furniture. The focal point is a plush, deep maroon sofa set against textured linen-colored walls. Warm natural light streams through large windows, highlighting the organic textures of teak wood accents and a meticulously crafted coffee table. The overall mood is stately, expert, and warm, evoking a sense of timeless elegance."
   }
 };
+
+
