@@ -1,4 +1,4 @@
-import { CATALOG_CATEGORIES, getCategoryBySlug } from "./categories";
+import { CATALOG_CATEGORIES, getCategoryBySlug, type CatalogCategory } from "./categories";
 import {
   fetchRestCategories,
   fetchRestProductById,
@@ -12,7 +12,7 @@ import { hasRestCredentials, isWooConfigured } from "./env";
 import { mapRestProduct, mapStoreProduct, toCard, toShelfItem } from "./mappers";
 import type { HomeShelfItem, ProductCardModel, ProductDetailModel } from "./types";
 
-async function loadMappedProducts(params: Record<string, string | number> = {}) {
+async function loadMappedProducts(params: Record<string, string | number | boolean> = {}) {
   if (!isWooConfigured()) return [] as ProductDetailModel[];
 
   try {
