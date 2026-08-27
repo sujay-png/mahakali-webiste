@@ -63,7 +63,7 @@ const localBusinessSchema = {
     <meta name="theme-color" content="#f7f3ee" />
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1PMFXHZMXM"></script>
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-1PMFXHZMXM"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -97,7 +97,7 @@ const localBusinessSchema = {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <!-- Structured data -->
-    <script
+    <script is:inline
       type="application/ld+json"
       set:html={JSON.stringify(localBusinessSchema)}
     />

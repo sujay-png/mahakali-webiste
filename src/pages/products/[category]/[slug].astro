@@ -65,7 +65,7 @@ const productSchema = {
   path={`/products/${category.slug}/${product.slug}`}
 >
   <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(productSchema)} />
   </Fragment>
 
   <main class="product-details-page">

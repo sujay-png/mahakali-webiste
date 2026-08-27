@@ -62,14 +62,14 @@ export const quickLinks = [
   { label: 'Contact Us', href: '/contact' },
   { label: 'Update News', href: '/blog' },
   { label: 'Terms Of Service', href: '/terms' },
-  { label: 'Privacy Policy', href: '/privacy' },
-  { label: 'Delivery & Installation Policy', href: '/delivery-policy' }
+  { label: 'Privacy Policy', href: '/privacy' }
 ];
 
 export const supportCenter = [
   { label: "FAQ's", href: '/faq' },
-  { label: 'Track Your Order', href: '/track-order' },
-  { label: 'Returns Policy', href: '/return' }
+  { label: 'Track Your Order', href: '#' },
+  { label: 'Returns Policy', href: '/returns' },
+  { label: 'Delivery & Installation Policy', href: '/delivery-policy' }
 ];
 
 export const footerNote = `© ${new Date().getFullYear()} Mahakali Furnitures. All Rights Reserved.`;
