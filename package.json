@@ -1,26 +1,32 @@
 {
   "name": "mahakali-home-furnitures",
-  "type": "module",
   "version": "1.0.0",
+  "type": "module",
+
+  "engines": {
+    "node": "22.x"
+  },
+
   "scripts": {
     "dev": "astro dev --host 0.0.0.0",
-    "start": "HOST=0.0.0.0 node ./dist/server/entry.mjs",
+    "start": "astro preview --host 0.0.0.0",
     "build": "astro build",
     "preview": "astro preview --host 0.0.0.0"
   },
+
   "dependencies": {
-    "@astrojs/node": "^8.3.4",
-    "@astrojs/react": "^4.4.2",
-    "@astrojs/vercel": "^7.8.2",
-    "astro": "^4.15.0",
+    "@astrojs/react": "^5.0.0",
+    "@astrojs/vercel": "^11.0.0",
+    "astro": "^7.0.0",
     "motion": "^13.1.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
+
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
-    "@types/react": "^18.3.31",
-    "@types/react-dom": "^18.3.7",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
     "typescript": "^5.9.3"
   }
 }
