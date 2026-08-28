@@ -23,7 +23,7 @@ const { data } = Astro.props;
           <span class="th-dot"></span> Happy Customer
         </div>
         
-        <h2 class="th-heading">Beautiful Furniture Trusted By<br/>Modern Families</h2>
+        <h2 class="th-heading">Beautiful Furniture Trusted By Modern Families</h2>
         
         <!-- Dynamic Carousel Section -->
         <div class="th-carousel" id="testimonial-carousel">
@@ -153,6 +153,10 @@ const { data } = Astro.props;
     font-weight: 600;
     font-family: var(--font-display, 'Inter', system-ui, sans-serif);
     letter-spacing: -0.02em;
+  }
+
+  @media (max-width: 480px) {
+    .th-heading { font-size: 1.9rem; }
   }
   
   .th-carousel {

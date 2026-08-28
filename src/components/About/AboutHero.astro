@@ -53,9 +53,9 @@ const { data } = Astro.props;
     margin-bottom: 1.5rem;
   }
   h1 {
-    font-size: clamp(2.8rem, 4.7vw, 4.8rem);
-    line-height: 1.02;
-    margin-bottom: 2rem;
+    font-size: clamp(2.5rem, 3.7vw, 4rem);
+    line-height: 1.04;
+    margin-bottom: 1.75rem;
   }
   .accent {
     font-style: italic;
@@ -113,7 +113,12 @@ const { data } = Astro.props;
     .copy-box { margin-left: 0; padding: 2rem; }
   }
   @media (max-width: 800px) {
-    .hero-grid { grid-template-columns: 1fr; }
+    .hero-grid { display: flex; flex-direction: column; }
+    .content { display: contents; }
+    .eyebrow { order: 1; }
+    h1 { order: 2; }
+    .visual { order: 3; }
+    .copy-box { order: 4; }
     h1 {
       font-size: clamp(2.4rem, 10vw, 3rem);
       line-height: 1.06;

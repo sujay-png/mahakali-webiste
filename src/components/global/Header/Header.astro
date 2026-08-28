@@ -15,7 +15,7 @@ const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
     <nav class="desktop-nav" aria-label="Primary">
       <ul>
         {
-          mainNav.map((item) => {
+          mainNav.filter((item) => !["User Dashboard", "Contact Us"].includes(item.label)).map((item) => {
             const isActive =
               Astro.url.pathname === item.href ||
               (item.href !== "/" && Astro.url.pathname.startsWith(item.href));
@@ -74,11 +74,14 @@ const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
     <p class="menu-kicker">Menu</p>
     <nav aria-label="Mobile">
       <ul class="menu-links">
-        {mainNav.map((item, i) => (
+        {mainNav.filter((item) => !["User Dashboard", "Contact Us"].includes(item.label)).map((item, i) => (
           <li style={`--d: ${0.08 + i * 0.06}s`}>
             {item.children ? (
               <div class="menu-group">
-                <a href={item.href} class="menu-link">{item.label}</a>
+                <a href={item.href} class="menu-link">
+                  <span>{item.label}</span>
+                  <Icon name="chevron-down" class="menu-chevron" />
+                </a>
                 <ul class="menu-sub">
                   {item.children.map((child) => (
                     <li><a href={child.href}>{child.label}</a></li>
@@ -335,7 +338,10 @@ const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
   }
   .menu-links { display: grid; gap: 0.75rem; }
   .menu-link {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
     font-family: var(--font-display);
     font-size: clamp(2rem, 8.5vw, 3.1rem);
     line-height: 1.04;
@@ -343,6 +349,13 @@ const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
     transform: translateY(24px);
     opacity: 0;
   }
+  :global(.menu-chevron) {
+    width: 1.4rem;
+    height: 1.4rem;
+    margin-left: 1rem;
+    transition: transform 0.35s var(--ease);
+  }
+  :global(.menu-group.is-open .menu-chevron) { transform: rotate(180deg); }
   .mobile-menu.is-open .menu-link,
   .mobile-menu.is-open .menu-group {
     animation: menu-rise 0.7s var(--ease) both;

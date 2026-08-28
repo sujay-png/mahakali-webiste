@@ -9,19 +9,23 @@ import { siteInfo, topBar, branches, footerNote, quickLinks, supportCenter } fro
       <img src="/images/new-logo.png" alt={siteInfo.name} class="logo" />
       <p>{siteInfo.description}</p>
     </div>
-    <div>
-      <p class="label">Quick Links</p>
-      <ul class="links" style="margin-bottom: 2rem;">
-        {quickLinks.map((item) => (
-          <li><a href={item.href}>{item.label}</a></li>
-        ))}
-      </ul>
-      <p class="label">Support Center</p>
-      <ul class="links">
-        {supportCenter.map((item) => (
-          <li><a href={item.href}>{item.label}</a></li>
-        ))}
-      </ul>
+    <div class="link-groups">
+      <div>
+        <p class="label">Quick Links</p>
+        <ul class="links">
+          {quickLinks.map((item) => (
+            <li><a href={item.href}>{item.label}</a></li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <p class="label">Support Center</p>
+        <ul class="links">
+          {supportCenter.map((item) => (
+            <li><a href={item.href}>{item.label}</a></li>
+          ))}
+        </ul>
+      </div>
     </div>
     <div>
       <p class="label">Visit</p>
@@ -76,6 +80,7 @@ import { siteInfo, topBar, branches, footerNote, quickLinks, supportCenter } fro
   }
   ul { display: grid; gap: 1.3rem; }
   .links { gap: 0.55rem; }
+  .link-groups { display: grid; gap: 2rem; }
   strong { display: block; color: #fff; font-weight: 500; margin-bottom: 0.25rem; }
   span { display: block; font-weight: 300; font-size: 0.92rem; }
   a:hover { color: #fff; }
@@ -96,5 +101,6 @@ import { siteInfo, topBar, branches, footerNote, quickLinks, supportCenter } fro
   @media (max-width: 480px) {
     .footer { padding-top: 3.5rem; }
     .top { padding-bottom: 2.5rem; }
+    .link-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
   }
 </style>

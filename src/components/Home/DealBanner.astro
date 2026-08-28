@@ -218,4 +218,10 @@ const { data } = Astro.props;
     h2 { font-size: 2.2rem; }
     .price-action { flex-direction: column; gap: 1.5rem; }
   }
+  @media (max-width: 480px) {
+    .deal-container { padding-inline: 1rem; }
+    .image-wrapper img { width: 100%; transform: rotate(-5deg); }
+    .deal-container:hover .image-wrapper img { transform: rotate(0deg) translateY(-6px); }
+    .btn-large { padding-inline: 1.5rem; }
+  }
 </style>

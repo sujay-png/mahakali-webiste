@@ -42,6 +42,10 @@ const { data } = Astro.props;
     p { border-right: none; padding-inline: 0; }
   }
   @media (max-width: 480px) {
-    .line { grid-template-columns: 1fr; text-align: center; gap: 1.5rem; }
+    .line { grid-template-columns: repeat(2, minmax(0, 1fr)); text-align: center; gap: 1.8rem 1rem; padding-block: 2rem; }
+    p { gap: 0.35rem; padding-inline: 0.35rem; }
+    p:nth-child(odd) { border-right: 1px solid var(--color-line); }
+    strong { font-size: 0.72rem; line-height: 1.25; }
+    span { font-size: 0.8rem; line-height: 1.35; }
   }
 </style>
