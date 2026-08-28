@@ -66,6 +66,7 @@ const { data } = Astro.props;
             {data.items.map((_, i) => (
               <button class={`th-dot-btn ${i === 0 ? 'active' : ''}`} aria-label={`Go to slide ${i + 1}`} data-target={i}></button>
             ))}
+            <button class="th-next" type="button" aria-label="Next customer review">&rarr;</button>
           </div>
         </div>
       </div>
@@ -271,6 +272,21 @@ const { data } = Astro.props;
     gap: 0.5rem;
     margin-top: 1.5rem;
   }
+
+  .th-next {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.35rem;
+    padding: 0.15rem 0;
+    border: 0;
+    background: transparent;
+    color: #6e3a2c;
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .th-next:hover { color: #241c18; }
   
   .th-dot-btn {
     width: 8px;
@@ -311,6 +327,7 @@ const { data } = Astro.props;
     track: HTMLElement;
     slides: NodeListOf<HTMLElement>;
     dots: NodeListOf<HTMLElement>;
+    nextButton: HTMLButtonElement | null;
     currentIndex: number;
     totalSlides: number;
     timer: ReturnType<typeof setInterval> | null;
@@ -322,6 +339,7 @@ const { data } = Astro.props;
       this.track = this.el.querySelector('.th-carousel-track') as HTMLElement;
       this.slides = this.el.querySelectorAll('.th-slide');
       this.dots = this.el.querySelectorAll('.th-dot-btn');
+      this.nextButton = this.el.querySelector('.th-next') as HTMLButtonElement | null;
       this.currentIndex = 0;
       this.totalSlides = this.slides.length;
       this.timer = null;
@@ -341,6 +359,10 @@ const { data } = Astro.props;
             this.resetTimer();
           }
         });
+      });
+      this.nextButton?.addEventListener('click', () => {
+        this.nextSlide();
+        this.resetTimer();
       });
       
       this.startTimer();
