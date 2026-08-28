@@ -123,4 +123,15 @@ const { data } = Astro.props;
   .gallery-card:hover .centered-content .action-text { color: #fff; }
   
   .load-more { text-align: left; margin-top: 1rem; }
+
+  @media (max-width: 640px) {
+    .catalog-container { gap: 3rem; }
+    .grid { column-gap: 0.75rem; }
+    .gallery-card { margin-bottom: 1.35rem; }
+    .image-wrapper,
+    .centered-content { border-radius: 12px; }
+    .card-content { padding-top: 0.55rem; }
+    .card-content h3 { font-size: 1.05rem; line-height: 1.05; }
+    .card-content p { font-size: 0.78rem; line-height: 1.35; }
+  }
 </style>

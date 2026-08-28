@@ -217,6 +217,15 @@ const { slides } = Astro.props;
     .product { max-height: 240px; }
     .pager { left: 1.5rem; }
   }
+  @media (max-width: 480px) {
+    .hero { padding-top: 4.5rem; padding-inline: 0.5rem; }
+    .copy { padding: 1.5rem 1rem 0.5rem; }
+    .actions { flex-direction: column; width: 100%; }
+    .actions .btn { width: 100%; justify-content: center; }
+    .stage { min-height: 220px; padding-bottom: 3.5rem; }
+    .product { max-height: 190px; }
+    .arrows { display: none; /* Hide arrows on very small screens to save space */ }
+  }
 </style>
 
 <script>

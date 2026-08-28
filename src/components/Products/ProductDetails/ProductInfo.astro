@@ -125,6 +125,7 @@ const excerpt = stripHtml(excerptHtml);
     display: flex;
     align-items: flex-end;
     gap: 1rem;
+    flex-wrap: wrap;
     margin-bottom: 1.3rem;
   }
   .discount-label {
@@ -158,4 +159,10 @@ const excerpt = stripHtml(excerptHtml);
 
   .cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
   :global(.cart-icon) { width: 14px; height: 14px; }
+
+  @media (max-width: 480px) {
+    .pricing-container { align-items: flex-start; flex-direction: column; gap: 0.35rem; }
+    .discount-badge { margin-left: 0; }
+    .cta-row .btn { width: 100%; justify-content: center; }
+  }
 </style>

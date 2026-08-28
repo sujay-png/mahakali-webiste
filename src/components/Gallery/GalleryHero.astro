@@ -13,3 +13,12 @@ const { data } = Astro.props;
     <p>{data.subtitle}</p>
   </div>
 </section>
+
+<style>
+  @media (max-width: 640px) {
+    .page-hero { min-height: 52vh; }
+    .page-hero .copy { padding: 4rem var(--gutter) 2.75rem; }
+    .page-hero h1 { margin: 0.65rem 0 0.75rem; }
+    .page-hero p { line-height: 1.5; }
+  }
+</style>
