@@ -1,6 +1,13 @@
 ---
 import Icon from "../UI/Icon.astro";
-import { siteInfo, topBar, branches, footerNote, quickLinks, supportCenter } from "../../../data/site";
+import {
+  siteInfo,
+  topBar,
+  branches,
+  footerNote,
+  quickLinks,
+  supportCenter,
+} from "../../../data/site";
 ---
 
 <footer class="footer">
@@ -13,41 +20,58 @@ import { siteInfo, topBar, branches, footerNote, quickLinks, supportCenter } fro
       <div>
         <p class="label">Quick Links</p>
         <ul class="links">
-          {quickLinks.map((item) => (
-            <li><a href={item.href}>{item.label}</a></li>
-          ))}
+          {
+            quickLinks.map((item) => (
+              <li>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            ))
+          }
         </ul>
       </div>
       <div>
         <p class="label">Support Center</p>
         <ul class="links">
-          {supportCenter.map((item) => (
-            <li><a href={item.href}>{item.label}</a></li>
-          ))}
+          {
+            supportCenter.map((item) => (
+              <li>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            ))
+          }
         </ul>
       </div>
     </div>
     <div>
       <p class="label">Visit</p>
       <ul>
-        {branches.map((b) => (
-          <li>
-            <strong>{b.name}</strong>
-            <span>{b.lines.join(" ")}</span>
-            <a href={`tel:${b.phone.replace(/\s/g, "")}`}>{b.phone}</a>
-          </li>
-        ))}
+        {
+          branches.map((b) => (
+            <li>
+              <strong>{b.name}</strong>
+              <span>{b.lines.join(" ")}</span>
+              <a href={`tel:${b.phone.replace(/\s/g, "")}`}>{b.phone}</a>
+            </li>
+          ))
+        }
       </ul>
     </div>
   </div>
   <div class="wrap wrap--wide bottom">
     <p>{footerNote}</p>
     <div class="social">
-      {topBar.social.map((s) => (
-        <a href={s.href} aria-label={s.label} target="_blank" rel="noopener noreferrer">
-          <Icon name={s.icon} class="icon-16" />
-        </a>
-      ))}
+      {
+        topBar.social.map((s) => (
+          <a
+            href={s.href}
+            aria-label={s.label}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon name={s.icon} class="icon-16" />
+          </a>
+        ))
+      }
     </div>
   </div>
 </footer>
@@ -70,7 +94,11 @@ import { siteInfo, topBar, branches, footerNote, quickLinks, supportCenter } fro
     gap: 3.5rem;
     padding-bottom: 4rem;
   }
-  .top p { max-width: 38ch; font-weight: 300; line-height: 1.7; }
+  .top p {
+    max-width: 38ch;
+    font-weight: 300;
+    line-height: 1.7;
+  }
   .label {
     font-size: 0.68rem;
     letter-spacing: 0.2em;
@@ -78,29 +106,68 @@ import { siteInfo, topBar, branches, footerNote, quickLinks, supportCenter } fro
     color: #e4c9a4;
     margin-bottom: 1.3rem;
   }
-  ul { display: grid; gap: 1.3rem; }
-  .links { gap: 0.55rem; }
-  .link-groups { display: grid; gap: 2rem; }
-  strong { display: block; color: #fff; font-weight: 500; margin-bottom: 0.25rem; }
-  span { display: block; font-weight: 300; font-size: 0.92rem; }
-  a:hover { color: #fff; }
+  ul {
+    display: grid;
+    gap: 1.3rem;
+  }
+  .links {
+    gap: 1rem; /* Increased gap to separate distinct links */
+  }
+  .links a {
+    line-height: 1.25; /* Tighter line-height for wrapped text */
+    display: inline-block;
+  }
+  .link-groups {
+    display: grid;
+    gap: 2rem;
+  }
+  strong {
+    display: block;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+  span {
+    display: block;
+    font-weight: 300;
+    font-size: 0.92rem;
+  }
+  a:hover {
+    color: #fff;
+  }
   .bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
     padding-block: 1.4rem;
-    border-top: 1px solid rgba(244,239,232,0.08);
+    border-top: 1px solid rgba(244, 239, 232, 0.08);
     font-size: 0.8rem;
   }
-  .social { display: flex; gap: 0.9rem; }
+  .social {
+    display: flex;
+    gap: 0.9rem;
+  }
   @media (max-width: 860px) {
-    .top { grid-template-columns: 1fr; gap: 2.5rem; }
-    .bottom { flex-direction: column; align-items: flex-start; }
+    .top {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
   @media (max-width: 480px) {
-    .footer { padding-top: 3.5rem; }
-    .top { padding-bottom: 2.5rem; }
-    .link-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    .footer {
+      padding-top: 3.5rem;
+    }
+    .top {
+      padding-bottom: 2.5rem;
+    }
+    .link-groups {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
   }
 </style>

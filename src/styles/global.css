@@ -366,20 +366,23 @@ h3 { font-size: clamp(1.45rem, 2.3vw, 2.05rem); }
 .policy-prose ol {
   list-style: none;
   counter-reset: policy;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 1.6rem;
 }
-.policy-prose li {
+.policy-prose ol > li {
   counter-increment: policy;
-  display: grid;
-  grid-template-columns: 2.4rem 1fr;
-  gap: 1rem;
+  position: relative;
+  padding-left: 3.4rem;
   color: var(--color-ink-soft);
   font-weight: 300;
   line-height: 1.75;
 }
-.policy-prose li::before {
+.policy-prose ol > li::before {
   content: counter(policy, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0;
   font-family: var(--font-display);
   color: var(--color-gold);
   font-size: 1.15rem;
@@ -389,14 +392,16 @@ h3 { font-size: clamp(1.45rem, 2.3vw, 2.05rem); }
   list-style: disc;
   padding-left: 1.2rem;
   margin-top: 0.6rem;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 0.35rem;
 }
 .policy-prose .nested-list li {
   display: list-item;
-  grid-template-columns: none;
+  color: var(--color-ink-soft);
+  font-weight: 300;
+  line-height: 1.75;
 }
-.policy-prose .nested-list li::before { content: none; }
 .policy-prose strong { color: var(--color-ink); font-weight: 500; }
 
 @media (max-width: 640px) {
@@ -406,5 +411,10 @@ h3 { font-size: clamp(1.45rem, 2.3vw, 2.05rem); }
   .page-hero .copy, .page-hero-inner { padding: 5rem var(--gutter) 3.5rem; }
   .row-head { flex-direction: column; align-items: flex-start; gap: 1rem; }
   .policy-prose { padding-block: 2.5rem; }
+}
+
+@media (max-width: 480px) {
+  .policy-prose ol > li { padding-left: 2.5rem; }
+  .policy-prose ol > li::before { font-size: 1rem; }
 }
 
