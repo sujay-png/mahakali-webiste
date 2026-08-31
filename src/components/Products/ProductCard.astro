@@ -47,13 +47,17 @@ const numericPrice = Number(String(price).replace(/[^0-9.-]+/g, "")) || 0;
       {category && <p class="product-cat">{category}</p>}
       <h3 class="product-name font-display">{name}</h3>
       <div class="star-rating" aria-label={`${stars} out of 5`}>
-        {Array.from({ length: fullStars }).map(() => (
-          <Icon name="star-filled" class="star-icon" />
-        ))}
+        {
+          Array.from({ length: fullStars }).map(() => (
+            <Icon name="star-filled" class="star-icon" />
+          ))
+        }
         {hasHalfStar && <Icon name="star-half" class="star-icon" />}
-        {Array.from({ length: emptyStars }).map(() => (
-          <Icon name="star" class="star-icon" />
-        ))}
+        {
+          Array.from({ length: emptyStars }).map(() => (
+            <Icon name="star" class="star-icon" />
+          ))
+        }
       </div>
     </div>
     <div class="price-stack">
@@ -82,6 +86,24 @@ const numericPrice = Number(String(price).replace(/[^0-9.-]+/g, "")) || 0;
     overflow: hidden;
   }
 
+  .card-image-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-25deg);
+    transition: left 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .product-card:hover .card-image-container::after {
+    left: 200%;
+  }
+
   .sale-chip {
     position: absolute;
     top: 1rem;
@@ -107,7 +129,9 @@ const numericPrice = Number(String(price).replace(/[^0-9.-]+/g, "")) || 0;
     font-size: 0.68rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
+    transition:
+      opacity 0.45s var(--ease),
+      transform 0.45s var(--ease);
   }
 
   .card-info {
@@ -132,10 +156,19 @@ const numericPrice = Number(String(price).replace(/[^0-9.-]+/g, "")) || 0;
     max-width: 16ch;
   }
 
-  .star-rating { display: flex; color: var(--color-gold); gap: 2px; }
-  :global(.star-icon) { width: 13px; height: 13px; }
+  .star-rating {
+    display: flex;
+    color: var(--color-gold);
+    gap: 2px;
+  }
+  :global(.star-icon) {
+    width: 13px;
+    height: 13px;
+  }
 
-  .price-stack { text-align: right; }
+  .price-stack {
+    text-align: right;
+  }
   .product-price {
     display: block;
     font-size: 0.82rem;

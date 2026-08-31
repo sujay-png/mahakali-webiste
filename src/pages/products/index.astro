@@ -32,7 +32,7 @@ const counts = Object.fromEntries(countsList.map((c) => [c.id, c.count]));
       <div class="main-column">
         <div class="category-mosaic">
           {countsList.map((category) => (
-            <a href={categoryPath(category.slug)} class="mosaic-card">
+            <a href={categoryPath(category.slug)} class="mosaic-card shimmer-bg">
               <img src={category.heroImage} alt="" />
               <span class="mosaic-copy">
                 <small>{category.eyebrow}</small>
