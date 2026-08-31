@@ -448,6 +448,21 @@ h3 {
   }
 }
 
+@media (max-width: 768px) {
+  .shimmer-bg {
+    background: linear-gradient(90deg, rgba(160, 124, 82, 0.06) 0%, rgba(160, 124, 82, 0.1) 50%, rgba(160, 124, 82, 0.06) 100%);
+  }
+
+  .shimmer-bg::before {
+    animation-duration: 1.5s;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.36) 45%, rgba(255,255,255,0.52) 50%, rgba(255,255,255,0.36) 55%, transparent 100%);
+  }
+
+  .shimmer-bg > * {
+    animation-delay: 0.5s;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] {
     opacity: 1;
@@ -460,6 +475,11 @@ h3 {
 
   .shimmer-bg::before {
     animation: none;
+  }
+
+  .shimmer-bg > * {
+    animation: none;
+    opacity: 1;
   }
 }
 

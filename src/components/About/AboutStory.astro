@@ -82,13 +82,6 @@ const { data } = Astro.props;
     aspect-ratio: 4/5;
     object-fit: cover;
     box-shadow: var(--shadow-lg);
-    clip-path: polygon(
-      0 0,
-      100% 0,
-      100% calc(100% - 34px),
-      calc(100% - 34px) 100%,
-      0 100%
-    );
   }
   .about__float {
     position: absolute;
@@ -160,14 +153,43 @@ const { data } = Astro.props;
   @media (max-width: 900px) {
     .about__grid {
       grid-template-columns: 1fr;
+      gap: clamp(1.5rem, 4vw, 2.5rem);
     }
     .about__collage {
-      padding: 1rem 1.5rem 2rem 0;
-      max-width: 420px;
-      margin-inline: auto;
+      padding: 0;
+      margin-inline: 0;
+      width: 100%;
+    }
+    .about__main {
+      width: 100%;
+      aspect-ratio: 1/1.3;
+      min-height: 600px;
+    }
+    .about__float {
+      display: none;
+    }
+    .about__badge {
+      display: none;
+    }
+    .about__copy {
+      padding: 1rem 0 0 0;
     }
     .about__bullets {
       grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .about__grid {
+      gap: 1rem;
+    }
+    .about__lead {
+      font-size: 0.95rem;
+      margin-top: 0.75rem;
+    }
+    .about__bullets li {
+      font-size: 0.88rem;
+      gap: 0.4rem;
     }
   }
 </style>
