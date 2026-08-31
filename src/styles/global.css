@@ -417,18 +417,34 @@ h3 {
   z-index: 0;
   background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.48) 45%, rgba(255,255,255,0.72) 50%, rgba(255,255,255,0.48) 55%, transparent 100%);
   transform: translateX(-125%);
-  animation: shimmer 1.8s ease-in-out infinite;
+  animation: shimmer 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   pointer-events: none;
 }
 
 .shimmer-bg > * {
   position: relative;
   z-index: 1;
+  opacity: 0;
+  animation: fadeInImage 0.35s ease forwards 0.75s;
 }
 
 @keyframes shimmer {
+  0% {
+    transform: translateX(-125%);
+    opacity: 1;
+  }
   100% {
     transform: translateX(125%);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInImage {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
