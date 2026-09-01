@@ -52,12 +52,13 @@ const products = passedProducts || (product ? await getRelatedProducts(product) 
   }
   .related-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.6rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem 1rem;
   }
   @media (min-width: 768px) {
     .related-grid {
       grid-template-columns: repeat(3, 1fr);
+      gap: 1.6rem;
     }
   }
   .related-card {

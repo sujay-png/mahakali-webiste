@@ -129,7 +129,7 @@ const productSchema = {
         <div slot="fallback" class="related-masterpieces" style="margin-top: 5.5rem; padding-top: 3.5rem; border-top: 1px solid var(--color-line);">
           <p class="eyebrow" style="margin-bottom: 0.7rem;">Continue looking</p>
           <div class="skeleton-box" style="margin: 0.7rem 0 2.2rem; width: 200px; height: 40px;"></div>
-          <div class="related-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem;">
+          <div class="skeleton-related-grid">
             {Array.from({ length: 3 }).map(() => (
               <div class="related-card" style="display: grid; gap: 0.9rem;">
                 <span class="skeleton-box" style="aspect-ratio: 4/5; width: 100%;"></span>
@@ -172,6 +172,18 @@ const productSchema = {
     .info-column {
       position: sticky;
       top: 6.5rem;
+    }
+  }
+
+  .skeleton-related-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem 1rem;
+  }
+  @media (min-width: 768px) {
+    .skeleton-related-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.6rem;
     }
   }
 </style>

@@ -55,7 +55,7 @@ const totalResults = counts[category.id] || 0;
           emptyTitle={`No ${category.name.toLowerCase()} listed yet`}
           emptyCopy="Once WooCommerce credentials are in place, this collection will load live from the store."
         >
-          <div slot="fallback" class="grid-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 3.5rem 2rem;">
+          <div slot="fallback" class="fallback-grid">
             {Array.from({ length: 4 }).map(() => (
               <div class="product-card" style="display: flex; flex-direction: column; gap: 1.25rem;">
                 <span class="skeleton-box" style="aspect-ratio: 4/5; width: 100%;"></span>
@@ -96,6 +96,24 @@ const totalResults = counts[category.id] || 0;
     .content-wrapper {
       grid-template-columns: 260px 1fr;
       gap: 4rem;
+    }
+  }
+
+  .fallback-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .fallback-grid {
+      gap: 3.5rem 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .fallback-grid {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 </style>
