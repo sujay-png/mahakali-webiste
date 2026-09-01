@@ -1,33 +1,44 @@
 ---
 import ProductCard from "./ProductCard.astro";
 import type { ProductCardModel } from "../../lib/woocommerce/types";
+import { getProductsByCategory } from "../../lib/woocommerce/catalog";
 
 export interface Props {
-  products: ProductCardModel[];
+  products?: ProductCardModel[];
+  category?: any;
   emptyTitle?: string;
   emptyCopy?: string;
 }
 
 const {
-  products,
+  products: passedProducts,
+  category,
   emptyTitle = "This collection is between seasons",
   emptyCopy = "Add your WooCommerce keys in .env and the live catalog will appear here automatically.",
 } = Astro.props;
+
+const products = passedProducts || (category ? await getProductsByCategory(category) : []);
 ---
 
 <section class="product-grid-section">
-  {products.length === 0 ? (
-    <div class="empty">
-      <p class="empty-kicker">Showroom note</p>
-      <h3 class="font-display">{emptyTitle}</h3>
-      <p>{emptyCopy}</p>
-      <a href="/contact" class="btn btn-primary">Talk to the showroom</a>
-    </div>
-  ) : (
-    <div class="grid-container" id="product-grid">
-      {products.map((product) => <ProductCard {...product} />)}
-    </div>
-  )}
+  {
+    products.length === 0 ? (
+      <div class="empty">
+        <p class="empty-kicker">Showroom note</p>
+        <h3 class="font-display">{emptyTitle}</h3>
+        <p>{emptyCopy}</p>
+        <a href="/contact" class="btn btn-primary">
+          Talk to the showroom
+        </a>
+      </div>
+    ) : (
+      <div class="grid-container" id="product-grid">
+        {products.map((product) => (
+          <ProductCard {...product} />
+        ))}
+      </div>
+    )
+  }
 </section>
 
 <script>
@@ -36,9 +47,15 @@ const {
     if (!grid || grid.dataset.bound === "true") return;
     grid.dataset.bound = "true";
 
-    const cards = Array.from(grid.querySelectorAll(".product-card")) as HTMLElement[];
-    const searchInput = document.getElementById("product-search-input") as HTMLInputElement | null;
-    const sortSelect = document.getElementById("product-sort-select") as HTMLSelectElement | null;
+    const cards = Array.from(
+      grid.querySelectorAll(".product-card"),
+    ) as HTMLElement[];
+    const searchInput = document.getElementById(
+      "product-search-input",
+    ) as HTMLInputElement | null;
+    const sortSelect = document.getElementById(
+      "product-sort-select",
+    ) as HTMLSelectElement | null;
     const resultsCount = document.querySelector(".results-count");
 
     cards.forEach((card, i) => (card.dataset.order = String(i)));
@@ -60,7 +77,10 @@ const {
         const pb = parseFloat(b.dataset.price || "0");
         if (sort === "price-asc") return pa - pb;
         if (sort === "price-desc") return pb - pa;
-        return parseInt(a.dataset.order || "0", 10) - parseInt(b.dataset.order || "0", 10);
+        return (
+          parseInt(a.dataset.order || "0", 10) -
+          parseInt(b.dataset.order || "0", 10)
+        );
       });
 
       filtered.forEach((card) => grid.appendChild(card));
@@ -76,7 +96,9 @@ const {
 </script>
 
 <style>
-  .product-grid-section { padding-block: 2.8rem 6rem; }
+  .product-grid-section {
+    padding-block: 2.8rem 6rem;
+  }
 
   .grid-container {
     display: grid;
@@ -85,7 +107,9 @@ const {
   }
 
   @media (min-width: 768px) {
-    .grid-container { grid-template-columns: repeat(2, 1fr); }
+    .grid-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   .empty {
@@ -99,6 +123,12 @@ const {
     color: var(--color-gold);
     margin-bottom: 0.8rem;
   }
-  .empty h3 { margin-bottom: 0.8rem; }
-  .empty p { color: var(--color-ink-soft); font-weight: 300; margin: 0 0 1.6rem; }
+  .empty h3 {
+    margin-bottom: 0.8rem;
+  }
+  .empty p {
+    color: var(--color-ink-soft);
+    font-weight: 300;
+    margin: 0 0 1.6rem;
+  }
 </style>

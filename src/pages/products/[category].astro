@@ -8,7 +8,10 @@ import ProductGrid from "../../components/Products/ProductGrid.astro";
 import CollectionCTA from "../../components/Products/CollectionCTA.astro";
 import ProductSidebar from "../../components/Products/ProductSidebar.astro";
 import { getCategoryBySlug } from "../../lib/woocommerce/categories";
-import { getCategoryCounts, getProductsByCategory } from "../../lib/woocommerce/catalog";
+import {
+  getCategoryCounts,
+  getProductsByCategory,
+} from "../../lib/woocommerce/catalog";
 
 const slug = Astro.params.category ?? "";
 const category = getCategoryBySlug(slug);
@@ -17,11 +20,9 @@ if (!category) {
   return Astro.redirect("/products");
 }
 
-const [products, countsList] = await Promise.all([
-  getProductsByCategory(category),
-  getCategoryCounts(),
-]);
+const countsList = await getCategoryCounts();
 const counts = Object.fromEntries(countsList.map((c) => [c.id, c.count]));
+const totalResults = counts[category.id] || 0;
 ---
 
 <Layout
@@ -44,12 +45,38 @@ const counts = Object.fromEntries(countsList.map((c) => [c.id, c.count]));
       </div>
 
       <div class="main-column">
-        <ProductToolbar categoryName={category.name} totalResults={products.length} />
+        <ProductToolbar
+          categoryName={category.name}
+          totalResults={totalResults}
+        />
         <ProductGrid
-          products={products}
+          server:defer
+          category={category}
           emptyTitle={`No ${category.name.toLowerCase()} listed yet`}
           emptyCopy="Once WooCommerce credentials are in place, this collection will load live from the store."
-        />
+        >
+          <div slot="fallback" class="grid-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 3.5rem 2rem;">
+            {Array.from({ length: 4 }).map(() => (
+              <div class="product-card" style="display: flex; flex-direction: column; gap: 1.25rem;">
+                <span class="skeleton-box" style="aspect-ratio: 4/5; width: 100%;"></span>
+                <div class="card-info" style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;">
+                  <div style="flex: 1; display: flex; flex-direction: column; gap: 0.4rem;">
+                    <span class="skeleton-box" style="width: 40%; height: 0.66rem; margin-bottom: 0.4rem;"></span>
+                    <span class="skeleton-box" style="width: 70%; height: 1.55rem; margin-bottom: 0.4rem;"></span>
+                    <div style="display: flex; gap: 2px;">
+                      {Array.from({ length: 5 }).map(() => (
+                        <span class="skeleton-box" style="width: 13px; height: 13px;"></span>
+                      ))}
+                    </div>
+                  </div>
+                  <div style="text-align: right;">
+                    <span class="skeleton-box" style="width: 60px; height: 0.82rem;"></span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </ProductGrid>
       </div>
     </div>
 

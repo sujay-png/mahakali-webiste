@@ -9,13 +9,18 @@ import RelatedProducts from "../../../components/Products/ProductDetails/Related
 import ProductGallery from "../../../components/Products/ProductDetails/ProductGallery.tsx";
 import Testimonials from "../../../components/Home/Testimonials.astro";
 import { testimonials } from "../../../data/home";
-import { getCategoryBySlug, categoryPath } from "../../../lib/woocommerce/categories";
-import { getProductBySlug, getRelatedProducts } from "../../../lib/woocommerce/catalog";
+import {
+  getCategoryBySlug,
+  categoryPath,
+} from "../../../lib/woocommerce/categories";
+import {
+  getProductBySlug,
+  getRelatedProducts,
+} from "../../../lib/woocommerce/catalog";
 import { featuresFromProduct } from "../../../lib/woocommerce/mappers";
 import { stripHtml } from "../../../lib/woocommerce/format";
 import { whatsappEnquire } from "../../../lib/enquire";
 import { siteInfo } from "../../../data/site";
-
 
 const categorySlug = Astro.params.category ?? "";
 const slug = Astro.params.slug ?? "";
@@ -26,7 +31,6 @@ if (!category || !product) {
   return Astro.redirect(category ? categoryPath(category.slug) : "/products");
 }
 
-const related = await getRelatedProducts(product);
 const features = featuresFromProduct(product);
 const specifications = [
   { label: "Collection", value: category.name },
@@ -37,8 +41,11 @@ const specifications = [
 
 const pageUrl = `${siteInfo.url}/products/${category.slug}/${product.slug}`;
 const whatsappHref = whatsappEnquire(product.name, pageUrl);
-const description = stripHtml(product.shortDescriptionHtml || product.descriptionHtml).slice(0, 180)
-  || product.name;
+const description =
+  stripHtml(product.shortDescriptionHtml || product.descriptionHtml).slice(
+    0,
+    180,
+  ) || product.name;
 
 const productSchema = {
   "@context": "https://schema.org",
@@ -65,7 +72,11 @@ const productSchema = {
   path={`/products/${category.slug}/${product.slug}`}
 >
   <Fragment slot="head">
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(productSchema)}
+    />
   </Fragment>
 
   <main class="product-details-page">
@@ -81,7 +92,11 @@ const productSchema = {
 
       <div class="product-grid-layout">
         <div class="gallery-column">
-          <ProductGallery client:load images={product.images} title={product.name} />
+          <ProductGallery
+            client:load
+            images={product.images}
+            title={product.name}
+          />
         </div>
         <div class="info-column">
           <ProductInfo
@@ -110,7 +125,24 @@ const productSchema = {
         </div>
       </div>
 
-      <RelatedProducts products={related} />
+      <RelatedProducts server:defer product={product}>
+        <div slot="fallback" class="related-masterpieces" style="margin-top: 5.5rem; padding-top: 3.5rem; border-top: 1px solid var(--color-line);">
+          <p class="eyebrow" style="margin-bottom: 0.7rem;">Continue looking</p>
+          <div class="skeleton-box" style="margin: 0.7rem 0 2.2rem; width: 200px; height: 40px;"></div>
+          <div class="related-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem;">
+            {Array.from({ length: 3 }).map(() => (
+              <div class="related-card" style="display: grid; gap: 0.9rem;">
+                <span class="skeleton-box" style="aspect-ratio: 4/5; width: 100%;"></span>
+                <div class="related-info">
+                  <div class="skeleton-box" style="width: 60%; height: 24px; margin-bottom: 8px;"></div>
+                  <br />
+                  <div class="skeleton-box" style="width: 30%; height: 16px;"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </RelatedProducts>
     </div>
     <Testimonials data={testimonials} />
   </main>
@@ -133,7 +165,13 @@ const productSchema = {
     align-items: start;
   }
   @media (min-width: 1024px) {
-    .product-grid-layout { grid-template-columns: 1.15fr 0.85fr; gap: 3.5rem; }
-    .info-column { position: sticky; top: 6.5rem; }
+    .product-grid-layout {
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3.5rem;
+    }
+    .info-column {
+      position: sticky;
+      top: 6.5rem;
+    }
   }
 </style>
