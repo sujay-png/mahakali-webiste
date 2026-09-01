@@ -86,6 +86,8 @@ body {
   line-height: 1.7;
   letter-spacing: 0.01em;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
 }
 
 img,
@@ -93,6 +95,7 @@ svg,
 video,
 canvas {
   max-width: 100%;
+  height: auto;
 }
 
 img,
@@ -263,6 +266,7 @@ h3 {
   border-radius: 0;
   transition: transform var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
   white-space: nowrap;
+  min-height: 48px;
 }
 
 .btn svg {
@@ -737,9 +741,35 @@ h3 {
   font-weight: 500;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 1024px) {
+  .wrap {
+    padding-inline: clamp(1rem, 3vw, 2rem);
+  }
+
+  .btn {
+    padding: 0.85rem 1.2rem;
+  }
+
+  .section-heading {
+    margin-bottom: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
   body {
     font-size: 1rem;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 9vw, 4.1rem);
+  }
+
+  h2 {
+    font-size: clamp(2.1rem, 7vw, 3.1rem);
+  }
+
+  h3 {
+    font-size: clamp(1.5rem, 5vw, 2rem);
   }
 
   .section {
@@ -759,6 +789,7 @@ h3 {
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
+    margin-bottom: 2.25rem;
   }
 
   .policy-prose {
@@ -767,6 +798,31 @@ h3 {
 }
 
 @media (max-width: 480px) {
+  :root {
+    --gutter: 1rem;
+  }
+
+  body {
+    line-height: 1.6;
+  }
+
+  h1 {
+    font-size: clamp(2.2rem, 12vw, 3.2rem);
+  }
+
+  h2 {
+    font-size: clamp(1.8rem, 9vw, 2.5rem);
+  }
+
+  .btn {
+    width: 100%;
+    letter-spacing: 0.12em;
+  }
+
+  .section-heading p.lead {
+    font-size: 0.96rem;
+  }
+
   .policy-prose ol>li {
     padding-left: 2.5rem;
   }

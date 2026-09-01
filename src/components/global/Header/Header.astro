@@ -379,7 +379,10 @@ const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
   }
 
   @media (max-width: 1080px) {
-    .header__inner { grid-template-columns: 1fr auto; }
+    .header__inner {
+      grid-template-columns: auto 1fr auto;
+      gap: 0.75rem;
+    }
     .desktop-nav, .btn-inquiry { display: none; }
     .nav-toggle { display: grid; }
   }
@@ -388,6 +391,10 @@ const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
     .brand-logo-img { height: 38px; }
     .nav-toggle { width: 40px; height: 40px; border-radius: 50%; }
     .mobile-menu { padding-top: 4.75rem; }
+  }
+  @media (max-width: 360px) {
+    .brand-logo-img { height: 32px; }
+    .header__inner { gap: 0.5rem; }
   }
 </style>
 
