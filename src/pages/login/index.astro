@@ -1,0 +1,234 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const title = "Log In | Mahakali Home Furnitures";
+const description = "Log in with your Mahakali account.";
+---
+
+<Layout title={title} description={description} path="/login">
+  <main class="auth-page">
+    <div class="auth-container">
+      <div class="auth-form-side" data-reveal>
+        <div class="auth-form-wrapper">
+          
+          <div class="auth-header" id="auth-header">
+            <h2 class="font-display" style="white-space: nowrap;">Welcome Back!</h2>
+            <p>Log in with your Mahakali account.</p>
+          </div>
+
+          <form class="auth-form" id="login-form">
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="Your Email" required />
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" name="password" placeholder="••••••••" required />
+            </div>
+
+            <button type="submit" class="btn btn-primary auth-btn">
+              Log In
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </form>
+
+          <div id="success-message" class="success-state" style="display: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="success-icon">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            <h3 class="font-display">Login successful!</h3>
+            <p>Welcome back to Mahakali Home Furnitures.</p>
+          </div>
+
+          <div class="auth-footer" id="auth-footer">
+            <p>Don't have an account? <a href="/signup" class="link-arrow">Sign up</a></p>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  const form = document.getElementById('login-form');
+  const successMessage = document.getElementById('success-message');
+  const authHeader = document.getElementById('auth-header');
+  const authFooter = document.getElementById('auth-footer');
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // Hide the form, header, and footer
+      form.style.display = 'none';
+      if(authHeader) authHeader.style.display = 'none';
+      if(authFooter) authFooter.style.display = 'none';
+      
+      // Show the success message
+      if(successMessage) successMessage.style.display = 'flex';
+    });
+  }
+</script>
+
+<style>
+  .auth-page {
+    min-height: calc(100vh - 80px); /* Adjust based on header height */
+    display: flex;
+    background-color: var(--color-surface);
+  }
+
+  .auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex: 1;
+    padding: 2rem;
+  }
+
+  .auth-form-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+    background-color: transparent; /* Removed background */
+    z-index: 10;
+  }
+
+  .auth-form-wrapper {
+    width: 100%;
+    text-align: center; /* Center everything */
+  }
+
+  .auth-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .auth-header h1 {
+    margin-bottom: 0.5rem;
+    color: var(--color-walnut); /* Theme color */
+  }
+
+  .auth-header p {
+    color: var(--color-ink-soft); /* Theme color */
+  }
+
+  /* Form Elements */
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: left; /* Keep labels aligned left for readability */
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-group label {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--color-ink); /* Theme color */
+    text-align: left;
+  }
+
+  /* Inputs */
+  .form-group input {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    background: transparent;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md); /* Consistent border-radius */
+    color: var(--color-ink);
+    transition: all var(--dur-fast) var(--ease);
+  }
+
+  .form-group input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(110, 58, 44, 0.1);
+  }
+
+  .form-group input::placeholder {
+    color: #a0978f;
+  }
+
+  /* Links & Buttons */
+  .auth-btn {
+    margin-top: 0.5rem;
+    width: 100%;
+    padding-block: 1.2rem;
+    font-size: 0.95rem;
+    border-radius: var(--radius-md); 
+    background: var(--color-primary); /* Theme color */
+    color: #fff;
+    border: none;
+    transition: background-color var(--dur-fast) var(--ease);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .auth-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .auth-btn:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .auth-footer {
+    margin-top: 2.5rem;
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--color-ink-soft);
+  }
+
+  .auth-footer .link-arrow {
+    margin-left: 0.5rem;
+    color: var(--color-primary);
+  }
+  
+  /* Success State */
+  .success-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem 0;
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  .success-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 1rem;
+  }
+  
+  .success-state h3 {
+    color: var(--color-walnut);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .success-state p {
+    color: var(--color-ink-soft);
+    font-size: 1.1rem;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>

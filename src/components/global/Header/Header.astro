@@ -15,7 +15,7 @@ const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
     <nav class="desktop-nav" aria-label="Primary">
       <ul>
         {
-          mainNav.filter((item) => !["User Dashboard", "Contact Us"].includes(item.label)).map((item) => {
+          mainNav.filter((item) => !["Contact Us"].includes(item.label)).map((item) => {
             const isActive =
               Astro.url.pathname === item.href ||
               (item.href !== "/" && Astro.url.pathname.startsWith(item.href));
@@ -54,6 +54,9 @@ const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
     </nav>
 
     <div class="header__actions">
+      <a href="/login" class="icon-action user-action" aria-label="User Dashboard">
+        <Icon name="user" />
+      </a>
       <a href="/contact" class="btn-inquiry">Visit Showroom</a>
       <button
         class="icon-action nav-toggle"
@@ -74,7 +77,7 @@ const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
     <p class="menu-kicker">Menu</p>
     <nav aria-label="Mobile">
       <ul class="menu-links">
-        {mainNav.filter((item) => !["User Dashboard", "Contact Us"].includes(item.label)).map((item, i) => (
+        {mainNav.filter((item) => !["Contact Us"].includes(item.label)).map((item, i) => (
           <li style={`--d: ${0.08 + i * 0.06}s`}>
             {item.children ? (
               <div class="menu-group">
@@ -147,6 +150,7 @@ const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
   .brand { justify-self: start; z-index: 130; }
   .desktop-nav { justify-self: center; }
   .header__actions { justify-self: end; display: flex; align-items: center; gap: 0.8rem; z-index: 130; }
+  .user-action { margin-right: 1.2rem; }
 
   .brand-logo-img {
     height: 63px;

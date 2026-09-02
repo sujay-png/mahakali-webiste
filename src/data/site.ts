@@ -35,7 +35,6 @@ export const mainNav = [
       href: categoryPath(category.slug),
     })),
   },
-  { label: 'User Dashboard', href: '/user-dashboard' },
   { label: 'Contact Us', href: '/contact' },
 ];
 
