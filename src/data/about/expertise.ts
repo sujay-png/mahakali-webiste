@@ -17,6 +17,6 @@ export const expertiseData = [
   {
     icon: "groups",
     title: "Trusted by Thousands of Happy Customers",
-    copy: "Our commitment to excellence has earned us the trust of thousands of satisfied customers across Udupi."
+    copy: "Our commitment to excellence has earned us the trust of thousands of satisfied customers across Udupi and Kundapur."
   }
 ];

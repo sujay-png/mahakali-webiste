@@ -6,7 +6,7 @@ export const siteInfo = {
   legalName: 'Mahakali Home Furnitures & Interiors',
   url: 'https://mahakalihomefurnitures.com',
   description:
-    "Udupi's most trusted name for premium sofas, mattresses, cots and curated curtains. 28+ years of handcrafted comfort, timeless style and honest pricing.",
+    "Udupi and Kundapura's most trusted name for premium sofas, mattresses, cots and curated curtains. 28+ years of handcrafted comfort, timeless style and honest pricing.",
   email: 'mahakali@gmail.com',
   phones: ['0824-4123456', '99486 42754', '098602 84996'],
   founded: 1997,
@@ -19,7 +19,7 @@ export const topBar = {
   needHelp: 'Need Help?',
   social: [
     { label: 'Facebook', href: 'https://www.facebook.com/mahakalisofas/', icon: 'facebook' },
-    { label: 'Instagram', href: 'https://www.instagram.com/mahakalifurnishings/', icon: 'instagram' },
+    { label: 'Instagram', href: 'https://www.instagram.com/mahakali_home_furnitures/', icon: 'instagram' },
   ]
 };
 
@@ -42,17 +42,20 @@ export const branches = [
   {
     name: 'Main Branch',
     lines: ['First Floor, KSRTC Bus Stand,', 'Bananje, Udupi,', 'Karnataka 576101'],
-    phone: '091486 43754'
+    phone: '091486 43754',
+    mapLink: 'https://www.google.com/maps/dir//Mahakali+Home+Furnitures+and+Interiors,+1st+floor,+New+KSRTC,+bus+stand,+Udupi,+Karnataka+576101/@13.3247898,74.764419,32293m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x3bbcbbe20d44c209:0x77f2a12c93e9b743!2m2!1d74.7383303!2d13.3451152?entry=ttu&g_ep=EgoyMDI2MDkyNy4xIKXMDSoASAFQAw%3D%3D'
   },
   {
     name: 'Kundapura Branch',
     lines: ['Karanth complex, beside KSRTC,', 'bus depot, Vaderhobli,', 'Kundapura, Karnataka 576201'],
-    phone: '099729 80332'
+    phone: '099729 80332',
+    mapLink: 'https://www.google.com/maps/dir//Mahakali+Home+Furnitures+%26+Interiors,+Karanth+complex,+bus+depot,+beside+KSRTC+Vaderhobli,+Kundapur,+Karnataka+576201/@12.8527141,74.8617728,3401m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x3bbc9134172d8e13:0xd6062e8a6032899e!2m2!1d74.693658!2d13.6149847?entry=ttu&g_ep=EgoyMDI2MDkyNy4xIKXMDSoASAFQAw%3D%3D'
   },
   {
     name: 'Our Branch',
     lines: ['Behind Hotel Janardana', 'near Old KSRTC Bus Stand,', 'Udupi, Karnataka 576101'],
-    phone: '099802 84696'
+    phone: '099802 84696',
+    mapLink: 'https://www.google.com/maps/dir//Mahakali+Sofas+%26+Curtains,+Bus+Stand,+near+Adarsh+Hospital,+next+to+KSRTC,+Brahmagiri,+Udupi,+Karnataka+576101/@12.8527141,74.8617728,3401m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x3bbcbb6f8e44e5cf:0x42503cad4986627a!2m2!1d74.7473293!2d13.3404993?entry=ttu&g_ep=EgoyMDI2MDkyNy4xIKXMDSoASAFQAw%3D%3D'
   }
 ];
 

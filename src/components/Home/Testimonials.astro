@@ -52,7 +52,11 @@ const { data } = Astro.props;
                       </div>
                       <div class="th-author-info">
                         <span class="th-author-name">{t.name}</span>
-                        <span class="th-author-role">{t.role}, Udupi</span>
+                                                {t.sourceUrl ? (
+                          <a class="th-author-role" href={t.sourceUrl} target="_blank" rel="noreferrer">{t.role} · View on Google</a>
+                        ) : (
+                          <span class="th-author-role">{t.role}</span>
+                        )}
                       </div>
                     </div>
                     <div class="th-quote-icon">

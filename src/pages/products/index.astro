@@ -21,7 +21,6 @@ const counts = Object.fromEntries(countsList.map((c) => [c.id, c.count]));
     <CollectionHero
       label="The atelier"
       title="Every collection, under one roof"
-      description="Ten workshops of seating, dining and rest — each piece finished in Udupi and waiting in our showrooms."
       image="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=1800&q=80"
     />
 
@@ -33,7 +32,7 @@ const counts = Object.fromEntries(countsList.map((c) => [c.id, c.count]));
         <div class="category-mosaic">
           {countsList.map((category) => (
             <a href={categoryPath(category.slug)} class="mosaic-card shimmer-bg">
-              <img src={category.heroImage} alt="" />
+              <img src={category.heroImage} alt="" onerror="this.onerror=null;this.src='/images/furniture-composition.jpg'" />
               <span class="mosaic-copy">
                 <small>{category.eyebrow}</small>
                 <strong class="font-display">{category.name}</strong>

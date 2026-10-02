@@ -10,8 +10,8 @@ const { data } = Astro.props;
 
 <section class="social section wrap wrap--wide" data-reveal-group>
   <div class="social-header" data-reveal="up">
-    <h2 class="font-display">{data.title} <em class="accent">{data.handle}</em></h2>
-    <p>Follow us on Instagram <a class="social-link" href={data.link} target="_blank" rel="noopener">{data.handle}</a></p>
+    <h2 class="font-display">{data.title}</h2>
+    <a class="social-link" href={data.link} target="_blank" rel="noopener noreferrer">@{data.handle}</a>
   </div>
   <div class="social-grid">
     {data.images.map((img, i) => (
@@ -29,10 +29,9 @@ const { data } = Astro.props;
   .social {
     padding-block: clamp(4rem, 8vw, 6rem);
   }
-  .social-header { margin-bottom: 3.5rem; text-align: center; }
-  h2 { margin: 1rem auto 1.2rem; font-size: clamp(2rem, 4vw, 3rem); }
-  .social-header p { color: var(--color-ink-soft); font-weight: 300; font-size: 1.1rem; }
-  .social-link { color: var(--color-ink); font-weight: 500; border-bottom: 1px solid var(--color-gold); padding-bottom: 2px; }
+  .social-header { margin-bottom: 3.5rem; text-align: center; display: grid; justify-items: center; gap: 0.65rem; }
+  h2 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; }
+  .social-link { color: var(--color-ink-soft); font-size: 1rem; font-weight: 500; border-bottom: 1px solid var(--color-gold); padding-bottom: 2px; text-decoration: none; }
   .social-link:hover { color: var(--color-gold); }
   
   .social-grid {

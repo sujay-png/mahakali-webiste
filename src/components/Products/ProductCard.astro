@@ -37,7 +37,7 @@ const numericPrice = Number(String(price).replace(/[^0-9.-]+/g, "")) || 0;
   data-category={category.toLowerCase()}
 >
   <div class="card-image-container" data-media>
-    <img src={image} alt={name} class="card-image" loading="lazy" />
+    <img src={image} alt={name} class="card-image" loading="lazy" onerror="this.onerror=null;this.src='/images/furniture-composition.jpg'" />
     {onSale && <span class="sale-chip">Sale</span>}
     <span class="quick-view-btn">View piece</span>
   </div>

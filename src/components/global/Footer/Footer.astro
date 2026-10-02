@@ -49,7 +49,13 @@ import {
           branches.map((b) => (
             <li>
               <strong>{b.name}</strong>
-              <span>{b.lines.join(" ")}</span>
+              {b.mapLink ? (
+                <a href={b.mapLink} target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">
+                  <span>{b.lines.join(" ")}</span>
+                </a>
+              ) : (
+                <span>{b.lines.join(" ")}</span>
+              )}
               <a href={`tel:${b.phone.replace(/\s/g, "")}`}>{b.phone}</a>
             </li>
           ))
@@ -68,7 +74,7 @@ import {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Icon name={s.icon} class="icon-16" />
+            <Icon name={s.icon} class="social-icon" />
           </a>
         ))
       }
@@ -142,11 +148,22 @@ import {
     gap: 1rem;
     padding-block: 1.4rem;
     border-top: 1px solid rgba(244, 239, 232, 0.08);
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
   .social {
     display: flex;
     gap: 0.9rem;
+  }
+  .social a {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+  }
+  .social :global(svg) {
+    width: 32px;
+    height: 32px;
+    stroke-width: 2;
   }
   @media (max-width: 860px) {
     .top {

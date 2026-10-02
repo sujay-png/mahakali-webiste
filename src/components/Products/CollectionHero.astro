@@ -2,18 +2,18 @@
 export interface Props {
   label: string;
   title: string;
-  description: string;
+  description?: string;
   image: string;
 }
 const { label, title, description, image } = Astro.props;
 ---
 
 <section class="page-hero" aria-label={title}>
-  <img src={image} alt="" />
+  <img src={image} alt="" onerror="this.onerror=null;this.src='/images/furniture-composition.jpg'" />
   <div class="veil"></div>
   <div class="wrap copy">
     <p class="eyebrow light">{label}</p>
     <h1>{title}</h1>
-    <p>{description}</p>
+    {description && <p>{description}</p>}
   </div>
 </section>

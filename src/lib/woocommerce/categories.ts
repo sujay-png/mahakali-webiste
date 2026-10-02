@@ -116,7 +116,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     id: 16,
     slug: "wooden-furniture",
     name: "Wooden furniture",
-    navLabel: "Wooden furniture",
+    navLabel: "WOODEN FURNITURE",
     eyebrow: "The timber atelier",
     description:
       "A wider wooden furniture edit — pieces that sit outside a single collection but share the same workshop DNA.",

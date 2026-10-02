@@ -26,6 +26,7 @@ const products = passedProducts || (product ? await getRelatedProducts(product) 
                 alt={product.name}
                 class="related-img"
                 loading="lazy"
+                onerror="this.onerror=null;this.src='/images/furniture-composition.jpg'"
               />
             </div>
             <div class="related-info">

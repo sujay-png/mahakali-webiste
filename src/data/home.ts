@@ -95,7 +95,6 @@ export const trendingBanner = {
 
 export const trustBar = [
   { icon: 'truck', title: 'Free Delivery', copy: 'For Any Orders' },
-  { icon: 'refresh', title: 'No Refund', copy: 'There Is No Refund' },
   { icon: 'shield', title: 'Safe Payment', copy: '100% Secure Payment' },
   { icon: 'headset', title: '9:30AM -7:00PM Support', copy: 'Feel Free To Call Us' }
 ];
@@ -122,7 +121,7 @@ export const aboutSection = {
   titleAccent: "Udupi’s most trusted name",
   titleTail: 'for comfort, elegance & timeless living.',
   copy:
-    "For over 28 years, we have been enhancing homes with premium sofas, cozy mattresses, beautiful curtains, and customized furniture that perfectly blend comfort and style. Located near Adarsh Hospital in Brahmagiri, we are your reliable destination for quality home furnishings. Our products are crafted to last and our guidance ensures you choose what suits your lifestyle best.",
+    "For over 28 years, we have been enhancing homes with premium sofas, cozy mattresses, beautiful curtains, and customized furniture that perfectly blend comfort and style. Our products are crafted to last and our guidance ensures you choose what suits your lifestyle best.",
   bullets: [
     'Streamlined Shipping Experience',
     'Affordable Modern Design', 
@@ -160,15 +159,18 @@ export const productLists = {
   },
   bestSeller: {
     title: 'Best Seller',
-    items: [] as { name: string; rating: number; price: string; oldPrice?: string; image: string }[],
-    emptyMessage: 'No best seller products found'
+    items: [
+      { name: 'Alen Gold Sofa', rating: 5, price: '₹48,500.00', image: '/images/products/alen-gold-sofa.jpg' },
+      { name: 'Polaris Sofa', rating: 5, price: '₹42,000.00', image: '/images/products/polaris.jpg' },
+      { name: 'Mercedes Sofa', rating: 4, price: '₹38,500.00', image: '/images/products/impress.jpg' }
+    ]
   },
   topRated: {
     title: 'Top Rated',
     items: [
-      { name: 'D101', rating: 5, price: '₹21,000.00', image: 'https://images.unsplash.com/photo-1505692952047-1a78307da8f2?auto=format&fit=crop&w=200&q=80' },
-      { name: 'Two Seater C Bend Leg', rating: 5, price: '₹15,600.00', image: 'https://images.unsplash.com/photo-1550254478-ead40cc54513?auto=format&fit=crop&w=200&q=80' },
-      { name: '3 Seater Bed Cum Sofa', rating: 4, price: '₹42,000.00', image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=200&q=80' }
+      { name: 'Dior', rating: 5, price: '₹21,000', image: 'https://mahakali.aksharadigital.in/wp-content/uploads/2026/08/1779278973_6a0da47d508ef.webp', href: 'https://mahakali.aksharadigital.in/product/d101/' },
+      { name: 'LOTUS CHAIR', rating: 5, price: '₹8,500', image: 'https://mahakali.aksharadigital.in/wp-content/uploads/2026/08/1778479127_6a017017ba11e.webp', href: 'https://mahakali.aksharadigital.in/product/lotus-chair/' },
+      { name: 'RECLINER WITH MOBILE HOLDER', rating: 5, price: '₹34,500', image: 'https://mahakali.aksharadigital.in/wp-content/uploads/2026/08/1778479040_6a016fc05ee3b.webp', href: 'https://mahakali.aksharadigital.in/product/recliner-with-mobile-holder/' }
     ]
   }
 };
@@ -192,9 +194,10 @@ export const testimonials = {
   title: 'What Our Client',
   titleAccent: "Say's",
   items: [
-    { name: 'Shilpa Bhat', role: 'Customer', rating: 5, quote: 'I recently purchased a sofa set from them and the quality is excellent. The finish, comfort and fabric are exactly as shown. Their team kept me updated till delivery. Truly a satisfying experience!' },
-    { name: 'Vishwanath Nayak', role: 'Customer', rating: 5, quote: 'Very good service and genuine pricing. I ordered a customized TV unit, and the workmanship was perfect. The installation team was polite and cooperative. I will surely recommend them to others.' },
-    { name: 'Raghavendra Bhat', role: 'Customer', rating: 4, quote: 'I loved their collection and how they guided me with measurements for my living room. The delivery was on time and the furniture looks premium. I am very happy with the purchase and will surely buy again!' }
+    { name: 'chandrakala sk', role: 'Google Review', rating: 5, sourceUrl: 'https://share.google/Io1A8YhW0cPXWmLmI', quote: "I'm super happy with the sofa I bought from Mahakali! I really appreciate the exceptional craftsmanship, and the quality is top-notch. The sofa looks amazing, and the cushions are so comfy! I'm totally loving the overall look and feel. Plus, the delivery was great! Overall, I'm absolutely loving it! Kudos to the team for a job well done! Keep up the fantastic work!" },
+    { name: 'Sumayya', role: 'Google Review', rating: 5, sourceUrl: 'https://share.google/wVu86tsbCiNQMl3j1', quote: 'This store is one stop for all the furnishings you need for your house. They have amazing and very distinctive collection of curtains. Beautiful designs and different price range from affordable to costlier. The owner cooperates with the customer so well and guides you choosing correct item your looking for. Very amiable person and is highly experienced in his field and has much knowledge about the furnishings / decor. Anyone who is looking for CURTAINS, carpets, sofas, diwan, cupboards, mattress, flooring vinyl rolls, etc this is a must and right shopping spot. GO FOR IT WITHOUT GIVING A SECOND THOUGHT... THE BEST in the Kundapura.' },
+    { name: 'Meo Meow', role: 'Google Review', rating: 5, sourceUrl: 'https://share.google/Io1A8YhW0cPXWmLmI', quote: 'Really had a great experience! Fantastic service offered by the staff. The products are extremely good and I also had a great experience with the owners.' },
+    { name: 'nethravathi K', role: 'Google Review', rating: 5, sourceUrl: 'https://share.google/wVu86tsbCiNQMl3j1', quote: 'Collections are good and furniture quality is good.' }
   ]
 };
 

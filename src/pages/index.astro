@@ -25,6 +25,7 @@ import {
   dealBanner,
   gallery,
   testimonials,
+  productLists,
 } from "../data/home";
 import { getHomeShelves } from "../lib/woocommerce/catalog";
 
@@ -32,18 +33,18 @@ const shelves = await getHomeShelves();
 const liveProductLists = {
   onSale: {
     title: "On Sale",
-    items: shelves.onSale,
-    emptyMessage: "No sale pieces online right now — ask in-store.",
+    items: shelves.onSale.length ? shelves.onSale : productLists.onSale.items,
+    emptyMessage: "Explore our popular furniture picks.",
   },
   bestSeller: {
     title: "Best Seller",
-    items: shelves.bestSeller,
+    items: productLists.bestSeller.items,
     emptyMessage: "Best sellers will appear once the catalog is connected.",
   },
   topRated: {
     title: "Top Rated",
-    items: shelves.topRated,
-    emptyMessage: "Ratings sync from WooCommerce after keys are added.",
+    items: productLists.topRated.items,
+    emptyMessage: "Customer favorites selected for comfort and style.",
   },
 };
 ---

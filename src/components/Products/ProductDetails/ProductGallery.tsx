@@ -28,6 +28,10 @@ export default function ProductGallery({ images, title }: Props) {
             exit={reduce ? undefined : { opacity: 0, scale: 0.98 }}
             transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
             className="pg__image"
+            onError={(event) => {
+              event.currentTarget.onerror = null;
+              event.currentTarget.src = "/images/furniture-composition.jpg";
+            }}
           />
         </AnimatePresence>
       </div>
@@ -42,7 +46,14 @@ export default function ProductGallery({ images, title }: Props) {
               onClick={() => setIndex(i)}
               aria-label={`View image ${i + 1}`}
             >
-              <img src={image.src} alt="" />
+              <img
+                src={image.src}
+                alt=""
+                onError={(event) => {
+                  event.currentTarget.onerror = null;
+                  event.currentTarget.src = "/images/furniture-composition.jpg";
+                }}
+              />
             </button>
           ))}
         </div>

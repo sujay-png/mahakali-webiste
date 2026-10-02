@@ -3,15 +3,12 @@ import Layout from "../../layouts/Layout.astro";
 
 import AboutHero from "../../components/About/AboutHero.astro";
 import AboutExpertise from "../../components/About/AboutExpertise.astro";
-import AboutVideo from "../../components/About/AboutVideo.astro";
-import AboutUSPs from "../../components/About/AboutUSPs.astro";
 import AboutMattress from "../../components/About/AboutMattress.astro";
 import AboutStats from "../../components/About/AboutStats.astro";
 import AboutSocial from "../../components/About/AboutSocial.astro";
 
 import { heroData } from "../../data/about/hero";
 import { expertiseData } from "../../data/about/expertise";
-import { videoData } from "../../data/about/video";
 import { statsData } from "../../data/about/stats";
 import { socialData } from "../../data/about/social";
 import { aboutMattress } from "../../data/about/mattress";
@@ -26,10 +23,8 @@ import { aboutMattress } from "../../data/about/mattress";
   <main>
     <AboutHero data={heroData} />
     <AboutStats data={statsData} />
-    <AboutUSPs />
     <AboutExpertise data={expertiseData} />
     <AboutMattress data={aboutMattress} />
-    <AboutVideo data={videoData} />
     <AboutSocial data={socialData} />
   </main>
 </Layout>
