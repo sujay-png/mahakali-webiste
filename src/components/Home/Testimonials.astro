@@ -40,7 +40,17 @@ const { data } = Astro.props;
                   </div>
                   
                   <blockquote class="th-quote">
-                    <p class="th-quote-text">"{t.quote}"</p>
+                    <p class="th-quote-text">
+                      {t.quote.length > 160 ? (
+                        <>
+                          <span class="quote-short">"{t.quote.slice(0, 150).trim()}..."</span>
+                          <span class="quote-full" hidden>"{t.quote}"</span>
+                          <button type="button" class="th-read-toggle" aria-expanded="false">Read More</button>
+                        </>
+                      ) : (
+                        <span>"{t.quote}"</span>
+                      )}
+                    </p>
                   </blockquote>
                   
                   <div class="th-divider"></div>
@@ -214,6 +224,26 @@ const { data } = Astro.props;
     color: var(--color-ink);
   }
   
+  .th-read-toggle {
+    display: inline-block;
+    background: none;
+    border: none;
+    padding: 0;
+    margin-left: 0.4rem;
+    color: var(--color-primary, #6e3a2c);
+    font-family: var(--font-body, system-ui, sans-serif);
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-style: normal;
+    text-decoration: underline;
+    cursor: pointer;
+    vertical-align: baseline;
+    transition: color 0.2s ease;
+  }
+  .th-read-toggle:hover {
+    color: var(--color-gold, #c49a45);
+  }
+
   .th-divider {
     height: 1px;
     background: rgba(0,0,0,0.08);
@@ -345,6 +375,29 @@ const { data } = Astro.props;
     }
     
     init() {
+      this.el.querySelectorAll('.th-read-toggle').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const parent = btn.closest('.th-quote-text');
+          if (!parent) return;
+          const shortSpan = parent.querySelector('.quote-short') as HTMLElement | null;
+          const fullSpan = parent.querySelector('.quote-full') as HTMLElement | null;
+          const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+          if (isExpanded) {
+            if (shortSpan) shortSpan.hidden = false;
+            if (fullSpan) fullSpan.hidden = true;
+            btn.setAttribute('aria-expanded', 'false');
+            btn.textContent = 'Read More';
+          } else {
+            if (shortSpan) shortSpan.hidden = true;
+            if (fullSpan) fullSpan.hidden = false;
+            btn.setAttribute('aria-expanded', 'true');
+            btn.textContent = 'Read Less';
+          }
+        });
+      });
+
       if (this.totalSlides <= 1) return;
       
       this.prevButton?.addEventListener('click', () => {
@@ -381,6 +434,19 @@ const { data } = Astro.props;
     
     goToSlide(index: number) {
       this.isAnimating = true;
+
+      this.slides.forEach((slide) => {
+        const btn = slide.querySelector('.th-read-toggle');
+        if (btn && btn.getAttribute('aria-expanded') === 'true') {
+          const parent = btn.closest('.th-quote-text');
+          const shortSpan = parent?.querySelector('.quote-short') as HTMLElement | null;
+          const fullSpan = parent?.querySelector('.quote-full') as HTMLElement | null;
+          if (shortSpan) shortSpan.hidden = false;
+          if (fullSpan) fullSpan.hidden = true;
+          btn.setAttribute('aria-expanded', 'false');
+          btn.textContent = 'Read More';
+        }
+      });
       
       this.slides[this.currentIndex].classList.remove('active');
       this.slides[index].classList.add('active');
