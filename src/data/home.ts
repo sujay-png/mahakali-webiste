@@ -12,7 +12,7 @@ export const heroSlides = [
     eyebrow: 'Welcome to Mahakali!',
     title: 'We craft modern furniture for your',
     titleAccent: 'dream home',
-    copy: 'At Mahakali Udupi, every sofa, mattress, and furnishing is designed with comfort, elegance, and lasting quality—so your home feels as beautiful as it looks.',
+    copy: 'At Mahakali, every sofa, mattress, and furnishing is designed with comfort, elegance, and lasting quality—so your home feels as beautiful as it looks.',
     ctaPrimary: { label: 'Shop Now', href: '/products' },
     ctaSecondary: { label: 'Learn More', href: '/about' },
     image: {
@@ -24,7 +24,7 @@ export const heroSlides = [
     eyebrow: 'Welcome to Mahakali!',
     title: 'Premium comfort with',
     titleAccent: 'timeless style',
-    copy: 'Discover handcrafted sofas, cozy mattresses, and curated curtains at Mahakali Udupi—where modern designs meet trusted craftsmanship for over 28 years.',
+    copy: 'Discover handcrafted sofas, cozy mattresses, and curated curtains at Mahakali—where modern designs meet trusted craftsmanship for over 28 years.',
     ctaPrimary: { label: 'Shop Now', href: '/products' },
     ctaSecondary: { label: 'Learn More', href: '/about' },
     image: {
@@ -35,7 +35,7 @@ export const heroSlides = [
   {
     eyebrow: 'Welcome to Mahakali!',
     title: 'Transform your home with',
-    titleAccent: 'Mahakali Udupi',
+    titleAccent: 'Mahakali',
     copy: 'From luxurious seating to elegant curtains and custom-made furniture, we bring comfort, durability, and beauty together to create living spaces you’ll love.',
     ctaPrimary: { label: 'Shop Now', href: '/products' },
     ctaSecondary: { label: 'Learn More', href: '/about' },
@@ -103,13 +103,13 @@ export const whyChooseUs = {
   eyebrow: 'Why Choose Us',
   title: 'Trusted For 28+ Years In Comfort, Style & Quality',
   copy:
-    "Mahakali Sofas & Curtains is Udupi’s most trusted destination for premium sofas, mattresses, curtains, and custom furniture. We provide long-lasting quality, modern designs, and a smooth shopping experience trusted by thousands of customers.",
+    "Mahakali Sofas & Curtains is your most trusted destination for premium sofas, mattresses, curtains, and custom furniture. We provide long-lasting quality, modern designs, and a smooth shopping experience trusted by thousands of customers.",
   image: {
     src: 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=900&q=80',
     alt: 'Beige corner sofa set styled in a bright living room'
   },
   points: [
-    { icon: 'medal', title: '28+ Years of Trust', copy: 'Serving Udupi since 1997 with top-quality sofas, mattresses, curtains & custom furniture trusted by thousands of happy customers.' },
+    { icon: 'medal', title: '28+ Years of Trust', copy: 'Serving customers since 1997 with top-quality sofas, mattresses, curtains & custom furniture trusted by thousands of happy customers.' },
     { icon: 'tag', title: 'Affordable Premium Quality', copy: 'We offer modern, elegant & durable designs at prices that fit every budget—without compromising on material quality or comfort.' },
     { icon: 'van', title: 'Home Delivery Available', copy: 'Hassle-free delivery & installation (on request), ensuring your furniture is safely set up exactly the way you want.' }
   ]
@@ -118,7 +118,7 @@ export const whyChooseUs = {
 export const aboutSection = {
   eyebrow: 'About Us',
   title: 'Mahakali Sofas & Curtains \u2013',
-  titleAccent: "Udupi’s most trusted name",
+  titleAccent: "A trusted name",
   titleTail: 'for comfort, elegance & timeless living.',
   copy:
     "For over 28 years, we have been enhancing homes with premium sofas, cozy mattresses, beautiful curtains, and customized furniture that perfectly blend comfort and style. Our products are crafted to last and our guidance ensures you choose what suits your lifestyle best.",

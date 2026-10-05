@@ -53,7 +53,7 @@ export const CATALOG_CATEGORIES: CatalogCategory[] = [
     navLabel: "WOODEN JOOLA",
     eyebrow: "Swing into stillness",
     description:
-      "Traditional wooden jhoolas for verandahs and living rooms — a slow, familiar rhythm for Udupi homes.",
+      "Traditional wooden jhoolas for verandahs and living rooms — a slow, familiar rhythm for modern homes.",
     heroImage:
       "https://mahakalihomefurnitures.com/uploads/category/1776080159_aac22c29-86dd-48f6-9e8c-d8183556ec22.jpeg",
   },

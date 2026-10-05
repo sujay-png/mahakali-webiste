@@ -128,7 +128,7 @@ export function featuresFromProduct(product: ProductDetailModel) {
   if (fromHtml.length) return fromHtml;
 
   return [
-    "Hand-finished in our Udupi workshop",
+    "Hand-finished in our workshop",
     "Showroom viewing available at all three branches",
     "Home delivery and installation on request",
     "Crafted for daily use with premium materials",
