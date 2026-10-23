@@ -35,11 +35,25 @@ import Icon from "../global/UI/Icon.astro";
         </div>
 
         <div class="form-actions">
-          <button type="submit" class="btn btn-primary">
-            Send Message via WhatsApp
+          <button type="submit" id="submitBtn" class="btn btn-primary">
+            <span class="btn-text">Send Message</span>
             <Icon name="arrow-right" />
           </button>
-          <p class="form-hint">This will open WhatsApp to send your inquiry directly to our team.</p>
+
+          <div id="formStatus" class="form-status" aria-live="polite"></div>
+
+          <div class="form-alternative">
+            <span>Prefer instant chat?</span>
+            <a
+              id="whatsappLink"
+              href="https://wa.me/919148643754"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="whatsapp-quick-link"
+            >
+              Chat on WhatsApp &rarr;
+            </a>
+          </div>
         </div>
       </form>
     </div>
@@ -98,11 +112,48 @@ import Icon from "../global/UI/Icon.astro";
     transform: translateY(-1.5rem) scale(0.85);
     color: var(--color-gold);
   }
-  .form-hint {
-    font-size: 0.78rem;
+  .form-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .form-status {
+    font-size: 0.9rem;
+    padding: 0.85rem 1.1rem;
+    border-radius: 4px;
+    display: none;
+    line-height: 1.5;
+    width: 100%;
+    max-width: 440px;
+  }
+  .form-status.is-success {
+    display: block;
+    background: #eef8f1;
+    color: #1e7e34;
+    border: 1px solid #c3e6cb;
+  }
+  .form-status.is-error {
+    display: block;
+    background: #fdf2f2;
+    color: #b02a37;
+    border: 1px solid #f5c2c7;
+  }
+  .form-alternative {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
     color: var(--color-ink-soft);
-    margin-top: 1rem;
-    font-weight: 300;
+    margin-top: 0.25rem;
+  }
+  .whatsapp-quick-link {
+    color: var(--color-gold);
+    font-weight: 500;
+    text-decoration: underline;
+  }
+  .whatsapp-quick-link:hover {
+    color: var(--color-ink);
   }
   @media (max-width: 900px) {
     .contact-form-section,
@@ -117,26 +168,68 @@ import Icon from "../global/UI/Icon.astro";
     if (!(form instanceof HTMLFormElement) || form.dataset.bound === "true") return;
     form.dataset.bound = "true";
 
-    form.addEventListener("submit", function (e) {
+    const submitBtn = document.getElementById("submitBtn") as HTMLButtonElement | null;
+    const btnText = submitBtn?.querySelector(".btn-text");
+    const statusEl = document.getElementById("formStatus");
+
+    form.addEventListener("submit", async function (e) {
       e.preventDefault();
 
-      const nameInput = document.getElementById("name") as HTMLInputElement;
-      const emailInput = document.getElementById("email") as HTMLInputElement;
-      const subjectInput = document.getElementById("subject") as HTMLInputElement;
-      const messageInput = document.getElementById("message") as HTMLTextAreaElement;
+      const nameInput = document.getElementById("name") as HTMLInputElement | null;
+      const emailInput = document.getElementById("email") as HTMLInputElement | null;
+      const subjectInput = document.getElementById("subject") as HTMLInputElement | null;
+      const messageInput = document.getElementById("message") as HTMLTextAreaElement | null;
 
-      if (nameInput && emailInput && subjectInput && messageInput) {
-        const name = nameInput.value;
-        const email = emailInput.value;
-        const subject = subjectInput.value;
-        const message = messageInput.value;
+      if (!nameInput || !emailInput || !subjectInput || !messageInput) return;
 
-        const text = `*New Inquiry from Website*%0A%0A*Name:* ${name}%0A*Email:* ${email}%0A*Subject:* ${subject}%0A*Message:* ${message}`;
+      const payload = {
+        name: nameInput.value.trim(),
+        email: emailInput.value.trim(),
+        subject: subjectInput.value.trim(),
+        message: messageInput.value.trim(),
+      };
 
-        const phone = "919148643754";
-        const whatsappUrl = `https://wa.me/${phone}?text=${text}`;
+      if (!payload.name || !payload.email || !payload.subject || !payload.message) return;
 
-        window.open(whatsappUrl, "_blank");
+      // Set loading state
+      if (submitBtn) submitBtn.disabled = true;
+      if (btnText) btnText.textContent = "Sending...";
+      if (statusEl) {
+        statusEl.className = "form-status";
+        statusEl.textContent = "";
+      }
+
+      try {
+        const res = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          if (statusEl) {
+            statusEl.className = "form-status is-success";
+            statusEl.textContent = data.message || "Thank you! Your message has been sent successfully.";
+          }
+          form.reset();
+        } else {
+          if (statusEl) {
+            statusEl.className = "form-status is-error";
+            statusEl.textContent =
+              data.error || "Failed to send message. Please try again or reach us via WhatsApp.";
+          }
+        }
+      } catch (err) {
+        if (statusEl) {
+          statusEl.className = "form-status is-error";
+          statusEl.textContent =
+            "An error occurred while sending your message. Please try again or contact us via WhatsApp.";
+        }
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+        if (btnText) btnText.textContent = "Send Message";
       }
     });
   }

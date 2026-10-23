@@ -20,7 +20,18 @@ const { data } = Astro.props;
       <article>
         <span>{String(index + 1).padStart(2, "0")}</span>
         <h3 class="font-display">{showroom.title}</h3>
-        <p class="address">{showroom.address}</p>
+        {showroom.mapLink ? (
+          <a
+            href={showroom.mapLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="address-link"
+          >
+            <p class="address">{showroom.address}</p>
+          </a>
+        ) : (
+          <p class="address">{showroom.address}</p>
+        )}
         <div class="contact-details">
           <a href={`tel:${showroom.phone}`}>{showroom.phone}</a>
           <a href={`mailto:${showroom.email}`}>{showroom.email}</a>
@@ -52,7 +63,9 @@ const { data } = Astro.props;
   }
   span { font-size: 0.68rem; letter-spacing: 0.2em; color: var(--color-gold); }
   h3 { font-size: 1.7rem; max-width: 12ch; }
-  .address { color: var(--color-ink-soft); font-weight: 300; max-width: 28ch; }
+  .address-link { text-decoration: none; color: inherit; }
+  .address { color: var(--color-ink-soft); font-weight: 300; max-width: 28ch; transition: color 0.2s ease; }
+  .address-link:hover .address { color: var(--color-ink); text-decoration: underline; }
   .contact-details { display: grid; gap: 0.35rem; padding-top: 0.6rem; }
   .contact-details a:hover { color: var(--color-primary); }
   .contact-details p { color: var(--color-ink-soft); font-size: 0.9rem; }

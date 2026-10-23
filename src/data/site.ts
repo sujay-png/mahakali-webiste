@@ -43,26 +43,26 @@ export const branches = [
     name: 'Main Branch',
     lines: ['First Floor, KSRTC Bus Stand,', 'Bananje, Udupi,', 'Karnataka 576101'],
     phone: '091486 43754',
-    mapLink: 'https://www.google.com/maps/dir//Mahakali+Home+Furnitures+and+Interiors,+1st+floor,+New+KSRTC,+bus+stand,+Udupi,+Karnataka+576101/@13.3247898,74.764419,32293m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x3bbcbbe20d44c209:0x77f2a12c93e9b743!2m2!1d74.7383303!2d13.3451152?entry=ttu&g_ep=EgoyMDI2MDkyNy4xIKXMDSoASAFQAw%3D%3D'
+    mapLink: 'https://maps.google.com/?cid=8643147847709603651'
   },
   {
     name: 'Kundapura Branch',
     lines: ['Karanth complex, beside KSRTC,', 'bus depot, Vaderhobli,', 'Kundapura, Karnataka 576201'],
     phone: '099729 80332',
-    mapLink: 'https://www.google.com/maps/dir//Mahakali+Home+Furnitures+%26+Interiors,+Karanth+complex,+bus+depot,+beside+KSRTC+Vaderhobli,+Kundapur,+Karnataka+576201/@12.8527141,74.8617728,3401m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x3bbc9134172d8e13:0xd6062e8a6032899e!2m2!1d74.693658!2d13.6149847?entry=ttu&g_ep=EgoyMDI2MDkyNy4xIKXMDSoASAFQAw%3D%3D'
+    mapLink: 'https://maps.google.com/?cid=15422065145831131550'
   },
   {
     name: 'Our Branch',
     lines: ['Behind Hotel Janardana', 'near Old KSRTC Bus Stand,', 'Udupi, Karnataka 576101'],
     phone: '099802 84696',
-    mapLink: 'https://www.google.com/maps/dir//Mahakali+Sofas+%26+Curtains,+Bus+Stand,+near+Adarsh+Hospital,+next+to+KSRTC,+Brahmagiri,+Udupi,+Karnataka+576101/@12.8527141,74.8617728,3401m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x3bbcbb6f8e44e5cf:0x42503cad4986627a!2m2!1d74.7473293!2d13.3404993?entry=ttu&g_ep=EgoyMDI2MDkyNy4xIKXMDSoASAFQAw%3D%3D'
+    mapLink: 'https://maps.google.com/?cid=4778385919600648826'
   }
 ];
 
 export const quickLinks = [
   { label: 'About Us', href: '/about' },
   { label: 'Contact Us', href: '/contact' },
-  { label: 'Update News', href: '/blog' },
+  { label: 'Blogs', href: '/blog' },
   { label: 'Terms Of Service', href: '/terms' },
   { label: 'Privacy Policy', href: '/privacy' }
 ];

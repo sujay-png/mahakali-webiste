@@ -50,7 +50,7 @@ import {
             <li>
               <strong>{b.name}</strong>
               {b.mapLink ? (
-                <a href={b.mapLink} target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">
+                <a href={b.mapLink} target="_blank" rel="noopener noreferrer" class="branch-address">
                   <span>{b.lines.join(" ")}</span>
                 </a>
               ) : (
@@ -137,6 +137,15 @@ import {
     display: block;
     font-weight: 300;
     font-size: 0.92rem;
+  }
+  .branch-address {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .branch-address:hover span {
+    color: #fff;
+    text-decoration: underline;
   }
   a:hover {
     color: #fff;

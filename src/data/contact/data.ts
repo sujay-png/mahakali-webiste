@@ -11,7 +11,8 @@ export const showrooms = [
     phone: "09148643754",
     email: "mangalore@mahakali.com",
     hours: "Mon - Sun (9:30AM - 7:00PM)",
-    icon: "store"
+    icon: "store",
+    mapLink: "https://maps.google.com/?cid=8643147847709603651"
   },
   {
     title: "Udupi Branch",
@@ -19,7 +20,8 @@ export const showrooms = [
     phone: "09845454696",
     email: "mahakali@gmail.com",
     hours: "Mon - Sun (9:30AM - 7:00PM)",
-    icon: "chair"
+    icon: "chair",
+    mapLink: "https://maps.google.com/?cid=4778385919600648826"
   },
   {
     title: "Kundapura Branch",
@@ -27,6 +29,7 @@ export const showrooms = [
     phone: "09972980332",
     email: "mahakali@gmail.com",
     hours: "Mon - Sun (9:30AM - 7:00PM)",
-    icon: "weekend"
+    icon: "weekend",
+    mapLink: "https://maps.google.com/?cid=15422065145831131550"
   }
 ];
