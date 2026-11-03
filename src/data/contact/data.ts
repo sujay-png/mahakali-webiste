@@ -7,7 +7,7 @@ export const contactHero = {
 export const showrooms = [
   {
     title: "Udupi Branch - Main",
-    address: "1st Floor, New KSRTC Bus Stand, Udupi, Karnataka 576101,indaia"
+    address: "1st Floor, New KSRTC Bus Stand, Udupi, Karnataka 576101,"
     Phone: "09148643754",
     email: "mangalore@mahakali.com",
     hours: "Mon - Sun (9:30AM - 7:00PM)",
