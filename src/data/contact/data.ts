@@ -7,7 +7,7 @@ export const contactHero = {
 export const showrooms = [
   {
     title: "Udupi Branch - Main",
-    address: "First Floor, KSRTC Bus Stand, Bananje, Udupi, Karnataka 576101",
+    address: "1st Floor, New KSRTC Bus Stand, Udupi, Karnataka 576101",
     phone: "09148643754",
     email: "mangalore@mahakali.com",
     hours: "Mon - Sun (9:30AM - 7:00PM)",
@@ -16,7 +16,7 @@ export const showrooms = [
   },
   {
     title: "Udupi Branch",
-    address: "Bus Stand, near Adarsh Hospital, Next to KSRTC, Brahmagiri, Udupi, Karnataka 576101",
+    address: "1st Floor, New KSRTC Bus Stand, Udupi, Karnataka 576101",
     phone: "09845454696",
     email: "mahakali@gmail.com",
     hours: "Mon - Sun (9:30AM - 7:00PM)",
